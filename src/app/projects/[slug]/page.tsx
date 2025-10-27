@@ -6,7 +6,6 @@ import { projects } from '@/data/projects'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { generateMetadata } from '@/lib/utils'
 
 interface ProjectPageProps {
   params: {
@@ -29,12 +28,22 @@ export async function generateMetadata({ params }: ProjectPageProps) {
     }
   }
 
-  return generateMetadata({
+  return {
     title: project.title,
     description: project.shortDescription,
-    image: project.coverImage,
-    url: `/projects/${project.slug}`,
-  })
+    openGraph: {
+      title: project.title,
+      description: project.shortDescription,
+      url: `/projects/${project.slug}`,
+      images: [{ url: project.coverImage }],
+    },
+    twitter: {
+      card: 'summary_large_image' as const,
+      title: project.title,
+      description: project.shortDescription,
+      images: [project.coverImage],
+    },
+  }
 }
 
 export default function ProjectPage({ params }: ProjectPageProps) {
