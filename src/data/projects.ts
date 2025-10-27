@@ -1,6 +1,6 @@
 import { Project } from '@/types/project'
 
-// TODO: Add new projects by copying this template and filling in the details:
+// Portfolio Projects Data
 /*
 {
   slug: 'project-name',
