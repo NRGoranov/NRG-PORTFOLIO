@@ -158,11 +158,11 @@ Traditional tea packaging creates waste and doesn't preserve freshness. Customer
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Sanity', 'Vercel'],
     liveUrl: 'https://matcha-swart.vercel.app',
     sourceUrl: 'https://github.com/NRGoranov/matcha',
-    coverImage: '/covers/matcha-shop.jpg',
+    coverImage: '/covers/matcha-pouch.png',
     gallery: [
+      '/covers/matcha-pouch.png',
       '/covers/matcha-shop.jpg',
-      '/covers/matcha-hero.png',
-      '/covers/matcha-pouch.png'
+      '/covers/matcha-hero.png'
     ],
     featured: true,
     highlightColor: '#10b981',
@@ -355,13 +355,13 @@ A comprehensive event management platform with ticketing, scheduling, and attend
     stack: ['Next.js', 'Stripe', 'PostgreSQL', 'QR Code', 'Tailwind CSS'],
     liveUrl: 'https://sites-for-skill-observation.vercel.app/events',
     sourceUrl: 'https://github.com/nrg/event-hub',
-    coverImage: '/covers/matcha-hero.png',
+    coverImage: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&h=630&fit=crop',
     gallery: [
-      '/covers/matcha-hero.png',
-      '/covers/matcha-shop.jpg',
-      '/covers/matcha-pouch.png'
+      'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1478720568477-1520c9d1be6d?w=1200&h=630&fit=crop'
     ],
-    featured: false,
+    featured: true,
     highlightColor: '#f97316',
     metrics: {
       users: '6K+',
