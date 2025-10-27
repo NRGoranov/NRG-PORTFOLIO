@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { SearchInput } from '@/components/SearchInput'
 import { FilterBar } from '@/components/FilterBar'
@@ -105,8 +106,8 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
+                          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6"
+            >
             {featuredProjects.map((project, index) => (
               <motion.div
                 key={project.slug}
@@ -117,23 +118,27 @@ export default function HomePage() {
                 whileHover={{ y: -4 }}
                 className="group"
               >
-                <div className="relative overflow-hidden rounded-2xl border bg-card/50 backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:shadow-primary/5">
-                  <div className="aspect-[4/3] relative overflow-hidden">
-                    <img
-                      src={project.coverImage}
-                      alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-white font-semibold text-lg mb-1">
-                        {project.title}
-                      </h3>
-                      <p className="text-white/90 text-sm line-clamp-2">
-                        {project.shortDescription}
-                      </p>
+                <div className="relative overflow-hidden rounded-2xl border bg-card/50 backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 h-full">
+                  <Link href={`/projects/${project.slug}`}>
+                    <div className="aspect-[4/3] relative overflow-hidden">
+                      <Image
+                        src={project.coverImage}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                      <div className="absolute bottom-4 left-4 right-4">
+                        <h3 className="text-white font-semibold text-lg mb-1">
+                          {project.title}
+                        </h3>
+                        <p className="text-white/90 text-sm line-clamp-2">
+                          {project.shortDescription}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
               </motion.div>
             ))}
