@@ -58,7 +58,7 @@ A sophisticated restaurant website showcasing fine dining experience with intera
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     liveUrl: 'https://restaurantsite-ecru.vercel.app',
     sourceUrl: 'https://github.com/NRGoranov/restaurantsite',
-    coverImage: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1200&h=630&fit=crop',
+    coverImage: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=630&fit=crop',
     gallery: [
       'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=630&fit=crop',
       'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1200&h=630&fit=crop',
@@ -110,11 +110,11 @@ Comprehensive ESG framework with 4 core criteria and 12 risk indicators that pro
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Data Visualization', 'Vercel'],
     liveUrl: 'https://bnp-paribas-esg-website.vercel.app',
     sourceUrl: 'https://github.com/nrg/bnp-paribas-esg',
-    coverImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop',
+    coverImage: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&h=630&fit=crop',
     gallery: [
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&h=630&fit=crop',
       'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop',
-      'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=1200&h=630&fit=crop'
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop'
     ],
     featured: true,
     highlightColor: '#059669',
@@ -323,11 +323,11 @@ A comprehensive event management platform with ticketing, scheduling, and attend
     stack: ['Next.js', 'Stripe', 'PostgreSQL', 'QR Code', 'Tailwind CSS'],
     liveUrl: 'https://sites-for-skill-observation.vercel.app/events',
     sourceUrl: 'https://github.com/nrg/event-hub',
-    coverImage: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&h=630&fit=crop',
+    coverImage: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&h=630&fit=crop',
     gallery: [
+      'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&h=630&fit=crop',
       'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&h=630&fit=crop',
-      'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=630&fit=crop',
-      'https://images.unsplash.com/photo-1478720568477-1520c9d1be6d?w=1200&h=630&fit=crop'
+      'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=630&fit=crop'
     ],
     featured: true,
     highlightColor: '#f97316',
