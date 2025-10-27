@@ -239,31 +239,44 @@ An advanced property search platform with interactive maps, detailed filtering, 
   },
   {
     slug: 'nonprofit-donation',
-    title: 'Nonprofit Donation Platform',
-    shortDescription: 'Secure donation platform with recurring payments, impact tracking, and donor management.',
-    longDescription: `# Nonprofit Donation Platform
+    title: 'Hope Foundation - Nonprofit Website',
+    shortDescription: 'Comprehensive nonprofit organization website with donation system, volunteer registration, and program showcase.',
+    longDescription: `# Hope Foundation - Nonprofit Website
 
-A comprehensive donation management system with secure payments, impact tracking, and donor relationship management.
+A complete nonprofit organization website featuring donation functionality, volunteer registration, program showcase, and event management.
 
 ## Features
-- Secure payment processing
-- Recurring donation management
-- Impact tracking and reporting
-- Donor communication tools
-- Tax receipt generation`,
-    tags: ['Nonprofit', 'Donations', 'Payments', 'Impact'],
-    year: 2023,
+- Donation platform with preset and custom amounts
+- Volunteer application system
+- Program showcase and event listings
+- Contact forms and inquiry management
+- Responsive design for all devices
+
+## Tech Stack
+- Next.js 14 with App Router
+- TypeScript for type safety
+- Tailwind CSS for elegant styling
+- Lucide React for icons
+
+## Design Highlights
+- Clean, professional aesthetic
+- User-friendly navigation
+- Accessible form design
+- SEO optimized`,
+    tags: ['Nonprofit', 'Donations', 'Volunteers', 'Community'],
+    year: 2024,
     role: 'Full Stack Developer',
-    stack: ['Next.js', 'Stripe', 'PostgreSQL', 'Prisma', 'Tailwind CSS'],
-    liveUrl: 'https://nonprofit-donations.vercel.app',
-    sourceUrl: 'https://github.com/nrg/nonprofit-platform',
-    coverImage: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&h=630&fit=crop',
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+    liveUrl: 'https://nonprofit-website-five.vercel.app',
+    sourceUrl: 'https://github.com/NRGoranov/nonprofit-website',
+    coverImage: 'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1200&h=630&fit=crop',
     gallery: [
-      'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&h=630&fit=crop',
-      'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=630&fit=crop'
+      'https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1505027496617-cfd09d93f672?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&h=630&fit=crop'
     ],
     featured: false,
-    highlightColor: '#ef4444',
+    highlightColor: '#10b981',
     metrics: {
       users: '3K+',
       stars: 12,

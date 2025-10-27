@@ -38,8 +38,11 @@ export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32">
-        <div className="container">
+      <section className="relative py-20 lg:py-32 bg-gradient-to-b from-background via-background/95 to-background">
+        {/* Subtle background pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+        
+        <div className="container relative">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -54,7 +57,7 @@ export default function HomePage() {
               
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight">
                 Modern Web
-                <span className="block bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+                <span className="block bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">
                   Development
                 </span>
               </h1>
@@ -83,7 +86,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured Projects */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-gradient-to-b from-background via-muted/20 to-background">
         <div className="container">
           <div className="text-center mb-16">
             <motion.div
