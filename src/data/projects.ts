@@ -27,6 +27,96 @@ import { Project } from '@/types/project'
 
 export const projects: Project[] = [
   {
+    slug: 'restaurant-website',
+    title: 'La Belle Cuisine - Fine Dining',
+    shortDescription: 'Elegant fine dining restaurant website with reservation system, menu showcase, and gallery.',
+    longDescription: `# La Belle Cuisine - Fine Dining Restaurant
+
+A sophisticated restaurant website showcasing fine dining experience with interactive features and elegant design.
+
+## Features
+- Online reservation system
+- Dynamic menu display with categories
+- Image gallery showcasing ambiance
+- Customer reviews system
+- Responsive design for all devices
+
+## Tech Stack
+- Next.js 14 with App Router
+- TypeScript for type safety
+- Tailwind CSS for styling
+- Optimized images with Next.js Image component
+
+## Design Highlights
+- Elegant and professional aesthetic
+- Smooth animations and transitions
+- Mobile-first responsive design
+- SEO optimized for local search`,
+    tags: ['Restaurant', 'Fine Dining', 'Next.js', 'Reservation System'],
+    year: 2024,
+    role: 'Full Stack Developer',
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
+    liveUrl: 'https://restaurantsite-ecru.vercel.app',
+    sourceUrl: 'https://github.com/NRGoranov/restaurantsite',
+    coverImage: '/covers/restaurant.jpg',
+    gallery: ['/covers/restaurant-1.jpg', '/covers/restaurant-2.jpg'],
+    featured: true,
+    highlightColor: '#d97706',
+    metrics: {
+      users: '1.5K+',
+      stars: 12,
+      lighthousePerf: 96,
+    },
+  },
+  {
+    slug: 'bnp-paribas-esg',
+    title: 'BNP Paribas ESG Risk Integration',
+    shortDescription: 'Comprehensive ESG risk assessment platform for insurance products with quantitative scoring framework.',
+    longDescription: `# BNP Paribas ESG Risk Integration
+
+An innovative ESG risk assessment platform designed for BNP Paribas Cardif to evaluate insurance product alignment with environmental, social, and governance criteria.
+
+## Problem
+BNP Paribas needed to integrate ESG criteria to manage risks, meet investor expectations, comply with regulations (SFDR, EU Taxonomy), and create long-term value.
+
+## Solution
+Comprehensive ESG framework with 4 core criteria and 12 risk indicators that provide quantitative scoring for insurance product compliance.
+
+## Key Features
+- ESG Risk Compilation Survey with quantitative framework
+- Four core criteria evaluation (Environmental, Social, Governance, Shared Value)
+- Weighted alignment scoring system
+- Compliance rating with pre-defined risk thresholds
+- Stakeholder-specific impact tracking
+
+## Implementation
+- 5-phase rollout over 8 weeks
+- Integration with existing underwriting processes
+- Training and change management
+- Ongoing monitoring and improvement
+
+## Results
+- Reduced approval time by 5-10 hours per product
+- Standardized compliance assessment
+- Risk mitigation and regulatory trust
+- Competitive advantage with SFDR-aligned products`,
+    tags: ['ESG', 'Risk Assessment', 'Insurance', 'Financial Services', 'Dashboard'],
+    year: 2024,
+    role: 'Full Stack Developer',
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Data Visualization', 'Vercel'],
+    liveUrl: 'https://bnp-paribas-esg-website.vercel.app',
+    sourceUrl: 'https://github.com/nrg/bnp-paribas-esg',
+    coverImage: '/covers/bnp-esg.jpg',
+    gallery: ['/covers/bnp-1.jpg', '/covers/bnp-2.jpg'],
+    featured: true,
+    highlightColor: '#059669',
+    metrics: {
+      users: '500+',
+      stars: 7,
+      lighthousePerf: 95,
+    },
+  },
+  {
     slug: 'matcha-shop-sofia',
     title: 'Matcha Shop Sofia',
     shortDescription: 'Premium matcha in a can - direct from Sofia. Modern e-commerce with subscription model and sustainable packaging.',
@@ -58,8 +148,8 @@ Traditional tea packaging creates waste and doesn't preserve freshness. Customer
     year: 2024,
     role: 'Full Stack Developer',
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Sanity', 'Vercel'],
-    liveUrl: 'https://matcha-shop-sofia.vercel.app',
-    sourceUrl: 'https://github.com/nrg/matcha-shop-sofia',
+    liveUrl: 'https://matcha-swart.vercel.app',
+    sourceUrl: 'https://github.com/NRGoranov/matcha',
     coverImage: '/covers/matcha-shop.jpg',
     gallery: ['/covers/matcha-1.jpg', '/covers/matcha-2.jpg', '/covers/matcha-3.jpg'],
     featured: true,
@@ -236,7 +326,7 @@ A comprehensive event management platform with ticketing, scheduling, and attend
     year: 2023,
     role: 'Full Stack Developer',
     stack: ['Next.js', 'Stripe', 'PostgreSQL', 'QR Code', 'Tailwind CSS'],
-    liveUrl: 'https://event-hub.vercel.app',
+    liveUrl: 'https://sites-for-skill-observation.vercel.app/events',
     sourceUrl: 'https://github.com/nrg/event-hub',
     coverImage: '/covers/event-hub.jpg',
     gallery: ['/covers/event-1.jpg', '/covers/event-2.jpg'],
