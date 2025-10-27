@@ -58,8 +58,11 @@ A sophisticated restaurant website showcasing fine dining experience with intera
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     liveUrl: 'https://restaurantsite-ecru.vercel.app',
     sourceUrl: 'https://github.com/NRGoranov/restaurantsite',
-    coverImage: '/covers/restaurant.jpg',
-    gallery: ['/covers/restaurant-1.jpg', '/covers/restaurant-2.jpg'],
+    coverImage: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=630&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1558030006-450675393462?w=1200&h=630&fit=crop'
+    ],
     featured: true,
     highlightColor: '#d97706',
     metrics: {
@@ -106,8 +109,11 @@ Comprehensive ESG framework with 4 core criteria and 12 risk indicators that pro
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Data Visualization', 'Vercel'],
     liveUrl: 'https://bnp-paribas-esg-website.vercel.app',
     sourceUrl: 'https://github.com/nrg/bnp-paribas-esg',
-    coverImage: '/covers/bnp-esg.jpg',
-    gallery: ['/covers/bnp-1.jpg', '/covers/bnp-2.jpg'],
+    coverImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop'
+    ],
     featured: true,
     highlightColor: '#059669',
     metrics: {
@@ -150,8 +156,12 @@ Traditional tea packaging creates waste and doesn't preserve freshness. Customer
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Sanity', 'Vercel'],
     liveUrl: 'https://matcha-swart.vercel.app',
     sourceUrl: 'https://github.com/NRGoranov/matcha',
-    coverImage: '/covers/matcha-shop.jpg',
-    gallery: ['/covers/matcha-1.jpg', '/covers/matcha-2.jpg', '/covers/matcha-3.jpg'],
+    coverImage: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=630&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1560749003-f4b1e17e2dff?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1578849278619-e73505e9610f?w=1200&h=630&fit=crop'
+    ],
     featured: true,
     highlightColor: '#10b981',
     metrics: {
@@ -179,8 +189,11 @@ A headless e-commerce solution for premium t-shirt sales with custom checkout an
     stack: ['Next.js', 'Shopify', 'Stripe', 'Tailwind CSS', 'TypeScript'],
     liveUrl: 'https://minimal-tees.vercel.app',
     sourceUrl: 'https://github.com/nrg/minimal-tees',
-    coverImage: '/covers/tees-store.jpg',
-    gallery: ['/covers/tees-1.jpg', '/covers/tees-2.jpg'],
+    coverImage: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1200&h=630&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1523381294911-8d3cead13475?w=1200&h=630&fit=crop'
+    ],
     featured: true,
     highlightColor: '#6366f1',
     metrics: {
@@ -208,8 +221,11 @@ A comprehensive fitness platform combining blog content with personal tracking t
     stack: ['Next.js', 'Prisma', 'PostgreSQL', 'Chart.js', 'Tailwind CSS'],
     liveUrl: 'https://fitness-tracker.vercel.app',
     sourceUrl: 'https://github.com/nrg/fitness-blog',
-    coverImage: '/covers/fitness-blog.jpg',
-    gallery: ['/covers/fitness-1.jpg', '/covers/fitness-2.jpg'],
+    coverImage: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=630&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1200&h=630&fit=crop'
+    ],
     featured: false,
     highlightColor: '#f59e0b',
     metrics: {
@@ -238,8 +254,11 @@ An advanced property search platform with interactive maps, detailed filtering, 
     stack: ['Next.js', 'Mapbox', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
     liveUrl: 'https://real-estate-map.vercel.app',
     sourceUrl: 'https://github.com/nrg/real-estate-platform',
-    coverImage: '/covers/real-estate.jpg',
-    gallery: ['/covers/real-estate-1.jpg', '/covers/real-estate-2.jpg'],
+    coverImage: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=630&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=630&fit=crop'
+    ],
     featured: false,
     highlightColor: '#8b5cf6',
     metrics: {
@@ -268,8 +287,11 @@ A comprehensive donation management system with secure payments, impact tracking
     stack: ['Next.js', 'Stripe', 'PostgreSQL', 'Prisma', 'Tailwind CSS'],
     liveUrl: 'https://nonprofit-donations.vercel.app',
     sourceUrl: 'https://github.com/nrg/nonprofit-platform',
-    coverImage: '/covers/nonprofit.jpg',
-    gallery: ['/covers/nonprofit-1.jpg', '/covers/nonprofit-2.jpg'],
+    coverImage: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&h=630&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1200&h=630&fit=crop'
+    ],
     featured: false,
     highlightColor: '#ef4444',
     metrics: {
@@ -298,8 +320,11 @@ A comprehensive learning management system with video streaming, progress tracki
     stack: ['Next.js', 'Node.js', 'MongoDB', 'AWS S3', 'Tailwind CSS'],
     liveUrl: 'https://learning-hub.vercel.app',
     sourceUrl: 'https://github.com/nrg/learning-platform',
-    coverImage: '/covers/learning.jpg',
-    gallery: ['/covers/learning-1.jpg', '/covers/learning-2.jpg'],
+    coverImage: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=630&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop'
+    ],
     featured: false,
     highlightColor: '#06b6d4',
     metrics: {
@@ -328,8 +353,11 @@ A comprehensive event management platform with ticketing, scheduling, and attend
     stack: ['Next.js', 'Stripe', 'PostgreSQL', 'QR Code', 'Tailwind CSS'],
     liveUrl: 'https://sites-for-skill-observation.vercel.app/events',
     sourceUrl: 'https://github.com/nrg/event-hub',
-    coverImage: '/covers/event-hub.jpg',
-    gallery: ['/covers/event-1.jpg', '/covers/event-2.jpg'],
+    coverImage: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&h=630&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=630&fit=crop'
+    ],
     featured: false,
     highlightColor: '#f97316',
     metrics: {
@@ -358,8 +386,11 @@ A modern blogging platform built for technical content with MDX support and inte
     stack: ['Next.js', 'MDX', 'Prism.js', 'Tailwind CSS', 'TypeScript'],
     liveUrl: 'https://tech-blog.vercel.app',
     sourceUrl: 'https://github.com/nrg/tech-blog',
-    coverImage: '/covers/tech-blog.jpg',
-    gallery: ['/covers/tech-blog-1.jpg', '/covers/tech-blog-2.jpg'],
+    coverImage: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=630&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=1200&h=630&fit=crop'
+    ],
     featured: false,
     highlightColor: '#6366f1',
     metrics: {
