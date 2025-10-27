@@ -173,38 +173,6 @@ Traditional tea packaging creates waste and doesn't preserve freshness. Customer
     },
   },
   {
-    slug: 'ecommerce-tees',
-    title: 'Minimal Tees Store',
-    shortDescription: 'Headless e-commerce for premium t-shirts. Built with Next.js, Shopify, and custom checkout flow.',
-    longDescription: `# Minimal Tees Store
-
-A headless e-commerce solution for premium t-shirt sales with custom checkout and inventory management.
-
-## Features
-- Custom checkout flow
-- Real-time inventory tracking
-- Custom product configurator
-- Mobile-optimized shopping experience`,
-    tags: ['E-commerce', 'Headless', 'Shopify', 'Next.js'],
-    year: 2024,
-    role: 'Full Stack Developer',
-    stack: ['Next.js', 'Shopify', 'Stripe', 'Tailwind CSS', 'TypeScript'],
-    liveUrl: 'https://minimal-tees.vercel.app',
-    sourceUrl: 'https://github.com/nrg/minimal-tees',
-    coverImage: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1200&h=630&fit=crop',
-    gallery: [
-      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1200&h=630&fit=crop',
-      'https://images.unsplash.com/photo-1523381294911-8d3cead13475?w=1200&h=630&fit=crop'
-    ],
-    featured: true,
-    highlightColor: '#6366f1',
-    metrics: {
-      users: '5K+',
-      stars: 15,
-      lighthousePerf: 96,
-    },
-  },
-  {
     slug: 'fitness-blog',
     title: 'Fitness Tracker Blog',
     shortDescription: 'Personal fitness blog with workout tracking, progress analytics, and community features.',
