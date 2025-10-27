@@ -58,10 +58,11 @@ A sophisticated restaurant website showcasing fine dining experience with intera
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     liveUrl: 'https://restaurantsite-ecru.vercel.app',
     sourceUrl: 'https://github.com/NRGoranov/restaurantsite',
-    coverImage: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=630&fit=crop',
+    coverImage: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1200&h=630&fit=crop',
     gallery: [
       'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=630&fit=crop',
-      'https://images.unsplash.com/photo-1558030006-450675393462?w=1200&h=630&fit=crop'
+      'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1200&h=630&fit=crop'
     ],
     featured: true,
     highlightColor: '#d97706',
@@ -109,10 +110,11 @@ Comprehensive ESG framework with 4 core criteria and 12 risk indicators that pro
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Data Visualization', 'Vercel'],
     liveUrl: 'https://bnp-paribas-esg-website.vercel.app',
     sourceUrl: 'https://github.com/nrg/bnp-paribas-esg',
-    coverImage: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop',
+    coverImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop',
     gallery: [
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop',
       'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop',
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop'
+      'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=1200&h=630&fit=crop'
     ],
     featured: true,
     highlightColor: '#059669',
