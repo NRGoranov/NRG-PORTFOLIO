@@ -46,14 +46,14 @@ export default function ContactPage() {
     {
       icon: Mail,
       label: 'Email',
-      value: 'hello@nrgoranov.com',
-      href: 'mailto:hello@nrgoranov.com'
+      value: 'nrgoranov@gmail.com',
+      href: 'mailto:nrgoranov@gmail.com'
     },
     {
       icon: Phone,
       label: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567'
+      value: '+359 89 733 8635',
+      href: 'tel:+359897338635'
     },
     {
       icon: MapPin,
@@ -305,7 +305,7 @@ export default function ContactPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="text-base">
-                <a href="mailto:hello@nrgoranov.com">
+                <a href="mailto:nrgoranov@gmail.com">
                   <Mail className="mr-2 h-4 w-4" />
                   Send Email
                 </a>
