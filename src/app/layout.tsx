@@ -30,17 +30,17 @@ export const metadata: Metadata = {
   creator: 'NRG',
   icons: {
     icon: [
-      { url: '/browserIcon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
-      { url: '/browserIcon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
     apple: [
-      { url: '/browserIcon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
     other: [
-      { rel: 'icon', url: '/browserIcon/favicon.ico' },
+      { rel: 'icon', url: '/favicon.ico' },
     ],
   },
-  manifest: '/browserIcon/site.webmanifest',
+  manifest: '/site.webmanifest',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -88,11 +88,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/browserIcon/favicon.ico" sizes="any" />
-        <link rel="icon" href="/browserIcon/favicon-16x16.png" sizes="16x16" type="image/png" />
-        <link rel="icon" href="/browserIcon/favicon-32x32.png" sizes="32x32" type="image/png" />
-        <link rel="apple-touch-icon" href="/browserIcon/apple-touch-icon.png" />
-        <link rel="manifest" href="/browserIcon/site.webmanifest" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon-16x16.png" sizes="16x16" type="image/png" />
+        <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider
