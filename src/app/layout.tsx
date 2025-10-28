@@ -50,10 +50,10 @@ export const metadata: Metadata = {
     siteName: 'NRG Portfolio',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=630&fit=crop&crop=center',
+        url: 'https://nrg-portfolio.vercel.app/og-image',
         width: 1200,
         height: 630,
-        alt: 'NRG Portfolio - Culinary Excellence in Web Development',
+        alt: 'NRG Portfolio - Full-Stack Developer showcasing modern web development projects',
       },
     ],
   },
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: 'NRG Portfolio - Modern Web Development',
     description: 'A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies.',
     creator: '@nrg',
-    images: ['https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=630&fit=crop&crop=center'],
+    images: ['https://nrg-portfolio.vercel.app/og-image'],
   },
   robots: {
     index: true,
