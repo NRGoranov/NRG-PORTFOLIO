@@ -23,13 +23,27 @@ export default function HomePage() {
     { label: 'Passion Level', value: '100%' },
   ]
 
-  const skills = [
-    { name: 'Next.js', level: 95 },
-    { name: 'TypeScript', level: 90 },
-    { name: 'React', level: 95 },
-    { name: 'Node.js', level: 85 },
-    { name: 'C', level: 80 },
-    { name: 'AWS', level: 75 },
+  const skillCategories = [
+    {
+      category: 'Frontend',
+      skills: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+      description: 'Modern UI/UX development'
+    },
+    {
+      category: 'Backend',
+      skills: ['Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'REST APIs'],
+      description: 'Server-side development'
+    },
+    {
+      category: 'Tools & Deployment',
+      skills: ['Git', 'Vercel', 'Docker', 'AWS', 'Figma'],
+      description: 'Development workflow'
+    },
+    {
+      category: 'Languages',
+      skills: ['JavaScript', 'TypeScript', 'Python', 'HTML5', 'CSS3'],
+      description: 'Programming languages'
+    }
   ]
 
   return (
@@ -242,10 +256,10 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Technical Expertise
+              Technical Skills
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Mastery of modern web technologies and frameworks
+              Technologies and tools I work with to build modern web applications
             </p>
           </motion.div>
 
@@ -254,29 +268,40 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+            className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto"
           >
-            {skills.map((skill, index) => (
+            {skillCategories.map((category, index) => (
               <motion.div
-                key={skill.name}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                key={category.category}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="space-y-2"
+                className="bg-card/50 backdrop-blur-sm border rounded-2xl p-6 hover:bg-card/70 transition-colors"
               >
-                <div className="flex justify-between items-center">
-                  <span className="font-medium">{skill.name}</span>
-                  <span className="text-sm text-muted-foreground">{skill.level}%</span>
-                </div>
-                <div className="h-2 bg-muted rounded-full overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    transition={{ duration: 1, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                    className="h-full bg-gradient-to-r from-primary to-primary/70 rounded-full"
-                  />
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="text-xl font-semibold mb-2">{category.category}</h3>
+                    <p className="text-sm text-muted-foreground">{category.description}</p>
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills.map((skill, skillIndex) => (
+                      <motion.span
+                        key={skill}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ 
+                          duration: 0.3, 
+                          delay: (index * 0.1) + (skillIndex * 0.05) 
+                        }}
+                        viewport={{ once: true }}
+                        className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium hover:bg-primary/20 transition-colors"
+                      >
+                        {skill}
+                      </motion.span>
+                    ))}
+                  </div>
                 </div>
               </motion.div>
             ))}
