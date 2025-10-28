@@ -87,6 +87,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/browserIcon/favicon.ico" sizes="any" />
+        <link rel="icon" href="/browserIcon/favicon-16x16.png" sizes="16x16" type="image/png" />
+        <link rel="icon" href="/browserIcon/favicon-32x32.png" sizes="32x32" type="image/png" />
+        <link rel="apple-touch-icon" href="/browserIcon/apple-touch-icon.png" />
+        <link rel="manifest" href="/browserIcon/site.webmanifest" />
+      </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
