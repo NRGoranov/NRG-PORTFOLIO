@@ -17,10 +17,10 @@ export default function HomePage() {
   }, [])
 
   const stats = [
-    { label: 'Projects Delivered', value: '50+' },
-    { label: 'Years Experience', value: '5+' },
-    { label: 'Technologies', value: '20+' },
-    { label: 'Happy Clients', value: '100%' },
+    { label: 'Projects Built', value: '25+' },
+    { label: 'Years Learning', value: '5' },
+    { label: 'Technologies', value: '15+' },
+    { label: 'Passion Level', value: '100%' },
   ]
 
   const skills = [
@@ -28,7 +28,7 @@ export default function HomePage() {
     { name: 'TypeScript', level: 90 },
     { name: 'React', level: 95 },
     { name: 'Node.js', level: 85 },
-    { name: 'Python', level: 80 },
+    { name: 'C', level: 80 },
     { name: 'AWS', level: 75 },
   ]
 
@@ -82,12 +82,12 @@ export default function HomePage() {
                     transition={{ delay: 0.4, duration: 0.6 }}
                     className="space-y-2"
                   >
-                    <h2 className="text-2xl lg:text-3xl text-muted-foreground font-light">
-                      Senior Full-Stack Developer
-                    </h2>
+                  <h2 className="text-2xl lg:text-3xl text-muted-foreground font-light">
+                    Full-Stack Developer
+                  </h2>
                     <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
                       Crafting exceptional digital experiences with modern technologies. 
-                      I transform complex ideas into elegant, scalable solutions that drive business growth.
+                      I transform complex ideas into elegant, scalable solutions through continuous learning and passion.
                     </p>
                   </motion.div>
                 </div>

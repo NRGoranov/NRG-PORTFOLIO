@@ -10,24 +10,24 @@ export default function AboutPage() {
   const experience = [
     {
       year: '2024',
-      title: 'Senior Full-Stack Developer',
-      company: 'Freelance',
-      description: 'Leading end-to-end development of complex web applications for diverse clients.',
-      technologies: ['Next.js', 'TypeScript', 'Node.js', 'AWS']
+      title: 'Full-Stack Developer',
+      company: 'Freelance & Personal Projects',
+      description: 'Building modern web applications and exploring cutting-edge technologies through personal projects.',
+      technologies: ['Next.js', 'TypeScript', 'React', 'Node.js']
     },
     {
       year: '2022-2023',
-      title: 'Full-Stack Developer',
-      company: 'Tech Solutions Inc.',
-      description: 'Developed scalable web applications and mentored junior developers.',
-      technologies: ['React', 'Python', 'PostgreSQL', 'Docker']
+      title: 'Web Developer',
+      company: 'Freelance',
+      description: 'Developing responsive websites and web applications for various clients and personal projects.',
+      technologies: ['React', 'JavaScript', 'CSS3', 'MongoDB']
     },
     {
       year: '2020-2022',
       title: 'Frontend Developer',
-      company: 'Digital Agency',
-      description: 'Created responsive user interfaces and optimized web performance.',
-      technologies: ['Vue.js', 'JavaScript', 'CSS3', 'Figma']
+      company: 'Learning & Self-Development',
+      description: 'Learning modern web technologies and building projects to master the craft of web development.',
+      technologies: ['HTML5', 'CSS3', 'JavaScript', 'Git']
     }
   ]
 
@@ -88,7 +88,7 @@ export default function AboutPage() {
                 </h1>
                 
                 <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                  A passionate full-stack developer with over 5 years of experience creating 
+                  A passionate full-stack developer with 5 years of experience creating 
                   exceptional digital experiences. I specialize in modern web technologies 
                   and love turning complex problems into elegant solutions.
                 </p>
@@ -129,7 +129,7 @@ export default function AboutPage() {
               <div className="space-y-6 text-muted-foreground leading-relaxed">
                 <p>
                   My journey in web development began with a simple curiosity about how websites work. 
-                  What started as a hobby quickly became a passion that has driven my career for over 5 years.
+                  What started as a hobby quickly became a passion that has driven my learning and growth for 5 years.
                 </p>
                 
                 <p>
@@ -139,16 +139,17 @@ export default function AboutPage() {
                 </p>
                 
                 <p>
-                  Throughout my career, I've had the privilege of working with diverse teams and clients, 
-                  from startups to enterprise companies. Each project has taught me something new and 
-                  reinforced my belief that great software is built through collaboration, continuous learning, 
-                  and attention to detail.
+                  Throughout my journey, I've had the privilege of working on diverse projects and helping 
+                  friends with their own challenges. Each project has taught me something new and 
+                  reinforced my belief that great software is built through continuous learning, 
+                  attention to detail, and genuine passion for the craft.
                 </p>
                 
                 <p>
-                  When I'm not coding, you'll find me exploring new technologies, contributing to open-source 
-                  projects, or sharing knowledge with the developer community. I believe in the power of 
-                  technology to solve real-world problems and make a positive impact.
+                  When I'm not coding, you'll find me pursuing my passion for fitness, attending competitions, 
+                  and expanding my network through my expertise in physical training. I love helping friends 
+                  with their own projects and problems, whether they're technical or personal. I believe in 
+                  the power of technology to solve real-world problems and make a positive impact, both online and off.
                 </p>
               </div>
             </motion.div>
