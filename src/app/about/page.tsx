@@ -1,130 +1,297 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Code, Palette, Zap, Globe, Github, Linkedin, Mail, Twitter } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
+import { ArrowRight, Code, Zap, Award, Users, Github, Linkedin, Mail, Download } from 'lucide-react'
+import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-
-const skills = [
-  { name: 'Frontend', icon: Palette, items: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'] },
-  { name: 'Backend', icon: Code, items: ['Node.js', 'Express', 'PostgreSQL', 'MongoDB', 'Prisma'] },
-  { name: 'DevOps', icon: Zap, items: ['Vercel', 'Docker', 'AWS', 'GitHub Actions', 'CI/CD'] },
-  { name: 'Design', icon: Globe, items: ['Figma', 'Adobe Creative Suite', 'Responsive Design', 'UI/UX'] },
-]
-
-const socialLinks = [
-  { name: 'GitHub', href: 'https://github.com/nrg', icon: Github },
-  { name: 'LinkedIn', href: 'https://linkedin.com/in/nrg', icon: Linkedin },
-  { name: 'Twitter', href: 'https://twitter.com/nrg', icon: Twitter },
-  { name: 'Email', href: 'mailto:hello@nrg.dev', icon: Mail },
-]
 
 export default function AboutPage() {
-  return (
-    <div className="py-20">
-      <div className="container max-w-4xl">
-        {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            About Me
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            I'm a passionate web developer who loves building modern, accessible, 
-            and performant web experiences.
-          </p>
-        </motion.div>
+  const experience = [
+    {
+      year: '2024',
+      title: 'Senior Full-Stack Developer',
+      company: 'Freelance',
+      description: 'Leading end-to-end development of complex web applications for diverse clients.',
+      technologies: ['Next.js', 'TypeScript', 'Node.js', 'AWS']
+    },
+    {
+      year: '2022-2023',
+      title: 'Full-Stack Developer',
+      company: 'Tech Solutions Inc.',
+      description: 'Developed scalable web applications and mentored junior developers.',
+      technologies: ['React', 'Python', 'PostgreSQL', 'Docker']
+    },
+    {
+      year: '2020-2022',
+      title: 'Frontend Developer',
+      company: 'Digital Agency',
+      description: 'Created responsive user interfaces and optimized web performance.',
+      technologies: ['Vue.js', 'JavaScript', 'CSS3', 'Figma']
+    }
+  ]
 
-        {/* Bio */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-16"
-        >
-          <Card>
-            <CardContent className="pt-6">
-              <div className="prose prose-gray dark:prose-invert max-w-none">
-                <p className="text-lg leading-relaxed mb-6">
-                  I'm a full-stack developer with a passion for creating exceptional web experiences. 
-                  With a background in both design and development, I bring a unique perspective to 
-                  every project I work on.
-                </p>
-                <p className="text-lg leading-relaxed mb-6">
-                  I specialize in modern web technologies like Next.js, TypeScript, and React, 
-                  but I'm always exploring new tools and frameworks. I believe in writing clean, 
-                  maintainable code and creating user experiences that are both beautiful and functional.
-                </p>
-                <p className="text-lg leading-relaxed">
-                  When I'm not coding, you can find me exploring new technologies, contributing to 
-                  open source projects, or sharing knowledge with the developer community.
+  const values = [
+    {
+      icon: Code,
+      title: 'Clean Code',
+      description: 'Writing maintainable, scalable, and well-documented code that stands the test of time.'
+    },
+    {
+      icon: Zap,
+      title: 'Performance',
+      description: 'Optimizing every aspect for speed, efficiency, and exceptional user experience.'
+    },
+    {
+      icon: Users,
+      title: 'Collaboration',
+      description: 'Working closely with teams to deliver solutions that exceed expectations.'
+    },
+    {
+      icon: Award,
+      title: 'Excellence',
+      description: 'Striving for the highest quality in every project and continuous learning.'
+    }
+  ]
+
+  return (
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative py-20 lg:py-32 bg-gradient-to-b from-background via-background/95 to-background">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.1)_0%,transparent_70%)]" />
+        
+        <div className="container relative">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center space-y-8"
+            >
+              <div className="flex justify-center">
+                <div className="relative">
+                  <div className="h-32 w-32 rounded-full bg-gradient-to-r from-primary to-primary/70 flex items-center justify-center">
+                    <span className="text-primary-foreground font-bold text-3xl">NRG</span>
+                  </div>
+                  <div className="absolute -top-2 -right-2 h-8 w-8 bg-green-500 rounded-full flex items-center justify-center">
+                    <div className="h-3 w-3 bg-white rounded-full" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+                  About
+                  <span className="block bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">
+                    Nikolay Goranov
+                  </span>
+                </h1>
+                
+                <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                  A passionate full-stack developer with over 5 years of experience creating 
+                  exceptional digital experiences. I specialize in modern web technologies 
+                  and love turning complex problems into elegant solutions.
                 </p>
               </div>
-            </CardContent>
-          </Card>
-        </motion.div>
 
-        {/* Skills */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-16"
-        >
-          <h2 className="text-3xl font-bold text-center mb-12">Skills & Technologies</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {skills.map((skill, index) => (
-              <Card key={skill.name}>
-                <CardHeader>
-                  <div className="flex items-center gap-3">
-                    <skill.icon className="h-5 w-5 text-primary" />
-                    <CardTitle className="text-lg">{skill.name}</CardTitle>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button asChild size="lg" className="text-base">
+                  <Link href="/contact">
+                    <Mail className="mr-2 h-4 w-4" />
+                    Let's Connect
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" size="lg" className="text-base">
+                  <Link href="/projects">
+                    View My Work
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Story Section */}
+      <section className="py-20">
+        <div className="container">
+          <div className="max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="prose prose-lg max-w-none"
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">My Story</h2>
+              
+              <div className="space-y-6 text-muted-foreground leading-relaxed">
+                <p>
+                  My journey in web development began with a simple curiosity about how websites work. 
+                  What started as a hobby quickly became a passion that has driven my career for over 5 years.
+                </p>
+                
+                <p>
+                  I specialize in creating modern, scalable web applications using cutting-edge technologies 
+                  like Next.js, TypeScript, and React. My approach combines technical excellence with 
+                  user-centered design to deliver solutions that not only meet requirements but exceed expectations.
+                </p>
+                
+                <p>
+                  Throughout my career, I've had the privilege of working with diverse teams and clients, 
+                  from startups to enterprise companies. Each project has taught me something new and 
+                  reinforced my belief that great software is built through collaboration, continuous learning, 
+                  and attention to detail.
+                </p>
+                
+                <p>
+                  When I'm not coding, you'll find me exploring new technologies, contributing to open-source 
+                  projects, or sharing knowledge with the developer community. I believe in the power of 
+                  technology to solve real-world problems and make a positive impact.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Professional Experience</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              A journey of growth, learning, and delivering exceptional results
+            </p>
+          </motion.div>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="space-y-8">
+              {experience.map((job, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="relative"
+                >
+                  <div className="flex items-start gap-6">
+                    <div className="flex-shrink-0">
+                      <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
+                        <span className="text-primary font-bold">{job.year}</span>
+                      </div>
+                    </div>
+                    
+                    <div className="flex-1 space-y-2">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                        <h3 className="text-xl font-semibold">{job.title}</h3>
+                        <span className="text-sm text-muted-foreground">{job.year}</span>
+                      </div>
+                      <p className="text-primary font-medium">{job.company}</p>
+                      <p className="text-muted-foreground">{job.description}</p>
+                      
+                      <div className="flex flex-wrap gap-2 mt-3">
+                        {job.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {skill.items.map((item) => (
-                      <Badge key={item} variant="secondary">
-                        {item}
-                      </Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                  
+                  {index < experience.length - 1 && (
+                    <div className="absolute left-6 top-12 w-px h-8 bg-border" />
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="py-20">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">What I Value</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              The principles that guide my work and approach to development
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value, index) => (
+              <motion.div
+                key={value.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="text-center space-y-4"
+              >
+                <div className="h-16 w-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto">
+                  <value.icon className="h-8 w-8 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold">{value.title}</h3>
+                <p className="text-muted-foreground">{value.description}</p>
+              </motion.div>
             ))}
           </div>
-        </motion.div>
+        </div>
+      </section>
 
-        {/* Connect */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-center"
-        >
-          <h2 className="text-3xl font-bold mb-6">Let's Connect</h2>
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            I'm always interested in new opportunities and collaborations. 
-            Feel free to reach out!
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            {socialLinks.map((social) => (
-              <Button key={social.name} asChild variant="outline" size="lg">
-                <a href={social.href} target="_blank" rel="noopener noreferrer">
-                  <social.icon className="h-4 w-4 mr-2" />
-                  {social.name}
-                </a>
+      {/* CTA Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center max-w-3xl mx-auto"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Let's Work Together
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              I'm always interested in new opportunities and exciting projects. 
+              Let's discuss how we can bring your ideas to life.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg" className="text-base">
+                <Link href="/contact">
+                  <Mail className="mr-2 h-4 w-4" />
+                  Get In Touch
+                </Link>
               </Button>
-            ))}
-          </div>
-        </motion.div>
-      </div>
+              <Button asChild variant="outline" size="lg" className="text-base">
+                <Link href="/projects">
+                  View My Work
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   )
 }
-

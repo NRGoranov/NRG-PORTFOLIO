@@ -1,186 +1,325 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, MessageSquare, Github, Linkedin, Twitter, MapPin, Clock } from 'lucide-react'
+import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-
-const contactMethods = [
-  {
-    name: 'Email',
-    description: 'Get in touch directly',
-    icon: Mail,
-    href: 'mailto:hello@nrg.dev',
-    label: 'hello@nrg.dev'
-  },
-  {
-    name: 'LinkedIn',
-    description: 'Professional networking',
-    icon: Linkedin,
-    href: 'https://linkedin.com/in/nrg',
-    label: 'linkedin.com/in/nrg'
-  },
-  {
-    name: 'GitHub',
-    description: 'View my code',
-    icon: Github,
-    href: 'https://github.com/nrg',
-    label: 'github.com/nrg'
-  },
-  {
-    name: 'Twitter',
-    description: 'Follow for updates',
-    icon: Twitter,
-    href: 'https://twitter.com/nrg',
-    label: '@nrg'
-  }
-]
-
-const quickInfo = [
-  {
-    icon: MapPin,
-    label: 'Location',
-    value: 'Sofia, Bulgaria'
-  },
-  {
-    icon: Clock,
-    label: 'Response Time',
-    value: 'Within 24 hours'
-  }
-]
+import { Textarea } from '@/components/ui/textarea'
+import { Label } from '@/components/ui/label'
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    setIsSubmitting(false)
+    setIsSubmitted(true)
+    
+    // Reset form after 3 seconds
+    setTimeout(() => {
+      setIsSubmitted(false)
+      setFormData({ name: '', email: '', subject: '', message: '' })
+    }, 3000)
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }))
+  }
+
+  const contactInfo = [
+    {
+      icon: Mail,
+      label: 'Email',
+      value: 'hello@nrgoranov.com',
+      href: 'mailto:hello@nrgoranov.com'
+    },
+    {
+      icon: Phone,
+      label: 'Phone',
+      value: '+1 (555) 123-4567',
+      href: 'tel:+15551234567'
+    },
+    {
+      icon: MapPin,
+      label: 'Location',
+      value: 'Sofia, Bulgaria',
+      href: '#'
+    }
+  ]
+
+  const socialLinks = [
+    {
+      icon: Github,
+      label: 'GitHub',
+      href: 'https://github.com/NRGoranov',
+      color: 'hover:text-gray-900 dark:hover:text-gray-100'
+    },
+    {
+      icon: Linkedin,
+      label: 'LinkedIn',
+      href: 'https://linkedin.com/in/nrgoranov',
+      color: 'hover:text-blue-600'
+    }
+  ]
+
   return (
-    <div className="py-20">
-      <div className="container max-w-4xl">
-        {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Get In Touch
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Have a project in mind? Want to collaborate? 
-            I'd love to hear from you.
-          </p>
-        </motion.div>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="relative py-20 lg:py-32 bg-gradient-to-b from-background via-background/95 to-background">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.1)_0%,transparent_70%)]" />
+        
+        <div className="container relative">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="space-y-6"
+            >
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
+                Let's
+                <span className="block bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">
+                  Connect
+                </span>
+              </h1>
+              
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+                Ready to start your next project? I'd love to hear about your ideas 
+                and discuss how we can bring them to life together.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Methods */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
-          >
-            <h2 className="text-2xl font-bold mb-6">Contact Methods</h2>
-            <div className="space-y-4">
-              {contactMethods.map((method) => (
-                <Card key={method.name} className="hover:shadow-md transition-shadow">
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <div className="p-2 rounded-lg bg-primary/10">
-                        <method.icon className="h-5 w-5 text-primary" />
+      {/* Contact Section */}
+      <section className="py-20">
+        <div className="container">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12">
+              {/* Contact Form */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="space-y-8"
+              >
+                <div>
+                  <h2 className="text-3xl font-bold mb-4">Send a Message</h2>
+                  <p className="text-muted-foreground">
+                    Fill out the form below and I'll get back to you within 24 hours.
+                  </p>
+                </div>
+
+                {isSubmitted ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center py-12"
+                  >
+                    <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
+                    <h3 className="text-2xl font-semibold mb-2">Message Sent!</h3>
+                    <p className="text-muted-foreground">
+                      Thank you for reaching out. I'll get back to you soon.
+                    </p>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="name">Name</Label>
+                        <Input
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          placeholder="Your name"
+                          required
+                        />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="font-semibold mb-1">{method.name}</h3>
-                        <p className="text-sm text-muted-foreground mb-3">
-                          {method.description}
-                        </p>
-                        <Button asChild variant="outline" size="sm">
-                          <a href={method.href} target="_blank" rel="noopener noreferrer">
-                            {method.label}
-                          </a>
-                        </Button>
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="your@email.com"
+                          required
+                        />
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
+
+                    <div className="space-y-2">
+                      <Label htmlFor="subject">Subject</Label>
+                      <Input
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        placeholder="What's this about?"
+                        required
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="message">Message</Label>
+                      <Textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="Tell me about your project..."
+                        rows={6}
+                        required
+                      />
+                    </div>
+
+                    <Button
+                      type="submit"
+                      size="lg"
+                      disabled={isSubmitting}
+                      className="w-full"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="mr-2 h-4 w-4" />
+                          Send Message
+                        </>
+                      )}
+                    </Button>
+                  </form>
+                )}
+              </motion.div>
+
+              {/* Contact Info */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="space-y-8"
+              >
+                <div>
+                  <h2 className="text-3xl font-bold mb-4">Get In Touch</h2>
+                  <p className="text-muted-foreground">
+                    Prefer to reach out directly? Here are the best ways to contact me.
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  {contactInfo.map((info, index) => (
+                    <motion.div
+                      key={info.label}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="flex items-center gap-4 p-4 rounded-lg border bg-card/50 hover:bg-card transition-colors"
+                    >
+                      <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                        <info.icon className="h-6 w-6 text-primary" />
+                      </div>
+                      <div>
+                        <p className="font-medium">{info.label}</p>
+                        <a
+                          href={info.href}
+                          className="text-muted-foreground hover:text-primary transition-colors"
+                        >
+                          {info.value}
+                        </a>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <div className="space-y-4">
+                  <h3 className="text-xl font-semibold">Follow Me</h3>
+                  <div className="flex gap-4">
+                    {socialLinks.map((social) => (
+                      <a
+                        key={social.label}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`h-12 w-12 rounded-lg border bg-card/50 flex items-center justify-center hover:bg-card transition-colors ${social.color}`}
+                      >
+                        <social.icon className="h-6 w-6" />
+                        <span className="sr-only">{social.label}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="p-6 rounded-lg border bg-muted/30">
+                  <h3 className="font-semibold mb-2">Response Time</h3>
+                  <p className="text-sm text-muted-foreground">
+                    I typically respond to messages within 24 hours. For urgent matters, 
+                    feel free to call or send a direct message on LinkedIn.
+                  </p>
+                </div>
+              </motion.div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* Quick Info */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Quick Info</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {quickInfo.map((info) => (
-                  <div key={info.label} className="flex items-center gap-3">
-                    <info.icon className="h-4 w-4 text-muted-foreground" />
-                    <div>
-                      <p className="text-sm font-medium">{info.label}</p>
-                      <p className="text-sm text-muted-foreground">{info.value}</p>
-                    </div>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Contact Form */}
+      {/* CTA Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container">
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center max-w-3xl mx-auto"
           >
-            <Card>
-              <CardHeader>
-                <CardTitle>Send a Message</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-2">
-                        Name
-                      </label>
-                      <Input id="name" placeholder="Your name" required />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-2">
-                        Email
-                      </label>
-                      <Input id="email" type="email" placeholder="your@email.com" required />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="subject" className="block text-sm font-medium mb-2">
-                      Subject
-                    </label>
-                    <Input id="subject" placeholder="What's this about?" required />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      rows={6}
-                      className="w-full px-3 py-2 border border-input bg-background rounded-md text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                      placeholder="Tell me about your project..."
-                      required
-                    />
-                  </div>
-                  
-                  <Button type="submit" className="w-full">
-                    <MessageSquare className="h-4 w-4 mr-2" />
-                    Send Message
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Ready to Start Your Project?
+            </h2>
+            <p className="text-lg text-muted-foreground mb-8">
+              Let's discuss your ideas and create something amazing together.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg" className="text-base">
+                <a href="mailto:hello@nrgoranov.com">
+                  <Mail className="mr-2 h-4 w-4" />
+                  Send Email
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="text-base">
+                <a href="https://linkedin.com/in/nrgoranov" target="_blank" rel="noopener noreferrer">
+                  <Linkedin className="mr-2 h-4 w-4" />
+                  Connect on LinkedIn
+                </a>
+              </Button>
+            </div>
           </motion.div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }
-
