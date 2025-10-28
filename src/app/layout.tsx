@@ -44,13 +44,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://nrg-portfolio.vercel.app',
+    url: 'https://nrg-portfolio-murex.vercel.app',
     title: 'NRG Portfolio - Modern Web Development',
     description: 'A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies.',
     siteName: 'NRG Portfolio',
     images: [
       {
-        url: 'https://nrg-portfolio.vercel.app/og-image.png',
+        url: 'https://nrg-portfolio-murex.vercel.app/og-image.png',
         width: 1200,
         height: 630,
         alt: 'NRG Portfolio - Full-Stack Developer showcasing modern web development projects',
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: 'NRG Portfolio - Modern Web Development',
     description: 'A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies.',
     creator: '@nrg',
-    images: ['https://nrg-portfolio.vercel.app/og-image.png'],
+    images: ['https://nrg-portfolio-murex.vercel.app/og-image.png'],
   },
   robots: {
     index: true,
@@ -96,10 +96,10 @@ export default function RootLayout({
         
         {/* Open Graph Meta Tags */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://nrg-portfolio.vercel.app" />
+        <meta property="og:url" content="https://nrg-portfolio-murex.vercel.app" />
         <meta property="og:title" content="NRG Portfolio - Modern Web Development" />
         <meta property="og:description" content="A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies." />
-        <meta property="og:image" content="https://nrg-portfolio.vercel.app/og-image.png" />
+        <meta property="og:image" content="https://nrg-portfolio-murex.vercel.app/og-image.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="NRG Portfolio - Full-Stack Developer showcasing modern web development projects" />
@@ -108,7 +108,7 @@ export default function RootLayout({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="NRG Portfolio - Modern Web Development" />
         <meta name="twitter:description" content="A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies." />
-        <meta name="twitter:image" content="https://nrg-portfolio.vercel.app/og-image.png" />
+        <meta name="twitter:image" content="https://nrg-portfolio-murex.vercel.app/og-image.png" />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider
