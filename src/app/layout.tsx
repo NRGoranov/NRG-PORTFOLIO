@@ -28,6 +28,19 @@ export const metadata: Metadata = {
   keywords: ['portfolio', 'web development', 'Next.js', 'TypeScript', 'React', 'Tailwind CSS'],
   authors: [{ name: 'NRG' }],
   creator: 'NRG',
+  icons: {
+    icon: [
+      { url: '/browserIcon/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/browserIcon/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/browserIcon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      { rel: 'icon', url: '/browserIcon/favicon.ico' },
+    ],
+  },
+  manifest: '/browserIcon/site.webmanifest',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -35,12 +48,21 @@ export const metadata: Metadata = {
     title: 'NRG Portfolio - Modern Web Development',
     description: 'A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies.',
     siteName: 'NRG Portfolio',
+    images: [
+      {
+        url: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=630&fit=crop&crop=center',
+        width: 1200,
+        height: 630,
+        alt: 'NRG Portfolio - Culinary Excellence in Web Development',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'NRG Portfolio - Modern Web Development',
     description: 'A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies.',
     creator: '@nrg',
+    images: ['https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=630&fit=crop&crop=center'],
   },
   robots: {
     index: true,
