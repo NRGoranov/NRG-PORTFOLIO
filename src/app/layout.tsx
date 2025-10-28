@@ -3,7 +3,6 @@ import { Inter, JetBrains_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { SerpentBackground } from '@/components/ClientSerpentBackground'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
@@ -73,7 +72,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <SerpentBackground />
           <div className="relative flex min-h-screen flex-col bg-background/95 backdrop-blur-sm">
             <Header />
             <main className="flex-1">

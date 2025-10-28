@@ -391,7 +391,7 @@ A modern blogging platform built for technical content with advanced theme switc
       'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=1200&h=630&fit=crop',
       'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop'
     ],
-    featured: false,
+    featured: true,
     highlightColor: '#10b981',
     metrics: {
       users: '4K+',
