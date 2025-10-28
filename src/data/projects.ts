@@ -157,7 +157,6 @@ Traditional tea packaging creates waste and doesn't preserve freshness. Customer
     role: 'Full Stack Developer',
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Sanity', 'Vercel'],
     liveUrl: 'https://matcha-swart.vercel.app',
-    sourceUrl: 'https://github.com/NRGoranov/matcha',
     coverImage: '/covers/matcha-pouch.png',
     gallery: [
       '/covers/matcha-pouch.png',
@@ -335,7 +334,6 @@ A comprehensive event management platform with ticketing, scheduling, and attend
     role: 'Full Stack Developer',
     stack: ['Next.js', 'Stripe', 'PostgreSQL', 'QR Code', 'Tailwind CSS'],
     liveUrl: 'https://sites-for-skill-observation.vercel.app/events',
-    sourceUrl: 'https://github.com/nrg/event-hub',
     coverImage: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&h=630&fit=crop',
     gallery: [
       'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=1200&h=630&fit=crop',
