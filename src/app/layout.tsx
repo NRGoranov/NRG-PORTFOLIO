@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     siteName: 'NRG Portfolio',
     images: [
       {
-        url: 'https://nrg-portfolio.vercel.app/og-image',
+        url: 'https://nrg-portfolio.vercel.app/socialPreview.png',
         width: 1200,
         height: 630,
         alt: 'NRG Portfolio - Full-Stack Developer showcasing modern web development projects',
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: 'NRG Portfolio - Modern Web Development',
     description: 'A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies.',
     creator: '@nrg',
-    images: ['https://nrg-portfolio.vercel.app/og-image'],
+    images: ['https://nrg-portfolio.vercel.app/socialPreview.png'],
   },
   robots: {
     index: true,
