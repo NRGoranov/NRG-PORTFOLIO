@@ -17,9 +17,9 @@ export default function HomePage() {
   }, [])
 
   const stats = [
-    { label: 'Projects Built', value: '25+' },
+    { label: 'Projects Built', value: '30+' },
     { label: 'Years Learning', value: '5' },
-    { label: 'Technologies', value: '15+' },
+    { label: 'Technologies', value: '20+' },
     { label: 'Passion Level', value: '100%' },
   ]
 
@@ -61,7 +61,6 @@ export default function HomePage() {
                       <span className="text-primary-foreground font-bold text-lg">NRG</span>
                     </div>
                     <div className="h-px bg-gradient-to-r from-primary/50 to-transparent flex-1" />
-                    <span className="text-sm text-muted-foreground font-medium">Available for work</span>
                   </motion.div>
 
                   <motion.h1

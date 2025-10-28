@@ -23,7 +23,7 @@ export default function AboutPage() {
       technologies: ['React', 'JavaScript', 'CSS3', 'MongoDB']
     },
     {
-      year: '2020-2022',
+      year: '2019-2021',
       title: 'Frontend Developer',
       company: 'Learning & Self-Development',
       description: 'Learning modern web technologies and building projects to master the craft of web development.',
@@ -69,13 +69,8 @@ export default function AboutPage() {
               className="text-center space-y-8"
             >
               <div className="flex justify-center">
-                <div className="relative">
-                  <div className="h-32 w-32 rounded-full bg-gradient-to-r from-primary to-primary/70 flex items-center justify-center">
-                    <span className="text-primary-foreground font-bold text-3xl">NRG</span>
-                  </div>
-                  <div className="absolute -top-2 -right-2 h-8 w-8 bg-green-500 rounded-full flex items-center justify-center">
-                    <div className="h-3 w-3 bg-white rounded-full" />
-                  </div>
+                <div className="h-32 w-32 rounded-full bg-gradient-to-r from-primary to-primary/70 flex items-center justify-center">
+                  <span className="text-primary-foreground font-bold text-3xl">NRG</span>
                 </div>
               </div>
 
