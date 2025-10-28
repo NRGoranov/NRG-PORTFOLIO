@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     siteName: 'NRG Portfolio',
     images: [
       {
-        url: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop&crop=center',
+        url: 'https://nrg-portfolio.vercel.app/og-image.png',
         width: 1200,
         height: 630,
         alt: 'NRG Portfolio - Full-Stack Developer showcasing modern web development projects',
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     title: 'NRG Portfolio - Modern Web Development',
     description: 'A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies.',
     creator: '@nrg',
-    images: ['https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop&crop=center'],
+    images: ['https://nrg-portfolio.vercel.app/og-image.png'],
   },
   robots: {
     index: true,
@@ -99,7 +99,7 @@ export default function RootLayout({
         <meta property="og:url" content="https://nrg-portfolio.vercel.app" />
         <meta property="og:title" content="NRG Portfolio - Modern Web Development" />
         <meta property="og:description" content="A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies." />
-        <meta property="og:image" content="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop&crop=center" />
+        <meta property="og:image" content="https://nrg-portfolio.vercel.app/og-image.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:alt" content="NRG Portfolio - Full-Stack Developer showcasing modern web development projects" />
@@ -108,7 +108,7 @@ export default function RootLayout({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="NRG Portfolio - Modern Web Development" />
         <meta name="twitter:description" content="A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies." />
-        <meta name="twitter:image" content="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop&crop=center" />
+        <meta name="twitter:image" content="https://nrg-portfolio.vercel.app/og-image.png" />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider
