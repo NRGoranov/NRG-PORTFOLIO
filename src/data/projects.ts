@@ -353,30 +353,46 @@ A comprehensive event management platform with ticketing, scheduling, and attend
   {
     slug: 'tech-blog',
     title: 'Tech Blog Platform',
-    shortDescription: 'Modern tech blog with MDX support, syntax highlighting, and interactive code examples.',
+    shortDescription: 'Modern tech blog with theme switching, Matrix dark mode, and interactive code examples.',
     longDescription: `# Tech Blog Platform
 
-A modern blogging platform built for technical content with MDX support and interactive code examples.
+A modern blogging platform built for technical content with advanced theme switching, Matrix-inspired dark mode, and interactive code examples.
 
 ## Features
-- MDX support for rich content
-- Syntax highlighting for code blocks
-- Interactive code examples
-- Search and filtering
-- RSS feed generation`,
-    tags: ['Blog', 'MDX', 'Technical', 'Content'],
-    year: 2023,
-    role: 'Frontend Developer',
-    stack: ['Next.js', 'MDX', 'Prism.js', 'Tailwind CSS', 'TypeScript'],
-    liveUrl: 'https://tech-blog.vercel.app',
-    sourceUrl: 'https://github.com/nrg/tech-blog',
+- Light/Dark theme switching with smooth transitions
+- Matrix-inspired dark mode with green cyber-grid background
+- Interactive code examples with syntax highlighting
+- Search and filtering capabilities
+- Responsive design with hidden scrollbars
+- Modern UI with glassmorphism effects
+
+## Tech Stack
+- Next.js 14 with App Router
+- TypeScript for type safety
+- Tailwind CSS with custom animations
+- next-themes for theme management
+- Lucide React for icons
+
+## Design Highlights
+- Cyber-grid background pattern in dark mode
+- Smooth theme transitions
+- Matrix-style green color scheme
+- Professional and modern aesthetic
+- Optimized for performance`,
+    tags: ['Blog', 'Theme Switching', 'Dark Mode', 'Matrix', 'Technical'],
+    year: 2024,
+    role: 'Full Stack Developer',
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'next-themes', 'Vercel'],
+    liveUrl: 'https://tech-blog-lyart.vercel.app',
+    sourceUrl: 'https://github.com/NRGoranov/tech-blog',
     coverImage: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=630&fit=crop',
     gallery: [
       'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=630&fit=crop',
-      'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=1200&h=630&fit=crop'
+      'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop'
     ],
     featured: false,
-    highlightColor: '#6366f1',
+    highlightColor: '#10b981',
     metrics: {
       users: '4K+',
       stars: 31,
