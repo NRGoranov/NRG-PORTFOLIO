@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Sparkles, Code, Zap, Award, Users, Github, Linkedin, Mail, ExternalLink } from 'lucide-react'
+import { ArrowRight, Sparkles, Code, Zap, Award, Users, Github, Linkedin, Instagram, Mail, ExternalLink } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
@@ -141,8 +141,13 @@ export default function HomePage() {
                       </Link>
                     </Button>
                     <Button asChild variant="ghost" size="icon" className="h-10 w-10">
-                      <Link href="https://linkedin.com/in/nrgoranov" target="_blank">
+                      <Link href="https://www.linkedin.com/in/nikolay-goranov-a5a0411a7" target="_blank">
                         <Linkedin className="h-5 w-5" />
+                      </Link>
+                    </Button>
+                    <Button asChild variant="ghost" size="icon" className="h-10 w-10">
+                      <Link href="https://www.instagram.com/nrgoranov" target="_blank">
+                        <Instagram className="h-5 w-5" />
                       </Link>
                     </Button>
                   </div>

@@ -1,11 +1,11 @@
 import Link from 'next/link'
-import { Github, Linkedin, Mail, Twitter } from 'lucide-react'
+import { Github, Linkedin, Instagram, Mail, Twitter } from 'lucide-react'
 
 const socialLinks = [
-  { name: 'GitHub', href: 'https://github.com/nrg', icon: Github },
-  { name: 'LinkedIn', href: 'https://linkedin.com/in/nrg', icon: Linkedin },
-  { name: 'Twitter', href: 'https://twitter.com/nrg', icon: Twitter },
-  { name: 'Email', href: 'mailto:hello@nrg.dev', icon: Mail },
+  { name: 'GitHub', href: 'https://github.com/NRGoranov', icon: Github },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/nikolay-goranov-a5a0411a7', icon: Linkedin },
+  { name: 'Instagram', href: 'https://www.instagram.com/nrgoranov', icon: Instagram },
+  { name: 'Email', href: 'mailto:nrgoranov@gmail.com', icon: Mail },
 ]
 
 const footerLinks = [
