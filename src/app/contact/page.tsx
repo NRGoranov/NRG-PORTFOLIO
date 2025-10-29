@@ -73,7 +73,7 @@ export default function ContactPage() {
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      href: 'https://linkedin.com/in/nrgoranov',
+      href: 'https://www.linkedin.com/in/nikolay-goranov-a5a0411a7',
       color: 'hover:text-blue-600'
     },
     {
@@ -318,7 +318,7 @@ export default function ContactPage() {
                 </a>
               </Button>
               <Button asChild variant="outline" size="lg" className="text-base">
-                <a href="https://linkedin.com/in/nrgoranov" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/in/nikolay-goranov-a5a0411a7" target="_blank" rel="noopener noreferrer">
                   <Linkedin className="mr-2 h-4 w-4" />
                   Connect on LinkedIn
                 </a>
