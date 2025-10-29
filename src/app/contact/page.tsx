@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle } from 'lucide-react'
+import { Mail, Phone, MapPin, Github, Linkedin, Instagram, Send, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -75,6 +75,12 @@ export default function ContactPage() {
       label: 'LinkedIn',
       href: 'https://linkedin.com/in/nrgoranov',
       color: 'hover:text-blue-600'
+    },
+    {
+      icon: Instagram,
+      label: 'Instagram',
+      href: 'https://www.instagram.com/nrgoranov',
+      color: 'hover:text-pink-600'
     }
   ]
 
