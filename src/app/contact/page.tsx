@@ -122,9 +122,9 @@ export default function ContactPage() {
                 className="space-y-8"
               >
                 <div>
-                  <h2 className="text-3xl font-bold mb-4">Send a Message</h2>
+                  <h2 className="text-3xl font-bold mb-4">Contact Form (Demo)</h2>
                   <p className="text-muted-foreground">
-                    Fill out the form below and I'll get back to you within 24 hours.
+                    This form is for showcasing purposes only. To actually reach me, please use the contact methods on the right or send me a direct email, message, or call.
                   </p>
                 </div>
 
@@ -135,9 +135,9 @@ export default function ContactPage() {
                     className="text-center py-12"
                   >
                     <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-                    <h3 className="text-2xl font-semibold mb-2">Message Sent!</h3>
+                    <h3 className="text-2xl font-semibold mb-2">Demo Message Sent!</h3>
                     <p className="text-muted-foreground">
-                      Thank you for reaching out. I'll get back to you soon.
+                      This is just a demo. To actually contact me, please use the email, phone, or social links on the right.
                     </p>
                   </motion.div>
                 ) : (
@@ -226,7 +226,7 @@ export default function ContactPage() {
                 <div>
                   <h2 className="text-3xl font-bold mb-4">Get In Touch</h2>
                   <p className="text-muted-foreground">
-                    Prefer to reach out directly? Here are the best ways to contact me.
+                    Here are the actual ways to contact me. Use these methods to reach out directly.
                   </p>
                 </div>
 
@@ -275,10 +275,11 @@ export default function ContactPage() {
                 </div>
 
                 <div className="p-6 rounded-lg border bg-muted/30">
-                  <h3 className="font-semibold mb-2">Response Time</h3>
+                  <h3 className="font-semibold mb-2">Important Note</h3>
                   <p className="text-sm text-muted-foreground">
-                    I typically respond to messages within 24 hours. For urgent matters, 
-                    feel free to call or send a direct message on LinkedIn.
+                    The contact form above is for demonstration purposes only. To actually reach me, 
+                    please use the email, phone, or social media links provided. I typically respond 
+                    within 24 hours to direct messages.
                   </p>
                 </div>
               </motion.div>
