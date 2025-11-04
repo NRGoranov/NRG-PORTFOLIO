@@ -1053,11 +1053,7 @@ function initializeAnimations() {
 }
 
 function initializeScrollEffects() {
-    // Scroll animations removed per user request
-    // All elements are visible immediately
-    document.querySelectorAll('.scroll-animate').forEach(el => {
-        el.classList.add('animate-in');
-    });
+    // Scroll animations removed - no functionality needed
 }
 
 function animatePropertyCards() {
