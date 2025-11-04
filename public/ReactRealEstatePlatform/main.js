@@ -1015,18 +1015,12 @@ function renderFilteredBlogArticles(articles) {
 
 // Animation functions
 function initializeAnimations() {
-    // Initialize scroll-triggered animations
-    if (typeof anime !== 'undefined') {
-        // Fade in animations for sections
-        anime({
-            targets: '.fade-in',
-            opacity: [0, 1],
-            translateY: [30, 0],
-            duration: 800,
-            delay: anime.stagger(100),
-            easing: 'easeOutQuad'
-        });
-    }
+    // Scroll animations removed per user request
+    // All fade-in elements are visible immediately
+    document.querySelectorAll('.fade-in').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+    });
 }
 
 function initializeScrollEffects() {
