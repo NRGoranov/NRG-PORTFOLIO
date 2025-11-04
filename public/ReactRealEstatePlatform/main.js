@@ -53,11 +53,28 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const formData = new FormData(this);
             const searchParams = new URLSearchParams(formData);
-            // In a real application, this would navigate to listings page with filters
+            // Scroll to featured properties section
+            const targetSection = document.getElementById('featured-properties-section');
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
             console.log('Search submitted:', Object.fromEntries(searchParams));
-            alert('Search functionality would navigate to listings page with your criteria.');
         });
     }
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (href && href !== '#') {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+    });
 
     // Mobile menu toggle
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
@@ -88,7 +105,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Initialize Splide carousel for featured properties
-    if (typeof Splide !== 'undefined' && document.getElementById('featured-properties')) {
+    function initPropertyCarousel() {
+        const featuredPropertiesEl = document.getElementById('featured-properties');
+        if (!featuredPropertiesEl) {
+            console.log('Featured properties element not found');
+            return;
+        }
+
+        // Wait for Splide to be available
+        if (typeof Splide === 'undefined') {
+            console.log('Splide library not loaded yet, retrying...');
+            setTimeout(initPropertyCarousel, 100);
+            return;
+        }
+
         // Sample properties data
         const properties = [
             {
@@ -117,48 +147,87 @@ document.addEventListener('DOMContentLoaded', function() {
                 beds: 5,
                 baths: 4,
                 sqft: '5,200'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop',
+                title: 'Mountain View Estate',
+                price: '$3,100,000',
+                address: '321 Hillside Drive, Aspen, CO',
+                beds: 4,
+                baths: 3,
+                sqft: '4,200'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1600585152915-d38becbb1e0c?w=800&h=600&fit=crop',
+                title: 'Urban Loft Apartment',
+                price: '$1,200,000',
+                address: '555 Downtown Ave, Seattle, WA',
+                beds: 2,
+                baths: 2,
+                sqft: '2,100'
             }
         ];
 
         const splideList = document.querySelector('#featured-properties .splide__list');
-        if (splideList) {
-            properties.forEach(property => {
-                const li = document.createElement('li');
-                li.className = 'splide__slide';
-                li.innerHTML = `
-                    <div class="property-card">
-                        <div class="property-image">
-                            <img src="${property.image}" alt="${property.title}" crossorigin="anonymous" loading="lazy">
-                            <button class="favorite-btn"><i class="fas fa-heart"></i></button>
-                        </div>
-                        <div class="property-info">
-                            <h3>${property.title}</h3>
-                            <div class="price">${property.price}</div>
-                            <div class="address">${property.address}</div>
-                            <div class="property-specs">
-                                <span><i class="fas fa-bed"></i> ${property.beds} Beds</span>
-                                <span><i class="fas fa-bath"></i> ${property.baths} Baths</span>
-                                <span><i class="fas fa-ruler-combined"></i> ${property.sqft} sqft</span>
-                            </div>
+        if (!splideList) {
+            console.log('Splide list not found');
+            return;
+        }
+
+        // Clear existing content
+        splideList.innerHTML = '';
+
+        // Add properties
+        properties.forEach(property => {
+            const li = document.createElement('li');
+            li.className = 'splide__slide';
+            li.innerHTML = `
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="${property.image}" alt="${property.title}" crossorigin="anonymous" loading="lazy" onerror="this.src='https://via.placeholder.com/800x600?text=Property+Image'">
+                        <button class="favorite-btn"><i class="fas fa-heart"></i></button>
+                    </div>
+                    <div class="property-info">
+                        <h3>${property.title}</h3>
+                        <div class="price">${property.price}</div>
+                        <div class="address">${property.address}</div>
+                        <div class="property-specs">
+                            <span><i class="fas fa-bed"></i> ${property.beds} Beds</span>
+                            <span><i class="fas fa-bath"></i> ${property.baths} Baths</span>
+                            <span><i class="fas fa-ruler-combined"></i> ${property.sqft} sqft</span>
                         </div>
                     </div>
-                `;
-                splideList.appendChild(li);
-            });
+                </div>
+            `;
+            splideList.appendChild(li);
+        });
 
+        // Initialize Splide
+        try {
             new Splide('#featured-properties', {
                 type: 'loop',
                 perPage: 3,
                 perMove: 1,
                 gap: '2rem',
+                pagination: true,
+                arrows: true,
                 breakpoints: {
+                    1024: {
+                        perPage: 2
+                    },
                     768: {
                         perPage: 1
                     }
                 }
             }).mount();
+            console.log('Splide carousel initialized successfully');
+        } catch (error) {
+            console.error('Error initializing Splide:', error);
         }
     }
+
+    // Initialize carousel after a short delay to ensure libraries are loaded
+    setTimeout(initPropertyCarousel, 500);
 
     // Initialize ECharts for market chart
     if (typeof echarts !== 'undefined' && document.getElementById('market-chart')) {
