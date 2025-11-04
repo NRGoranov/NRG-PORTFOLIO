@@ -17,8 +17,8 @@ const properties = [
         image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
         images: [
             "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop"
+            "https://images.unsplash.com/photo-1600210491892-03d54c0aafb3?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop"
         ],
         amenities: ["Pool", "Garage", "Garden", "Gym"],
         description: "Stunning modern villa with panoramic city views, featuring an open-concept design, premium finishes, and resort-style backyard.",
@@ -40,8 +40,8 @@ const properties = [
         image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
         images: [
             "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600585152915-d38becbb1e0c?w=800&h=600&fit=crop"
+            "https://images.unsplash.com/photo-1600566753086-5f62d21f8d83?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600585153490-76fb20a326cc?w=800&h=600&fit=crop"
         ],
         amenities: ["Gym", "Concierge", "Rooftop Deck"],
         description: "Sophisticated penthouse in the heart of downtown with floor-to-ceiling windows and premium building amenities.",
@@ -63,8 +63,8 @@ const properties = [
         image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
         images: [
             "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop"
+            "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop"
         ],
         amenities: ["Waterfront", "Balcony", "Garage"],
         description: "Charming waterfront townhouse with stunning marina views and private patio perfect for entertaining.",
@@ -86,8 +86,8 @@ const properties = [
         image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
         images: [
             "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600240644453-484edb135597?w=800&h=600&fit=crop"
+            "https://images.unsplash.com/photo-1600566753086-5f62d21f8d83?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600585153490-76fb20a326cc?w=800&h=600&fit=crop"
         ],
         amenities: ["Garden", "Garage", "Fireplace"],
         description: "Beautiful family home in quiet Pasadena neighborhood with updated kitchen and spacious backyard.",
@@ -109,8 +109,8 @@ const properties = [
         image: "https://images.unsplash.com/photo-1600585152915-d38becbb1e0c?w=800&h=600&fit=crop",
         images: [
             "https://images.unsplash.com/photo-1600585152915-d38becbb1e0c?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop"
+            "https://images.unsplash.com/photo-1600585153071-8c2d5e6e6b3b?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop"
         ],
         amenities: ["Ocean Views", "Balcony", "Gym", "Pool"],
         description: "Stunning oceanfront condo with panoramic views and luxury amenities in prime Santa Monica location.",
@@ -132,8 +132,8 @@ const properties = [
         image: "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
         images: [
             "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop"
+            "https://images.unsplash.com/photo-1600047509807-ba8f99d478cd?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop"
         ],
         amenities: ["City Views", "Infinity Pool", "Home Theater", "Wine Cellar"],
         description: "Architectural masterpiece in the Hollywood Hills with stunning city views and premium finishes throughout.",
@@ -155,8 +155,8 @@ const properties = [
         image: "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop",
         images: [
             "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600240644453-484edb135597?w=800&h=600&fit=crop"
+            "https://images.unsplash.com/photo-1600240644453-484edb135597?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop"
         ],
         amenities: ["Hardwood Floors", "Fireplace", "Patio"],
         description: "Beautiful Craftsman home with original details and modern updates in desirable Glendale neighborhood.",
@@ -178,8 +178,8 @@ const properties = [
         image: "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop",
         images: [
             "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop"
+            "https://images.unsplash.com/photo-1600585153071-8c2d5e6e6b3b?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600047509807-ba8f99d478cd?w=800&h=600&fit=crop"
         ],
         amenities: ["Modern Kitchen", "Rooftop Deck", "Garage"],
         description: "Contemporary townhouse with sleek design and premium finishes in trendy Culver City location.",
