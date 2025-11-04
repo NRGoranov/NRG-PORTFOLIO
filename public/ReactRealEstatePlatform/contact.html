@@ -1111,32 +1111,48 @@
             e.preventDefault();
             
             // Validate final step
-            if (!validateStep(currentStep)) {
+            const currentStepValue = window.contactFormStep || 3;
+            if (!validateStep(currentStepValue)) {
                 return;
             }
             
             // Show loading state
             const submitBtn = e.target.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
+            const originalText = submitBtn ? submitBtn.textContent : 'Submit';
+            if (submitBtn) {
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+            }
             
             // Simulate form submission
             setTimeout(() => {
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
+                if (submitBtn) {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
                 showSuccessMessage();
                 
                 // Reset form
-                document.getElementById('contact-form').reset();
-                currentStep = 1;
+                const form = document.getElementById('contact-form');
+                if (form) {
+                    form.reset();
+                }
+                window.contactFormStep = 1;
                 document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
-                document.getElementById('step-1').classList.add('active');
+                const firstStep = document.getElementById('step-1');
+                if (firstStep) {
+                    firstStep.classList.add('active');
+                }
                 document.querySelectorAll('.step-dot').forEach(dot => {
                     dot.classList.remove('active', 'completed');
                 });
-                document.querySelector('.step-dot').classList.add('active');
-                updateProgressBar();
+                const firstDot = document.querySelector('.step-dot');
+                if (firstDot) {
+                    firstDot.classList.add('active');
+                }
+                if (typeof updateProgressBar === 'function') {
+                    updateProgressBar();
+                }
             }, 2000);
         }
         
