@@ -20,35 +20,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Animation System
 function initializeAnimations() {
-    // Reveal text animations
-    const revealElements = document.querySelectorAll('.reveal-text');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+    // Scroll animations removed per user request
+    // All reveal-text elements are visible immediately
+    document.querySelectorAll('.reveal-text').forEach(el => {
+        el.classList.add('revealed');
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
     });
-    
-    revealElements.forEach(element => {
-        observer.observe(element);
-    });
-    
-    // Staggered text animations for hero
-    if (document.querySelector('.hero-bg')) {
-        anime({
-            targets: '.reveal-text',
-            opacity: [0, 1],
-            translateY: [30, 0],
-            delay: anime.stagger(200),
-            duration: 800,
-            easing: 'easeOutCubic'
-        });
-    }
 }
 
 // Navigation System

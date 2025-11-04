@@ -14,11 +14,11 @@ const properties = [
         address: "123 Hillside Drive, Beverly Hills, CA 90210",
         lat: 34.0901,
         lng: -118.4065,
-        image: "https://kimi-web-img.moonshot.cn/img/thumbs.dreamstime.com/e5d027c082a1b2c996e401e212c43bdf2a71893a.jpg",
+        image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
         images: [
-            "https://kimi-web-img.moonshot.cn/img/thumbs.dreamstime.com/e5d027c082a1b2c996e401e212c43bdf2a71893a.jpg",
-            "https://kimi-web-img.moonshot.cn/img/hawk-haven.com/7734d73750741588fa85c4a61250852607b2dff6.jpg",
-            "https://kimi-web-img.moonshot.cn/img/portfolio.zeelproject.com/db494cf7cd8575ae83b16a5db618d5bdda1fad54.jpg"
+            "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop"
         ],
         amenities: ["Pool", "Garage", "Garden", "Gym"],
         description: "Stunning modern villa with panoramic city views, featuring an open-concept design, premium finishes, and resort-style backyard.",
@@ -37,11 +37,11 @@ const properties = [
         address: "456 Main Street, Los Angeles, CA 90015",
         lat: 34.0522,
         lng: -118.2437,
-        image: "https://kimi-web-img.moonshot.cn/img/artilett.com/f41cbc17670e8d5f7db2bda737029d0f74e5078f.jpeg",
+        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
         images: [
-            "https://kimi-web-img.moonshot.cn/img/artilett.com/f41cbc17670e8d5f7db2bda737029d0f74e5078f.jpeg",
-            "https://kimi-web-img.moonshot.cn/img/cdn.home-designing.com/8d553beea386d83d04ca4eb1c1ac622da13558a0.jpg",
-            "https://kimi-web-img.moonshot.cn/img/dkorinteriors.com/90849c9210f609c4873c22fdcc89d88b5ef89b52.jpg"
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop"
         ],
         amenities: ["Gym", "Concierge", "Rooftop Deck"],
         description: "Sophisticated penthouse in the heart of downtown with floor-to-ceiling windows and premium building amenities.",
@@ -60,11 +60,11 @@ const properties = [
         address: "789 Marina Blvd, Marina del Rey, CA 90292",
         lat: 33.9681,
         lng: -118.4513,
-        image: "https://kimi-web-img.moonshot.cn/img/www.architectureboutique.com/3758098b86cf6ddc2f2111e006b25811d1908908.png",
+        image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
         images: [
-            "https://kimi-web-img.moonshot.cn/img/www.architectureboutique.com/3758098b86cf6ddc2f2111e006b25811d1908908.png",
-            "https://kimi-web-img.moonshot.cn/img/stuartsilk.com/6e79fc62884063c0dd9af157bfa4c2e0c13fa651.jpg",
-            "https://kimi-web-img.moonshot.cn/img/fabricerie.com/2d22b7bc23f2a1f27df2487a1262f2b3c3b17662.jpeg"
+            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop"
         ],
         amenities: ["Waterfront", "Balcony", "Garage"],
         description: "Charming waterfront townhouse with stunning marina views and private patio perfect for entertaining.",
@@ -83,11 +83,11 @@ const properties = [
         address: "321 Oak Avenue, Pasadena, CA 91101",
         lat: 34.1478,
         lng: -118.1445,
-        image: "https://kimi-web-img.moonshot.cn/img/img.freepik.com/79af2ed9338689c12f3fdc1b6448a078b003bfdd.jpg",
+        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
         images: [
-            "https://kimi-web-img.moonshot.cn/img/img.freepik.com/79af2ed9338689c12f3fdc1b6448a078b003bfdd.jpg",
-            "https://kimi-web-img.moonshot.cn/img/thearchitecturedesigns.com/4fc881dd0004e0714a2e738105b31faa5a144169.jpg",
-            "https://kimi-web-img.moonshot.cn/img/images.squarespace-cdn.com/827443d4883dc80a38cfd0ff6d1c9bcbf61fd112.jpg"
+            "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600585152915-d38becbb1e0c?w=800&h=600&fit=crop"
         ],
         amenities: ["Garden", "Garage", "Fireplace"],
         description: "Beautiful family home in quiet Pasadena neighborhood with updated kitchen and spacious backyard.",
@@ -106,11 +106,11 @@ const properties = [
         address: "987 Ocean Drive, Santa Monica, CA 90401",
         lat: 34.0195,
         lng: -118.4912,
-        image: "https://kimi-web-img.moonshot.cn/img/images.squarespace-cdn.com/827443d4883dc80a38cfd0ff6d1c9bcbf61fd112.jpg",
+        image: "https://images.unsplash.com/photo-1600585152915-d38becbb1e0c?w=800&h=600&fit=crop",
         images: [
-            "https://kimi-web-img.moonshot.cn/img/images.squarespace-cdn.com/827443d4883dc80a38cfd0ff6d1c9bcbf61fd112.jpg",
-            "https://kimi-web-img.moonshot.com/img/thumbs.dreamstime.com/cda137ea23e4367aa85a1c33d2ba2ced5a7cddcc.jpg",
-            "https://kimi-web-img.moonshot.cn/img/img.freepik.com/808bfb9dbe5d3b5e07e5d2cc3eefa4d9e93f8b1f.jpg"
+            "https://images.unsplash.com/photo-1600585152915-d38becbb1e0c?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600585152915-d38becbb1e0c?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop"
         ],
         amenities: ["Ocean Views", "Balcony", "Gym", "Pool"],
         description: "Stunning oceanfront condo with panoramic views and luxury amenities in prime Santa Monica location.",
@@ -129,11 +129,11 @@ const properties = [
         address: "654 Canyon Road, Hollywood Hills, CA 90068",
         lat: 34.1184,
         lng: -118.3432,
-        image: "https://kimi-web-img.moonshot.cn/img/thumbs.dreamstime.com/cda137ea23e4367aa85a1c33d2ba2ced5a7cddcc.jpg",
+        image: "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
         images: [
-            "https://kimi-web-img.moonshot.cn/img/thumbs.dreamstime.com/cda137ea23e4367aa85a1c33d2ba2ced5a7cddcc.jpg",
-            "https://kimi-web-img.moonshot.cn/img/stuartsilk.com/6e79fc62884063c0dd9af157bfa4c2e0c13fa651.jpg",
-            "https://kimi-web-img.moonshot.cn/img/thearchitecturedesigns.com/4fc881dd0004e0714a2e738105b31faa5a144169.jpg"
+            "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop"
         ],
         amenities: ["City Views", "Infinity Pool", "Home Theater", "Wine Cellar"],
         description: "Architectural masterpiece in the Hollywood Hills with stunning city views and premium finishes throughout.",
@@ -152,11 +152,11 @@ const properties = [
         address: "147 Maple Street, Glendale, CA 91205",
         lat: 34.1425,
         lng: -118.2551,
-        image: "https://kimi-web-img.moonshot.cn/img/img.freepik.com/808bfb9dbe5d3b5e07e5d2cc3eefa4d9e93f8b1f.jpg",
+        image: "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop",
         images: [
-            "https://kimi-web-img.moonshot.cn/img/img.freepik.com/808bfb9dbe5d3b5e07e5d2cc3eefa4d9e93f8b1f.jpg",
-            "https://kimi-web-img.moonshot.cn/img/cdn.home-designing.com/8d553beea386d83d04ca4eb1c1ac622da13558a0.jpg",
-            "https://kimi-web-img.moonshot.cn/img/fabricerie.com/2d22b7bc23f2a1f27df2487a1262f2b3c3b17662.jpeg"
+            "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop"
         ],
         amenities: ["Hardwood Floors", "Fireplace", "Patio"],
         description: "Beautiful Craftsman home with original details and modern updates in desirable Glendale neighborhood.",
@@ -175,11 +175,11 @@ const properties = [
         address: "258 Modern Way, Culver City, CA 90232",
         lat: 34.0211,
         lng: -118.3965,
-        image: "https://kimi-web-img.moonshot.cn/img/2ea4ba0d5e57f88221296342445c847b4c810f30.jpg",
+        image: "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop",
         images: [
-            "https://kimi-web-img.moonshot.cn/img/thumbs.dreamstime.com/2ea4ba0d5e57f88221296342445c847b4c810f30.jpg",
-            "https://kimi-web-img.moonshot.cn/img/portfolio.zeelproject.com/db494cf7cd8575ae83b16a5db618d5bdda1fad54.jpg",
-            "https://kimi-web-img.moonshot.cn/img/dkorinteriors.com/90849c9210f609c4873c22fdcc89d88b5ef89b52.jpg"
+            "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop"
         ],
         amenities: ["Modern Kitchen", "Rooftop Deck", "Garage"],
         description: "Contemporary townhouse with sleek design and premium finishes in trendy Culver City location.",
@@ -198,7 +198,7 @@ const blogArticles = [
         category: "Market Trends",
         readTime: "5 min read",
         date: "2024-09-15",
-        image: "https://kimi-web-img.moonshot.cn/img/thearchitecturedesigns.com/4fc881dd0004e0714a2e738105b31faa5a144169.jpg",
+        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
         content: "The 2024 real estate market continues to evolve with changing interest rates, inventory levels, and buyer preferences. This comprehensive analysis explores key trends including the shift toward suburban properties, the impact of remote work on housing choices, and emerging technologies in real estate transactions. Learn how these factors affect pricing, timing, and negotiation strategies for both buyers and sellers."
     },
     {
@@ -208,7 +208,7 @@ const blogArticles = [
         category: "Buying Guide",
         readTime: "8 min read",
         date: "2024-09-10",
-        image: "https://kimi-web-img.moonshot.cn/img/cdn.home-designing.com/8d553beea386d83d04ca4eb1c1ac622da13558a0.jpg",
+        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
         content: "Buying your first home can be overwhelming, but proper preparation makes all the difference. This guide covers everything from financial preparation and mortgage pre-approval to house hunting strategies and closing procedures. Learn about common pitfalls to avoid, questions to ask during viewings, and how to work effectively with real estate professionals."
     },
     {
@@ -218,7 +218,7 @@ const blogArticles = [
         category: "Selling Tips",
         readTime: "6 min read",
         date: "2024-09-05",
-        image: "https://kimi-web-img.moonshot.cn/img/fabricerie.com/2d22b7bc23f2a1f27df2487a1262f2b3c3b17662.jpeg",
+        image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
         content: "Effective home staging can significantly impact your property's selling price and time on market. This article reveals professional staging techniques that create emotional connections with buyers, highlight your home's best features, and minimize potential drawbacks. From decluttering and depersonalizing to strategic furniture placement and lighting improvements."
     },
     {
@@ -228,7 +228,7 @@ const blogArticles = [
         category: "Market Trends",
         readTime: "7 min read",
         date: "2024-08-28",
-        image: "https://kimi-web-img.moonshot.cn/img/stuartsilk.com/6e79fc62884063c0dd9af157bfa4c2e0c13fa651.jpg",
+        image: "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop",
         content: "Property taxes are a significant ongoing cost of homeownership that many buyers underestimate. This guide explains how property assessments work, what factors influence tax rates, and strategies for appealing excessive assessments. Learn about tax deductions, exemptions, and how to budget for this important expense."
     }
 ];
@@ -1030,35 +1030,20 @@ function initializeAnimations() {
 }
 
 function initializeScrollEffects() {
-    // Intersection Observer for scroll animations
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-    
-    // Observe elements with scroll animation
+    // Scroll animations removed per user request
+    // All elements are visible immediately
     document.querySelectorAll('.scroll-animate').forEach(el => {
-        observer.observe(el);
+        el.classList.add('animate-in');
     });
 }
 
 function animatePropertyCards() {
-    if (typeof anime !== 'undefined') {
-        anime({
-            targets: '.property-card',
-            opacity: [0, 1],
-            translateY: [50, 0],
-            duration: 600,
-            delay: anime.stagger(100),
-            easing: 'easeOutQuad'
-        });
-    }
+    // Scroll animations removed per user request
+    // Property cards are visible immediately
+    document.querySelectorAll('.property-card').forEach(card => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+    });
 }
 
 // Utility functions
