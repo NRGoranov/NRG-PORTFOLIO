@@ -83,7 +83,7 @@ const properties = [
         address: "321 Oak Avenue, Pasadena, CA 91101",
         lat: 34.1478,
         lng: -118.1445,
-        image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
         images: [
             "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop",
@@ -208,7 +208,7 @@ const blogArticles = [
         category: "Buying Guide",
         readTime: "8 min read",
         date: "2024-09-10",
-        image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&h=600&fit=crop",
         content: "Buying your first home can be overwhelming, but proper preparation makes all the difference. This guide covers everything from financial preparation and mortgage pre-approval to house hunting strategies and closing procedures. Learn about common pitfalls to avoid, questions to ask during viewings, and how to work effectively with real estate professionals."
     },
     {
@@ -218,7 +218,7 @@ const blogArticles = [
         category: "Selling Tips",
         readTime: "6 min read",
         date: "2024-09-05",
-        image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop",
         content: "Effective home staging can significantly impact your property's selling price and time on market. This article reveals professional staging techniques that create emotional connections with buyers, highlight your home's best features, and minimize potential drawbacks. From decluttering and depersonalizing to strategic furniture placement and lighting improvements."
     },
     {
@@ -228,7 +228,7 @@ const blogArticles = [
         category: "Market Trends",
         readTime: "7 min read",
         date: "2024-08-28",
-        image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
         content: "Property taxes are a significant ongoing cost of homeownership that many buyers underestimate. This guide explains how property assessments work, what factors influence tax rates, and strategies for appealing excessive assessments. Learn about tax deductions, exemptions, and how to budget for this important expense."
     }
 ];
