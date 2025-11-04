@@ -2,6 +2,8 @@ import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, ExternalLink, Github, Star, Users, Zap, Calendar } from 'lucide-react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { projects } from '@/data/projects'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -154,12 +156,10 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                   <CardTitle>About This Project</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="prose prose-gray dark:prose-invert max-w-none">
-                    {project.longDescription.split('\n').map((paragraph, index) => (
-                      <p key={index} className="mb-4 last:mb-0">
-                        {paragraph}
-                      </p>
-                    ))}
+                  <div className="prose prose-gray dark:prose-invert max-w-none prose-headings:font-bold prose-headings:text-foreground prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-muted-foreground prose-strong:text-foreground prose-ul:list-disc prose-ol:list-decimal prose-li:my-2">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {project.longDescription}
+                    </ReactMarkdown>
                   </div>
                 </CardContent>
               </Card>
