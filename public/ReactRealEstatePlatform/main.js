@@ -433,31 +433,38 @@ function initializePriceSlider() {
 
 // Featured properties carousel
 function initializeFeaturedProperties() {
-    const splideContainer = document.querySelector('#featured-properties');
-    if (!splideContainer) {
-        console.warn('Featured properties container not found');
-        return;
-    }
-    
-    const splideList = splideContainer.querySelector('.splide__list');
-    if (!splideList) {
-        console.warn('Splide list not found');
+    // Check if properties array exists and has data
+    if (!properties || properties.length === 0) {
+        console.error('Properties array is empty or undefined');
         return;
     }
     
     const featuredProperties = properties.slice(0, 6);
+    console.log('Featured properties:', featuredProperties.length, featuredProperties);
     
-    // Clear existing content
-    splideList.innerHTML = '';
+    const container = document.querySelector('.featured-section .container');
+    if (!container) {
+        console.warn('Featured section container not found');
+        return;
+    }
     
-    // Add properties to the list
-    featuredProperties.forEach(property => {
-        const li = document.createElement('li');
-        li.className = 'splide__slide';
-        li.innerHTML = `
+    const splideContainer = document.querySelector('#featured-properties');
+    const splideList = splideContainer ? splideContainer.querySelector('.splide__list') : null;
+    
+    // Always render properties first - use grid as primary, carousel as enhancement
+    function renderPropertiesGrid() {
+        // Check if grid already exists
+        let grid = container.querySelector('.property-grid-fallback');
+        if (!grid) {
+            grid = document.createElement('div');
+            grid.className = 'property-grid property-grid-fallback';
+            container.insertBefore(grid, splideContainer ? splideContainer : container.querySelector('.section-header').nextSibling);
+        }
+        
+        grid.innerHTML = featuredProperties.map(property => `
             <div class="property-card" data-property-id="${property.id}">
                 <div class="property-image">
-                    <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop'">
+                    <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop'" style="width: 100%; height: 100%; object-fit: cover;">
                     <button class="favorite-btn ${favorites.includes(property.id) ? 'active' : ''}" onclick="toggleFavorite(${property.id})">
                         <i class="fas fa-heart"></i>
                     </button>
@@ -474,83 +481,102 @@ function initializeFeaturedProperties() {
                     <button class="btn btn-primary" onclick="viewProperty(${property.id})">View Details</button>
                 </div>
             </div>
-        `;
-        splideList.appendChild(li);
-    });
-    
-    // Initialize carousel after content is added and Splide is loaded
-    function initCarousel() {
-        if (typeof Splide !== 'undefined') {
-            try {
-                // Destroy existing instance if any
-                const existingInstance = splideContainer.splideInstance;
-                if (existingInstance) {
-                    existingInstance.destroy();
-                }
-                
-                const splide = new Splide('#featured-properties', {
-                    type: 'loop',
-                    perPage: 3,
-                    perMove: 1,
-                    gap: '2rem',
-                    autoplay: true,
-                    interval: 4000,
-                    pagination: true,
-                    arrows: true,
-                    breakpoints: {
-                        768: {
-                            perPage: 1
-                        },
-                        1024: {
-                            perPage: 2
-                        }
-                    }
-                });
-                
-                splide.mount();
-                splideContainer.splideInstance = splide;
-            } catch (error) {
-                console.error('Error initializing Splide:', error);
-                // Fallback: show properties in a grid if carousel fails
-                const container = document.querySelector('.featured-section .container');
-                if (container) {
-                    const grid = document.createElement('div');
-                    grid.className = 'property-grid';
-                    grid.innerHTML = featuredProperties.map(property => `
-                        <div class="property-card" data-property-id="${property.id}">
-                            <div class="property-image">
-                                <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop'">
-                                <button class="favorite-btn ${favorites.includes(property.id) ? 'active' : ''}" onclick="toggleFavorite(${property.id})">
-                                    <i class="fas fa-heart"></i>
-                                </button>
-                            </div>
-                            <div class="property-info">
-                                <h3>${property.title}</h3>
-                                <p class="price">${formatPrice(property.price)}</p>
-                                <p class="address">${property.address}</p>
-                                <div class="property-specs">
-                                    <span>${property.bedrooms} beds</span>
-                                    <span>${property.bathrooms} baths</span>
-                                    <span>${property.sqft.toLocaleString()} sqft</span>
-                                </div>
-                                <button class="btn btn-primary" onclick="viewProperty(${property.id})">View Details</button>
-                            </div>
-                        </div>
-                    `).join('');
-                    splideContainer.style.display = 'none';
-                    container.insertBefore(grid, splideContainer.nextSibling);
-                }
-            }
-        } else {
-            // Retry after a delay if Splide isn't loaded yet
-            setTimeout(initCarousel, 200);
+        `).join('');
+        
+        // Hide splide container if grid is shown
+        if (splideContainer) {
+            splideContainer.style.display = 'none';
         }
     }
     
-    // Try to initialize immediately, then retry if needed
-    setTimeout(initCarousel, 100);
-    setTimeout(initCarousel, 500);
-    setTimeout(initCarousel, 1000);
+    // Render grid immediately
+    renderPropertiesGrid();
+    
+    // Try to initialize carousel as enhancement (optional)
+    if (splideContainer && splideList) {
+        // Clear existing content
+        splideList.innerHTML = '';
+        
+        // Add properties to the list
+        featuredProperties.forEach(property => {
+            const li = document.createElement('li');
+            li.className = 'splide__slide';
+            li.innerHTML = `
+                <div class="property-card" data-property-id="${property.id}">
+                    <div class="property-image">
+                        <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop'" style="width: 100%; height: 100%; object-fit: cover;">
+                        <button class="favorite-btn ${favorites.includes(property.id) ? 'active' : ''}" onclick="toggleFavorite(${property.id})">
+                            <i class="fas fa-heart"></i>
+                        </button>
+                    </div>
+                    <div class="property-info">
+                        <h3>${property.title}</h3>
+                        <p class="price">${formatPrice(property.price)}</p>
+                        <p class="address">${property.address}</p>
+                        <div class="property-specs">
+                            <span>${property.bedrooms} beds</span>
+                            <span>${property.bathrooms} baths</span>
+                            <span>${property.sqft.toLocaleString()} sqft</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="viewProperty(${property.id})">View Details</button>
+                    </div>
+                </div>
+            `;
+            splideList.appendChild(li);
+        });
+        
+        // Initialize carousel after content is added and Splide is loaded
+        function initCarousel() {
+            if (typeof Splide !== 'undefined') {
+                try {
+                    // Destroy existing instance if any
+                    if (splideContainer.splideInstance) {
+                        splideContainer.splideInstance.destroy();
+                    }
+                    
+                    const splide = new Splide('#featured-properties', {
+                        type: 'loop',
+                        perPage: 3,
+                        perMove: 1,
+                        gap: '2rem',
+                        autoplay: true,
+                        interval: 4000,
+                        pagination: true,
+                        arrows: true,
+                        breakpoints: {
+                            768: {
+                                perPage: 1
+                            },
+                            1024: {
+                                perPage: 2
+                            }
+                        }
+                    });
+                    
+                    splide.mount();
+                    splideContainer.splideInstance = splide;
+                    
+                    // Show carousel and hide grid if carousel works
+                    const grid = container.querySelector('.property-grid-fallback');
+                    if (grid) {
+                        grid.style.display = 'none';
+                    }
+                    splideContainer.style.display = 'block';
+                    console.log('Splide carousel initialized successfully');
+                } catch (error) {
+                    console.error('Error initializing Splide:', error);
+                    // Keep grid visible
+                }
+            } else {
+                // Retry after a delay if Splide isn't loaded yet
+                setTimeout(initCarousel, 200);
+            }
+        }
+        
+        // Try to initialize carousel
+        setTimeout(initCarousel, 100);
+        setTimeout(initCarousel, 500);
+    }
 }
 
 // Market statistics visualization

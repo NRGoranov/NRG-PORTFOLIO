@@ -278,6 +278,24 @@
             margin: 0 auto;
         }
         
+        /* Splide carousel styles */
+        #featured-properties {
+            margin-bottom: 2rem;
+        }
+        
+        #featured-properties .splide__slide {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        #featured-properties .splide__list {
+            display: flex !important;
+        }
+        
+        #featured-properties .splide__track {
+            overflow: visible;
+        }
+        
         .property-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -291,8 +309,8 @@
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(50px);
+            opacity: 1;
+            transform: translateY(0);
         }
         
         .property-card.animate-in {
