@@ -14,9 +14,9 @@ const properties = [
         address: "123 Hillside Drive, Beverly Hills, CA 90210",
         lat: 34.0901,
         lng: -118.4065,
-        image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
         images: [
-            "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600210491892-03d54c0aafb3?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop"
         ],
@@ -37,9 +37,9 @@ const properties = [
         address: "456 Main Street, Los Angeles, CA 90015",
         lat: 34.0522,
         lng: -118.2437,
-        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
         images: [
-            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600585153490-76fb20a326cc?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600585153071-8c2d5e6e6b3b?w=800&h=600&fit=crop"
         ],
@@ -60,9 +60,9 @@ const properties = [
         address: "789 Marina Blvd, Marina del Rey, CA 90292",
         lat: 33.9681,
         lng: -118.4513,
-        image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
         images: [
-            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600607688069-2c0b0a0a0a0a?w=800&h=600&fit=crop"
         ],
@@ -83,9 +83,9 @@ const properties = [
         address: "321 Oak Avenue, Pasadena, CA 91101",
         lat: 34.1478,
         lng: -118.1445,
-        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1600585152915-d38becbb1e0c?w=800&h=600&fit=crop",
         images: [
-            "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600585152915-d38becbb1e0c?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600240644453-484edb135597?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600566753086-5f62d21f8d83?w=800&h=600&fit=crop"
         ],
@@ -106,9 +106,9 @@ const properties = [
         address: "987 Ocean Drive, Santa Monica, CA 90401",
         lat: 34.0195,
         lng: -118.4912,
-        image: "https://images.unsplash.com/photo-1600585152915-d38becbb1e0c?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
         images: [
-            "https://images.unsplash.com/photo-1600585152915-d38becbb1e0c?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600607688201-4e2a09cf159d?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600047509807-ba8f99d478cd?w=800&h=600&fit=crop"
         ],
@@ -129,9 +129,9 @@ const properties = [
         address: "654 Canyon Road, Hollywood Hills, CA 90068",
         lat: 34.1184,
         lng: -118.3432,
-        image: "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop",
         images: [
-            "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600607688069-2c0b0a0a0a0a?w=800&h=600&fit=crop"
         ],
@@ -152,9 +152,9 @@ const properties = [
         address: "147 Maple Street, Glendale, CA 91205",
         lat: 34.1425,
         lng: -118.2551,
-        image: "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop",
         images: [
-            "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600240644453-484edb135597?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600585153490-76fb20a326cc?w=800&h=600&fit=crop"
         ],
@@ -464,7 +464,7 @@ function initializeFeaturedProperties() {
         grid.innerHTML = featuredProperties.map(property => `
             <div class="property-card" data-property-id="${property.id}">
                 <div class="property-image">
-                    <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='${property.image}'" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="${property.image}" alt="${property.title}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                     <button class="favorite-btn ${favorites.includes(property.id) ? 'active' : ''}" onclick="toggleFavorite(${property.id})">
                         <i class="fas fa-heart"></i>
                     </button>
@@ -504,7 +504,7 @@ function initializeFeaturedProperties() {
             li.innerHTML = `
                 <div class="property-card" data-property-id="${property.id}">
                     <div class="property-image">
-                        <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='${property.image}'" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="${property.image}" alt="${property.title}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                         <button class="favorite-btn ${favorites.includes(property.id) ? 'active' : ''}" onclick="toggleFavorite(${property.id})">
                             <i class="fas fa-heart"></i>
                         </button>
@@ -681,7 +681,7 @@ function renderPropertyGrid() {
     gridContainer.innerHTML = currentProperties.map(property => `
         <div class="property-card" data-property-id="${property.id}">
             <div class="property-image">
-                <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='${property.image}'">
+                <img src="${property.image}" alt="${property.title}" loading="lazy">
                 <span class="property-type">${property.type}</span>
                 <button class="favorite-btn ${favorites.includes(property.id) ? 'active' : ''}" onclick="toggleFavorite(${property.id})">
                     <i class="fas fa-heart"></i>
