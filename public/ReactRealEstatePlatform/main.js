@@ -64,7 +64,7 @@ const properties = [
         images: [
             "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600240644453-484edb135597?w=800&h=600&fit=crop"
+            "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop"
         ],
         amenities: ["Waterfront", "Balcony", "Garage"],
         description: "Charming waterfront townhouse with stunning marina views and private patio perfect for entertaining.",
@@ -155,8 +155,8 @@ const properties = [
         image: "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop",
         images: [
             "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600047509807-ba8f99d478cd?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600566753086-5f62d21f8d83?w=800&h=600&fit=crop"
+            "https://images.unsplash.com/photo-1600240644453-484edb135597?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600585153490-76fb20a326cc?w=800&h=600&fit=crop"
         ],
         amenities: ["Hardwood Floors", "Fireplace", "Patio"],
         description: "Beautiful Craftsman home with original details and modern updates in desirable Glendale neighborhood.",
@@ -179,7 +179,7 @@ const properties = [
         images: [
             "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600047509807-ba8f99d478cd?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600210491892-03d54c0aafb3?w=800&h=600&fit=crop"
+            "https://images.unsplash.com/photo-1600566753086-5f62d21f8d83?w=800&h=600&fit=crop"
         ],
         amenities: ["Modern Kitchen", "Rooftop Deck", "Garage"],
         description: "Contemporary townhouse with sleek design and premium finishes in trendy Culver City location.",
