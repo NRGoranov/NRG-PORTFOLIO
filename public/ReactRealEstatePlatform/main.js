@@ -60,9 +60,9 @@ const properties = [
         address: "987 Ocean Drive, Santa Monica, CA 90401",
         lat: 34.0195,
         lng: -118.4912,
-        image: "https://images.unsplash.com/photo-1600585152915-d38becbb1e0c?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
         images: [
-            "https://images.unsplash.com/photo-1600585152915-d38becbb1e0c?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600607688201-4e2a09cf159d?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600047509807-ba8f99d478cd?w=800&h=600&fit=crop"
         ],
@@ -83,9 +83,9 @@ const properties = [
         address: "654 Canyon Road, Hollywood Hills, CA 90068",
         lat: 34.1184,
         lng: -118.3432,
-        image: "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
+        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
         images: [
-            "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
+            "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600607688069-2c0b0a0a0a0a?w=800&h=600&fit=crop"
         ],
