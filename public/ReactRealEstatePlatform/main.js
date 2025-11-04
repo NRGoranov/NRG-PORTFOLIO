@@ -324,17 +324,19 @@ function handleSearch(e) {
 
 function initializePriceSlider() {
     const minPriceSlider = document.getElementById('min-price');
-    const maxPriceSlider = document.getElementById('max-price');
     const minPriceDisplay = document.getElementById('min-price-display');
     const maxPriceDisplay = document.getElementById('max-price-display');
     
-    if (minPriceSlider && maxPriceSlider) {
-        minPriceSlider.addEventListener('input', (e) => {
-            minPriceDisplay.textContent = formatPrice(e.target.value);
-        });
+    if (minPriceSlider) {
+        // Initialize display
+        minPriceDisplay.textContent = formatPrice(minPriceSlider.value);
+        maxPriceDisplay.textContent = formatPrice(minPriceSlider.max);
         
-        maxPriceSlider.addEventListener('input', (e) => {
-            maxPriceDisplay.textContent = formatPrice(e.target.value);
+        minPriceSlider.addEventListener('input', (e) => {
+            const value = parseInt(e.target.value);
+            minPriceDisplay.textContent = formatPrice(value);
+            // Update max display to show range
+            maxPriceDisplay.textContent = formatPrice(minPriceSlider.max);
         });
     }
 }
