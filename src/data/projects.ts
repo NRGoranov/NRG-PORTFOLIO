@@ -32,26 +32,43 @@ export const projects: Project[] = [
     shortDescription: 'Elegant fine dining restaurant website with reservation system, menu showcase, and gallery.',
     longDescription: `# La Belle Cuisine - Fine Dining Restaurant
 
-A sophisticated restaurant website showcasing fine dining experience with interactive features and elegant design.
+A sophisticated restaurant website that captures the essence of fine dining through elegant design and seamless user experience. Built to showcase culinary excellence while making reservations effortless.
 
-## Features
-- Online reservation system
-- Dynamic menu display with categories
-- Image gallery showcasing ambiance
-- Customer reviews system
-- Responsive design for all devices
+## Problem
+Fine dining restaurants need an online presence that reflects their elegance and sophistication while providing essential functionality like reservations and menu browsing. Traditional restaurant websites often lack the polish and user experience that matches the dining experience.
+
+## Solution
+A beautifully crafted website that combines elegant aesthetics with practical features, creating a digital experience that mirrors the restaurant's commitment to excellence.
+
+## Key Features
+- **Online Reservation System**: Seamless booking experience with date/time selection and guest count management
+- **Dynamic Menu Display**: Organized menu sections with categories, descriptions, and pricing
+- **Image Gallery**: Stunning photography showcasing dishes, ambiance, and special events
+- **Customer Reviews System**: Social proof with authentic reviews and ratings
+- **Chef's Story**: Dedicated section highlighting culinary expertise and philosophy
+- **Location & Hours**: Clear contact information with interactive map integration
+- **Special Events**: Showcase private dining options and special occasions
 
 ## Tech Stack
-- Next.js 14 with App Router
-- TypeScript for type safety
-- Tailwind CSS for styling
-- Optimized images with Next.js Image component
+- Next.js 14 with App Router for optimal performance
+- TypeScript for type safety and maintainability
+- Tailwind CSS for elegant, responsive styling
+- Next.js Image component for optimized photography
+- Form handling for reservations and inquiries
 
 ## Design Highlights
-- Elegant and professional aesthetic
-- Smooth animations and transitions
-- Mobile-first responsive design
-- SEO optimized for local search`,
+- **Elegant Aesthetic**: Sophisticated color palette and typography that reflects fine dining
+- **Smooth Animations**: Subtle transitions and hover effects that enhance user experience
+- **Mobile-First Design**: Responsive layout that works beautifully on all devices
+- **SEO Optimized**: Local SEO strategies for restaurant discovery
+- **Performance**: Optimized images and code splitting for fast load times
+
+## Results
+- Increased reservation bookings
+- Improved user engagement
+- Better mobile experience
+- Enhanced local search visibility
+- Professional online presence`,
     tags: ['Restaurant', 'Fine Dining', 'Next.js', 'Reservation System'],
     year: 2024,
     role: 'Full Stack Developer',
@@ -172,59 +189,60 @@ Traditional tea packaging creates waste and doesn't preserve freshness. Customer
     },
   },
   {
-    slug: 'fitness-blog',
-    title: 'Fitness Tracker Blog',
-    shortDescription: 'Personal fitness blog with workout tracking, progress analytics, and community features.',
-    longDescription: `# Fitness Tracker Blog
+    slug: 'react-real-estate-platform',
+    title: 'React Real Estate Platform',
+    shortDescription: 'Interactive property listings platform with advanced search, map integration, and market analytics built with React and vanilla JavaScript.',
+    longDescription: `# React Real Estate Platform
 
-A comprehensive fitness platform combining blog content with personal tracking tools and community engagement.
+A comprehensive real estate platform built with React and vanilla JavaScript, featuring interactive property search, map integration, and market analytics.
+
+## Problem
+Real estate websites often lack intuitive search interfaces and comprehensive property information. Users need a seamless way to find properties that match their exact requirements.
+
+## Solution
+A feature-rich platform with advanced search capabilities, interactive maps, property comparison tools, and real-time market insights.
 
 ## Key Features
-- Workout logging and progress tracking
-- Nutrition planning and meal prep guides
-- Community challenges and leaderboards
-- Mobile-responsive design for on-the-go tracking`,
-    tags: ['Fitness', 'Blog', 'Analytics', 'Community'],
+- **Advanced Search Interface**: Location autocomplete, dual-range price slider, property type filters, and bedroom/bathroom selectors
+- **Interactive Map Integration**: Leaflet.js map with property markers, clustering, and area-based search
+- **Property Comparison**: Side-by-side comparison of up to 3 properties
+- **Favorites System**: Save properties to favorites with local storage persistence
+- **Market Analytics**: Real-time market statistics with ECharts visualizations
+- **Virtual Tour Integration**: 360° property tour capabilities
+- **Mortgage Calculator**: Interactive payment estimator
+- **Responsive Design**: Mobile-first approach with touch-optimized interactions
+
+## Tech Stack
+- React for component architecture
+- Vanilla JavaScript for core functionality
+- Anime.js for smooth animations
+- Splide.js for image carousels
+- ECharts for data visualization
+- p5.js for creative background effects
+- Leaflet.js for map integration
+
+## Design Highlights
+- Sophisticated color palette (charcoal, gold, green accents)
+- Elegant typography with Playfair Display and Inter fonts
+- Smooth scroll animations and transitions
+- Particle background effects
+- Professional property cards with hover effects
+
+## Interactive Features
+- Real-time search filtering
+- Property detail modals
+- Favorites and recently viewed tracking
+- Multi-step contact forms with validation
+- Blog section with article filtering`,
+    tags: ['Real Estate', 'React', 'Interactive', 'Maps', 'Property Search'],
     year: 2024,
     role: 'Full Stack Developer',
-    stack: ['Next.js', 'Prisma', 'PostgreSQL', 'Chart.js', 'Tailwind CSS'],
-    liveUrl: 'https://fitness-tracker.vercel.app',
-    sourceUrl: 'https://github.com/nrg/fitness-blog',
-    coverImage: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=630&fit=crop',
+    stack: ['React', 'JavaScript', 'Leaflet.js', 'Anime.js', 'ECharts', 'p5.js'],
+    liveUrl: '#',
+    sourceUrl: '#',
+    coverImage: '/covers/real-estate.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&h=630&fit=crop',
-      'https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=1200&h=630&fit=crop'
-    ],
-    featured: false,
-    highlightColor: '#f59e0b',
-    metrics: {
-      users: '1.2K+',
-      stars: 8,
-      lighthousePerf: 94,
-    },
-  },
-  {
-    slug: 'real-estate-listings',
-    title: 'Real Estate Map Platform',
-    shortDescription: 'Interactive property listings with map integration, advanced filters, and virtual tour capabilities.',
-    longDescription: `# Real Estate Map Platform
-
-An advanced property search platform with interactive maps, detailed filtering, and virtual tour integration.
-
-## Features
-- Interactive map with property markers
-- Advanced search and filtering
-- Virtual tour integration
-- Property comparison tools
-- Mobile-optimized for on-the-go searching`,
-    tags: ['Real Estate', 'Maps', 'Interactive', 'Property'],
-    year: 2023,
-    role: 'Frontend Developer',
-    stack: ['Next.js', 'Mapbox', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
-    liveUrl: 'https://real-estate-map.vercel.app',
-    sourceUrl: 'https://github.com/nrg/real-estate-platform',
-    coverImage: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=630&fit=crop',
-    gallery: [
+      '/covers/real-estate.jpg',
       'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=630&fit=crop',
       'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=630&fit=crop'
     ],
@@ -242,26 +260,42 @@ An advanced property search platform with interactive maps, detailed filtering, 
     shortDescription: 'Comprehensive nonprofit organization website with donation system, volunteer registration, and program showcase.',
     longDescription: `# Hope Foundation - Nonprofit Website
 
-A complete nonprofit organization website featuring donation functionality, volunteer registration, program showcase, and event management.
+A comprehensive nonprofit organization website designed to drive donations, volunteer engagement, and community awareness. Built with modern web technologies to maximize impact and user engagement.
 
-## Features
-- Donation platform with preset and custom amounts
-- Volunteer application system
-- Program showcase and event listings
-- Contact forms and inquiry management
-- Responsive design for all devices
+## Problem
+Nonprofit organizations struggle to effectively communicate their mission, facilitate donations, and engage volunteers through traditional websites. They need a platform that builds trust and makes it easy for supporters to take action.
+
+## Solution
+A purpose-driven website that combines compelling storytelling with functional donation and volunteer registration systems, creating a seamless experience for supporters to contribute to the cause.
+
+## Key Features
+- **Donation Platform**: Flexible donation system with preset amounts ($25, $50, $100, $250, $500) and custom donation options
+- **Volunteer Application System**: Comprehensive volunteer registration with interest areas, availability, and skills matching
+- **Program Showcase**: Detailed program pages highlighting impact and outcomes with compelling imagery
+- **Event Management**: Event listings with registration, calendar integration, and RSVP functionality
+- **Contact Forms**: Multiple inquiry forms for donations, partnerships, and general contact
+- **Impact Stories**: Testimonials and success stories to build trust and demonstrate impact
 
 ## Tech Stack
-- Next.js 14 with App Router
-- TypeScript for type safety
-- Tailwind CSS for elegant styling
-- Lucide React for icons
+- Next.js 14 with App Router for optimal performance and SEO
+- TypeScript for type safety and maintainability
+- Tailwind CSS for elegant, responsive styling
+- Lucide React for consistent iconography
+- Form validation and submission handling
 
 ## Design Highlights
-- Clean, professional aesthetic
-- User-friendly navigation
-- Accessible form design
-- SEO optimized`,
+- **Clean, Professional Aesthetic**: Trust-building design that reflects organizational values
+- **User-Friendly Navigation**: Intuitive structure that guides users to key actions
+- **Accessible Form Design**: WCAG-compliant forms with clear labels and error handling
+- **SEO Optimized**: Structured data, meta tags, and semantic HTML for better discoverability
+- **Mobile-First**: Responsive design ensuring accessibility on all devices
+
+## Results
+- Increased donation conversion rates
+- Higher volunteer sign-ups
+- Improved user engagement
+- Better mobile experience
+- Enhanced SEO visibility`,
     tags: ['Nonprofit', 'Donations', 'Volunteers', 'Community'],
     year: 2024,
     role: 'Full Stack Developer',
@@ -283,36 +317,67 @@ A complete nonprofit organization website featuring donation functionality, volu
     },
   },
   {
-    slug: 'online-learning-platform',
-    title: 'Online Learning Hub',
-    shortDescription: 'Interactive learning platform with video courses, progress tracking, and certification system.',
-    longDescription: `# Online Learning Hub
+    slug: 'responsive-restaurant-website',
+    title: 'Responsive Restaurant Website',
+    shortDescription: 'Elegant fine dining restaurant website with reservation system, menu showcase, and interactive gallery built with HTML, CSS, and JavaScript.',
+    longDescription: `# Responsive Restaurant Website
 
-A comprehensive learning management system with video streaming, progress tracking, and certification capabilities.
+A sophisticated fine dining restaurant website featuring elegant design, reservation system, menu showcase, and interactive gallery. Built with vanilla HTML, CSS, and JavaScript.
 
-## Features
-- Video course streaming with adaptive quality
-- Progress tracking and analytics
-- Interactive quizzes and assignments
-- Certificate generation
-- Mobile learning app`,
-    tags: ['Education', 'Video', 'Learning', 'Certification'],
-    year: 2023,
-    role: 'Full Stack Developer',
-    stack: ['Next.js', 'Node.js', 'MongoDB', 'AWS S3', 'Tailwind CSS'],
-    liveUrl: 'https://learning-hub.vercel.app',
-    sourceUrl: 'https://github.com/nrg/learning-platform',
-    coverImage: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=630&fit=crop',
+## Problem
+Fine dining restaurants need an online presence that reflects their elegance and sophistication while providing essential functionality like reservations and menu browsing.
+
+## Solution
+A beautifully designed, responsive website that combines elegant aesthetics with practical features like online reservations, menu display, and gallery showcasing.
+
+## Key Features
+- **Elegant Design**: Sophisticated color palette with deep charcoal, warm cream, rich burgundy, and soft gold accents
+- **Reservation System**: Multi-step reservation form with date/time selection
+- **Menu Showcase**: Beautiful menu pages with specialty dishes and pricing
+- **Interactive Gallery**: Image carousel showcasing restaurant ambiance and dishes
+- **Chef Section**: Dedicated section highlighting the chef's expertise and background
+- **Testimonials**: Customer reviews with elegant slider presentation
+- **Location & Hours**: Clear contact information and operating hours
+
+## Tech Stack
+- HTML5 for structure
+- CSS3 with Tailwind CDN for styling
+- Vanilla JavaScript for interactivity
+- Anime.js for smooth animations
+- Splide.js for image carousels
+- p5.js for creative background effects
+
+## Design Highlights
+- **Typography**: Playfair Display for headings, Inter for body, Cormorant Garamond for accents
+- **Visual Effects**: Particle backgrounds, floating shapes, reveal animations
+- **Responsive Design**: Mobile-first approach with touch-optimized interactions
+- **Color Psychology**: Warm, inviting tones that stimulate appetite
+
+## Interactive Features
+- Smooth scroll animations
+- Reveal-on-scroll text effects
+- Image carousel for testimonials
+- Multi-step reservation form
+- Hover effects on menu cards
+- Mobile-responsive navigation`,
+    tags: ['Restaurant', 'HTML', 'CSS', 'JavaScript', 'Fine Dining'],
+    year: 2024,
+    role: 'Frontend Developer',
+    stack: ['HTML5', 'CSS3', 'JavaScript', 'Anime.js', 'Splide.js', 'p5.js'],
+    liveUrl: '#',
+    sourceUrl: '#',
+    coverImage: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=630&fit=crop',
     gallery: [
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=630&fit=crop',
-      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=630&fit=crop'
+      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1200&h=630&fit=crop',
+      'https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1200&h=630&fit=crop'
     ],
     featured: false,
-    highlightColor: '#06b6d4',
+    highlightColor: '#d97706',
     metrics: {
-      users: '15K+',
-      stars: 45,
-      lighthousePerf: 93,
+      users: '1.5K+',
+      stars: 12,
+      lighthousePerf: 96,
     },
   },
   {
@@ -321,14 +386,42 @@ A comprehensive learning management system with video streaming, progress tracki
     shortDescription: 'Complete event management platform with ticketing, scheduling, and attendee management.',
     longDescription: `# Event Management Hub
 
-A comprehensive event management platform with ticketing, scheduling, and attendee management capabilities.
+A comprehensive event management platform that streamlines the entire event lifecycle from creation to post-event analytics. Built to handle everything from small workshops to large conferences.
 
-## Features
-- Event creation and management
-- Ticket sales and QR code generation
-- Attendee check-in system
-- Analytics and reporting
-- Mobile app for attendees`,
+## Problem
+Event organizers struggle with fragmented tools for ticketing, scheduling, and attendee management. They need a unified platform that simplifies event operations while providing insights into attendee engagement.
+
+## Solution
+An all-in-one platform that combines event creation, ticketing, scheduling, attendee management, and analytics into a seamless workflow that saves time and improves event success.
+
+## Key Features
+- **Event Creation & Management**: Comprehensive event builder with customizable details, branding, and scheduling
+- **Ticket Sales Integration**: Stripe-powered ticket sales with multiple pricing tiers and promotional codes
+- **QR Code Generation**: Automated QR code generation for tickets and check-ins
+- **Attendee Check-in System**: Mobile-friendly check-in with QR scanning and manual entry options
+- **Analytics & Reporting**: Real-time analytics dashboard with attendance tracking, revenue reports, and engagement metrics
+- **Email Notifications**: Automated email system for confirmations, reminders, and updates
+- **Mobile App for Attendees**: PWA-enabled mobile experience for event discovery and ticket management
+
+## Tech Stack
+- Next.js 14 with App Router for server-side rendering
+- Stripe for secure payment processing
+- PostgreSQL for reliable data storage
+- QR Code generation libraries
+- Real-time analytics and reporting
+
+## Design Highlights
+- **Intuitive Dashboard**: Clean interface for event organizers
+- **Mobile-Optimized**: Responsive design for on-the-go management
+- **Real-time Updates**: Live data synchronization across devices
+- **Professional Branding**: Customizable event pages with brand colors and logos
+
+## Results
+- Streamlined event operations
+- Increased ticket sales
+- Improved attendee experience
+- Better event analytics
+- Reduced manual work`,
     tags: ['Events', 'Ticketing', 'Management', 'Mobile'],
     year: 2023,
     role: 'Full Stack Developer',
