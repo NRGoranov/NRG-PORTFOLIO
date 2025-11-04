@@ -433,8 +433,17 @@ function initializePriceSlider() {
 
 // Featured properties carousel
 function initializeFeaturedProperties() {
-    const splideList = document.querySelector('#featured-properties .splide__list');
-    if (!splideList) return;
+    const splideContainer = document.querySelector('#featured-properties');
+    if (!splideContainer) {
+        console.warn('Featured properties container not found');
+        return;
+    }
+    
+    const splideList = splideContainer.querySelector('.splide__list');
+    if (!splideList) {
+        console.warn('Splide list not found');
+        return;
+    }
     
     const featuredProperties = properties.slice(0, 6);
     
@@ -448,7 +457,7 @@ function initializeFeaturedProperties() {
         li.innerHTML = `
             <div class="property-card" data-property-id="${property.id}">
                 <div class="property-image">
-                    <img src="${property.image}" alt="${property.title}" loading="lazy">
+                    <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop'">
                     <button class="favorite-btn ${favorites.includes(property.id) ? 'active' : ''}" onclick="toggleFavorite(${property.id})">
                         <i class="fas fa-heart"></i>
                     </button>
@@ -469,11 +478,17 @@ function initializeFeaturedProperties() {
         splideList.appendChild(li);
     });
     
-    // Initialize carousel after content is added
-    if (typeof Splide !== 'undefined') {
-        setTimeout(() => {
+    // Initialize carousel after content is added and Splide is loaded
+    function initCarousel() {
+        if (typeof Splide !== 'undefined') {
             try {
-                new Splide('#featured-properties', {
+                // Destroy existing instance if any
+                const existingInstance = splideContainer.splideInstance;
+                if (existingInstance) {
+                    existingInstance.destroy();
+                }
+                
+                const splide = new Splide('#featured-properties', {
                     type: 'loop',
                     perPage: 3,
                     perMove: 1,
@@ -490,12 +505,52 @@ function initializeFeaturedProperties() {
                             perPage: 2
                         }
                     }
-                }).mount();
+                });
+                
+                splide.mount();
+                splideContainer.splideInstance = splide;
             } catch (error) {
                 console.error('Error initializing Splide:', error);
+                // Fallback: show properties in a grid if carousel fails
+                const container = document.querySelector('.featured-section .container');
+                if (container) {
+                    const grid = document.createElement('div');
+                    grid.className = 'property-grid';
+                    grid.innerHTML = featuredProperties.map(property => `
+                        <div class="property-card" data-property-id="${property.id}">
+                            <div class="property-image">
+                                <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop'">
+                                <button class="favorite-btn ${favorites.includes(property.id) ? 'active' : ''}" onclick="toggleFavorite(${property.id})">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                            </div>
+                            <div class="property-info">
+                                <h3>${property.title}</h3>
+                                <p class="price">${formatPrice(property.price)}</p>
+                                <p class="address">${property.address}</p>
+                                <div class="property-specs">
+                                    <span>${property.bedrooms} beds</span>
+                                    <span>${property.bathrooms} baths</span>
+                                    <span>${property.sqft.toLocaleString()} sqft</span>
+                                </div>
+                                <button class="btn btn-primary" onclick="viewProperty(${property.id})">View Details</button>
+                            </div>
+                        </div>
+                    `).join('');
+                    splideContainer.style.display = 'none';
+                    container.insertBefore(grid, splideContainer.nextSibling);
+                }
             }
-        }, 100);
+        } else {
+            // Retry after a delay if Splide isn't loaded yet
+            setTimeout(initCarousel, 200);
+        }
     }
+    
+    // Try to initialize immediately, then retry if needed
+    setTimeout(initCarousel, 100);
+    setTimeout(initCarousel, 500);
+    setTimeout(initCarousel, 1000);
 }
 
 // Market statistics visualization
@@ -592,10 +647,16 @@ function renderPropertyGrid() {
     const gridContainer = document.getElementById('property-grid');
     if (!gridContainer) return;
     
+    // Ensure all properties are shown if no filters are applied
+    if (currentProperties.length === 0) {
+        currentProperties = [...properties];
+    }
+    
     gridContainer.innerHTML = currentProperties.map(property => `
         <div class="property-card" data-property-id="${property.id}">
             <div class="property-image">
-                <img src="${property.image}" alt="${property.title}" loading="lazy">
+                <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop'">
+                <span class="property-type">${property.type}</span>
                 <button class="favorite-btn ${favorites.includes(property.id) ? 'active' : ''}" onclick="toggleFavorite(${property.id})">
                     <i class="fas fa-heart"></i>
                 </button>
@@ -649,27 +710,46 @@ function initializeFilters() {
 }
 
 function handleFilterChange() {
-    const formData = new FormData(document.getElementById('filter-form'));
+    const filterForm = document.getElementById('filter-form');
+    if (!filterForm) return;
+    
+    const formData = new FormData(filterForm);
+    const propertyTypes = formData.getAll('propertyType');
+    const minPrice = document.getElementById('min-price-filter')?.value;
+    const maxPrice = document.getElementById('max-price-filter')?.value;
+    const bedrooms = formData.get('bedrooms');
+    const bathrooms = formData.get('bathrooms');
+    
     const filters = {
-        propertyType: formData.getAll('propertyType'),
-        minPrice: document.getElementById('min-price-filter')?.value || 0,
-        maxPrice: document.getElementById('max-price-filter')?.value || 5000000,
-        bedrooms: formData.get('bedrooms'),
-        bathrooms: formData.get('bathrooms')
+        propertyType: propertyTypes,
+        minPrice: minPrice || 0,
+        maxPrice: maxPrice || 5000000,
+        bedrooms: bedrooms,
+        bathrooms: bathrooms
     };
     
     applyFilters(filters);
 }
 
 function applyFilters(filters) {
+    // If no filters provided or filters are empty, show all properties
+    if (!filters || (filters.propertyType.length === 0 && !filters.minPrice && !filters.maxPrice && !filters.bedrooms && !filters.bathrooms)) {
+        currentProperties = [...properties];
+        renderPropertyGrid();
+        updateResultsCount();
+        return;
+    }
+    
     currentProperties = properties.filter(property => {
         // Property type filter
-        if (filters.propertyType.length > 0 && !filters.propertyType.includes(property.type)) {
+        if (filters.propertyType && filters.propertyType.length > 0 && !filters.propertyType.includes(property.type)) {
             return false;
         }
         
         // Price range filter
-        if (property.price < filters.minPrice || property.price > filters.maxPrice) {
+        const minPrice = parseInt(filters.minPrice) || 0;
+        const maxPrice = parseInt(filters.maxPrice) || 5000000;
+        if (property.price < minPrice || property.price > maxPrice) {
             return false;
         }
         

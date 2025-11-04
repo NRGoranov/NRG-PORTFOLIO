@@ -240,7 +240,7 @@ A feature-rich platform with advanced search capabilities, interactive maps, pro
     stack: ['React', 'JavaScript', 'Leaflet.js', 'Anime.js', 'ECharts', 'p5.js'],
     liveUrl: '/ReactRealEstatePlatform/index.html',
     sourceUrl: '#',
-    coverImage: '/covers/real-estate.jpg',
+    coverImage: '/covers/real-estate-hero.jpg',
     gallery: [
       '/covers/real-estate.jpg',
       'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&h=630&fit=crop',
