@@ -110,7 +110,7 @@ const properties = [
         images: [
             "https://images.unsplash.com/photo-1600585152915-d38becbb1e0c?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600585153071-8c2d5e6e6b3b?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600607688201-4e2a09cf159d?w=800&h=600&fit=crop"
+            "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop"
         ],
         amenities: ["Ocean Views", "Balcony", "Gym", "Pool"],
         description: "Stunning oceanfront condo with panoramic views and luxury amenities in prime Santa Monica location.",
@@ -133,7 +133,7 @@ const properties = [
         images: [
             "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600047509807-ba8f99d478cd?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600607688069-2c0b0a0a0a0a?w=800&h=600&fit=crop"
+            "https://images.unsplash.com/photo-1600607688201-4e2a09cf159d?w=800&h=600&fit=crop"
         ],
         amenities: ["City Views", "Infinity Pool", "Home Theater", "Wine Cellar"],
         description: "Architectural masterpiece in the Hollywood Hills with stunning city views and premium finishes throughout.",
@@ -179,7 +179,7 @@ const properties = [
         images: [
             "https://images.unsplash.com/photo-1600585154526-990dbe4eb0a3?w=800&h=600&fit=crop",
             "https://images.unsplash.com/photo-1600566753086-5f62d21f8d83?w=800&h=600&fit=crop",
-            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop"
+            "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop"
         ],
         amenities: ["Modern Kitchen", "Rooftop Deck", "Garage"],
         description: "Contemporary townhouse with sleek design and premium finishes in trendy Culver City location.",
