@@ -732,8 +732,23 @@ function handleFilterChange() {
 }
 
 function applyFilters(filters) {
-    // If no filters provided or filters are empty, show all properties
-    if (!filters || (filters.propertyType.length === 0 && !filters.minPrice && !filters.maxPrice && !filters.bedrooms && !filters.bathrooms)) {
+    // If no filters provided, show all properties
+    if (!filters) {
+        currentProperties = [...properties];
+        renderPropertyGrid();
+        updateResultsCount();
+        return;
+    }
+    
+    const minPrice = parseInt(filters.minPrice) || 0;
+    const maxPrice = parseInt(filters.maxPrice) || 5000000;
+    const hasPropertyTypeFilter = filters.propertyType && filters.propertyType.length > 0;
+    const hasBedroomFilter = filters.bedrooms && filters.bedrooms !== '';
+    const hasBathroomFilter = filters.bathrooms && filters.bathrooms !== '';
+    const hasPriceFilter = minPrice > 0 || maxPrice < 5000000;
+    
+    // If no active filters, show all properties
+    if (!hasPropertyTypeFilter && !hasPriceFilter && !hasBedroomFilter && !hasBathroomFilter) {
         currentProperties = [...properties];
         renderPropertyGrid();
         updateResultsCount();
@@ -742,24 +757,22 @@ function applyFilters(filters) {
     
     currentProperties = properties.filter(property => {
         // Property type filter
-        if (filters.propertyType && filters.propertyType.length > 0 && !filters.propertyType.includes(property.type)) {
+        if (hasPropertyTypeFilter && !filters.propertyType.includes(property.type)) {
             return false;
         }
         
         // Price range filter
-        const minPrice = parseInt(filters.minPrice) || 0;
-        const maxPrice = parseInt(filters.maxPrice) || 5000000;
-        if (property.price < minPrice || property.price > maxPrice) {
+        if (hasPriceFilter && (property.price < minPrice || property.price > maxPrice)) {
             return false;
         }
         
         // Bedrooms filter
-        if (filters.bedrooms && property.bedrooms < parseInt(filters.bedrooms)) {
+        if (hasBedroomFilter && property.bedrooms < parseInt(filters.bedrooms)) {
             return false;
         }
         
         // Bathrooms filter
-        if (filters.bathrooms && property.bathrooms < parseFloat(filters.bathrooms)) {
+        if (hasBathroomFilter && property.bathrooms < parseFloat(filters.bathrooms)) {
             return false;
         }
         
