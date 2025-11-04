@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 li.innerHTML = `
                     <div class="property-card">
                         <div class="property-image">
-                            <img src="${property.image}" alt="${property.title}">
+                            <img src="${property.image}" alt="${property.title}" crossorigin="anonymous" loading="lazy">
                             <button class="favorite-btn"><i class="fas fa-heart"></i></button>
                         </div>
                         <div class="property-info">
