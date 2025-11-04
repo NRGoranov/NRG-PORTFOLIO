@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Map - Luxury Realty</title>
+    <meta name="description" content="Explore properties on our interactive map. Find homes, condos, and commercial properties in your desired location with detailed neighborhood information.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #2D3748;
+            --secondary-color: #D69E2E;
+            --accent-color: #68D391;
+            --neutral-color: #F7FAFC;
+            --text-color: #1A202C;
+            --light-gray: #E2E8F0;
+            --dark-gray: #4A5568;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--neutral-color);
+            padding-top: 80px;
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Map Container */
+        .map-container {
+            position: relative;
+            height: calc(100vh - 200px);
+            margin: 2rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        #property-map {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Map Controls */
+        .map-controls {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .map-control-btn {
+            background: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.8rem;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+        
+        .map-control-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        .map-control-btn.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        /* Filter Panel */
+        .filter-panel {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 300px;
+            max-height: calc(100% - 2rem);
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .filter-panel.active {
+            transform: translateX(0);
+        }
+        
+        .filter-toggle {
+            position: absolute;
+            left: 100%;
+            top: 1rem;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            padding: 1rem 0.5rem;
+            cursor: pointer;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-toggle:hover {
+            background: #B7791F;
+        }
+        
+        .filter-panel h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+        
+        .filter-group select {
+            width: 100%;
+            padding: 0.6rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .filter-group select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            margin: 0;
+        }
+        
+        .price-range {
+            margin-bottom: 1rem;
+        }
+        
+        .price-display {
+            font-weight: 600;
+            color: var(--secondary-color);
+            font-size: 0.8rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .range-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .range-inputs input[type="range"] {
+            width: 100%;
+            margin: 0;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            flex: 1;
+        }
+        
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #B7791F;
+        }
+        
+        .btn-secondary {
+            background: var(--light-gray);
+            color: var(--text-color);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--dark-gray);
+            color: white;
+        }
+        
+        /* Property Info Panel */
+        .info-panel {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            right: 1rem;
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .info-panel.active {
+            transform: translateY(0);
+        }
+        
+        .info-panel-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--light-gray);
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .info-panel h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            padding-right: 2rem;
+        }
+        
+        .info-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-address {
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .info-specs {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+        
+        .info-specs span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .info-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .info-actions .btn {
+            flex: 1;
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Map Popup Styles */
+        .map-popup {
+            min-width: 250px;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .map-popup img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .map-popup h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .map-popup .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .map-popup .address {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .map-popup .btn {
+            width: 100%;
+            padding: 0.6rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Stats Panel */
+        .stats-panel {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: white;
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            text-align: center;
+        }
+        
+        .stats-panel h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .stats-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+        
+        .stats-label {
+            font-size: 0.8rem;
+            color: var(--dark-gray);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .map-container {
+                margin: 1rem;
+                height: calc(100vh - 180px);
+            }
+            
+            .filter-panel {
+                width: 280px;
+                padding: 1rem;
+            }
+            
+            .filter-panel.active {
+                transform: translateX(0);
+            }
+            
+            .map-controls {
+                top: auto;
+                bottom: 1rem;
+                right: 1rem;
+                flex-direction: row;
+            }
+            
+            .info-panel {
+                left: 1rem;
+                right: 1rem;
+                bottom: 1rem;
+                padding: 1rem;
+            }
+            
+            .stats-panel {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .filter-panel {
+                width: 100%;
+                height: 100%;
+                max-height: 100%;
+                border-radius: 0;
+                top: 0;
+                left: 0;
+                transform: translateY(100%);
+            }
+            
+            .filter-panel.active {
+                transform: translateY(0);
+            }
+            
+            .filter-toggle {
+                display: none;
+            }
+            
+            .info-actions {
+                flex-direction: column;
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-animate.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Luxury Realty</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="listings.html">Listings</a></li>
+                <li><a href="map.html" class="active">Map</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Property Map</h1>
+            <p>Explore properties and neighborhoods with our interactive map</p>
+        </div>
+    </section>
+
+    <!-- Map Container -->
+    <div class="map-container">
+        <div id="property-map"></div>
+        
+        <!-- Filter Panel -->
+        <div class="filter-panel" id="filter-panel">
+            <button class="filter-toggle" onclick="toggleFilterPanel()">
+                Filters <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <h3>Map Filters</h3>
+            
+            <form id="map-filter-form">
+                <div class="filter-group">
+                    <label for="map-property-type">Property Type</label>
+                    <select id="map-property-type" name="propertyType">
+                        <option value="">All Types</option>
+                        <option value="House">House</option>
+                        <option value="Condo">Condo</option>
+                        <option value="Townhouse">Townhouse</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Price Range</label>
+                    <div class="price-range">
+                        <div class="price-display" id="map-min-price-display">$0</div>
+                        <input type="range" id="map-min-price" name="minPrice" min="0" max="5000000" value="0" step="50000">
+                        
+                        <div class="price-display" id="map-max-price-display">$5M</div>
+                        <input type="range" id="map-max-price" name="maxPrice" min="0" max="5000000" value="5000000" step="50000">
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="map-bedrooms">Bedrooms</label>
+                    <select id="map-bedrooms" name="bedrooms">
+                        <option value="">Any</option>
+                        <option value="1">1+</option>
+                        <option value="2">2+</option>
+                        <option value="3">3+</option>
+                        <option value="4">4+</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Amenities</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="map-pool" name="amenities" value="Pool">
+                            <label for="map-pool">Pool</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="map-garage" name="amenities" value="Garage">
+                            <label for="map-garage">Garage</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="map-waterfront" name="amenities" value="Waterfront">
+                            <label for="map-waterfront">Waterfront</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="filter-buttons">
+                    <button type="button" class="btn btn-primary" onclick="applyMapFilters()">Apply</button>
+                    <button type="button" class="btn btn-secondary" onclick="clearMapFilters()">Clear</button>
+                </div>
+            </form>
+        </div>
+        
+        <!-- Map Controls -->
+        <div class="map-controls">
+            <button class="map-control-btn" onclick="centerMap()" title="Center Map">
+                <i class="fas fa-crosshairs"></i>
+            </button>
+            <button class="map-control-btn" onclick="toggleSatellite()" title="Satellite View">
+                <i class="fas fa-satellite"></i>
+            </button>
+            <button class="map-control-btn" onclick="drawSearchArea()" title="Draw Search Area">
+                <i class="fas fa-draw-polygon"></i>
+            </button>
+        </div>
+        
+        <!-- Property Info Panel -->
+        <div class="info-panel" id="info-panel">
+            <button class="info-panel-close" onclick="closeInfoPanel()">&times;</button>
+            <div id="info-content">
+                <!-- Property info will be dynamically loaded here -->
+            </div>
+        </div>
+        
+        <!-- Stats Panel -->
+        <div class="stats-panel">
+            <h4>Properties on Map</h4>
+            <div class="stats-number" id="map-stats-count">8</div>
+            <div class="stats-label">Total Properties</div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="main.js"></script>
+    
+    <script>
+        let isSatelliteView = false;
+        let drawnItems = [];
+        
+        // Initialize map page
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeMapPage();
+            initializeMapFilters();
+        });
+        
+        function initializeMapFilters() {
+            const minPriceSlider = document.getElementById('map-min-price');
+            const maxPriceSlider = document.getElementById('map-max-price');
+            const minPriceDisplay = document.getElementById('map-min-price-display');
+            const maxPriceDisplay = document.getElementById('map-max-price-display');
+            
+            if (minPriceSlider && maxPriceSlider) {
+                minPriceSlider.addEventListener('input', (e) => {
+                    minPriceDisplay.textContent = formatPrice(e.target.value);
+                });
+                
+                maxPriceSlider.addEventListener('input', (e) => {
+                    maxPriceDisplay.textContent = formatPrice(e.target.value);
+                });
+            }
+        }
+        
+        function toggleFilterPanel() {
+            const panel = document.getElementById('filter-panel');
+            panel.classList.toggle('active');
+        }
+        
+        function centerMap() {
+            if (map) {
+                map.setView([34.0522, -118.2437], 10);
+            }
+        }
+        
+        function toggleSatellite() {
+            if (!map) return;
+            
+            isSatelliteView = !isSatelliteView;
+            const btn = event.target.closest('.map-control-btn');
+            
+            if (isSatelliteView) {
+                btn.classList.add('active');
+                L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                    attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                }).addTo(map);
+            } else {
+                btn.classList.remove('active');
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+            }
+        }
+        
+        function drawSearchArea() {
+            alert('Draw search area functionality would be implemented with Leaflet.draw plugin in a production environment.');
+        }
+        
+        function applyMapFilters() {
+            const formData = new FormData(document.getElementById('map-filter-form'));
+            const filters = {
+                propertyType: formData.get('propertyType'),
+                minPrice: document.getElementById('map-min-price').value,
+                maxPrice: document.getElementById('map-max-price').value,
+                bedrooms: formData.get('bedrooms'),
+                amenities: formData.getAll('amenities')
+            };
+            
+            // Filter properties
+            let filteredProperties = properties.filter(property => {
+                // Property type filter
+                if (filters.propertyType && property.type !== filters.propertyType) {
+                    return false;
+                }
+                
+                // Price range filter
+                if (property.price < filters.minPrice || property.price > filters.maxPrice) {
+                    return false;
+                }
+                
+                // Bedrooms filter
+                if (filters.bedrooms && property.bedrooms < parseInt(filters.bedrooms)) {
+                    return false;
+                }
+                
+                // Amenities filter
+                if (filters.amenities.length > 0) {
+                    const hasAmenities = filters.amenities.every(amenity => 
+                        property.amenities.includes(amenity)
+                    );
+                    if (!hasAmenities) {
+                        return false;
+                    }
+                }
+                
+                return true;
+            });
+            
+            // Update map markers
+            updateMapMarkers(filteredProperties);
+            
+            // Update stats
+            document.getElementById('map-stats-count').textContent = filteredProperties.length;
+        }
+        
+        function clearMapFilters() {
+            document.getElementById('map-filter-form').reset();
+            updateMapMarkers(properties);
+            document.getElementById('map-stats-count').textContent = properties.length;
+        }
+        
+        function updateMapMarkers(propertiesToShow) {
+            if (!map) return;
+            
+            // Clear existing markers
+            markers.forEach(marker => map.removeLayer(marker));
+            markers = [];
+            
+            // Add new markers
+            propertiesToShow.forEach(property => {
+                const marker = L.marker([property.lat, property.lng])
+                    .addTo(map)
+                    .bindPopup(`
+                        <div class="map-popup">
+                            <img src="${property.image}" alt="${property.title}">
+                            <h3>${property.title}</h3>
+                            <p class="price">${formatPrice(property.price)}</p>
+                            <p class="address">${property.address}</p>
+                            <div style="margin: 0.5rem 0; font-size: 0.9rem;">
+                                ${property.bedrooms} beds • ${property.bathrooms} baths • ${property.sqft.toLocaleString()} sqft
+                            </div>
+                            <button class="btn btn-primary" onclick="viewProperty(${property.id})">View Details</button>
+                            <button class="btn btn-secondary" onclick="showPropertyInfo(${property.id})" style="margin-top: 0.5rem;">More Info</button>
+                        </div>
+                    `)
+                    .on('click', () => {
+                        showPropertyInfo(property.id);
+                    });
+                
+                markers.push(marker);
+            });
+        }
+        
+        function showPropertyInfo(propertyId) {
+            const property = properties.find(p => p.id === propertyId);
+            if (!property) return;
+            
+            const infoPanel = document.getElementById('info-panel');
+            const infoContent = document.getElementById('info-content');
+            
+            infoContent.innerHTML = `
+                <h3>${property.title}</h3>
+                <div class="info-price">${formatPrice(property.price)}</div>
+                <div class="info-address">${property.address}</div>
+                <div class="info-specs">
+                    <span><i class="fas fa-bed"></i> ${property.bedrooms} beds</span>
+                    <span><i class="fas fa-bath"></i> ${property.bathrooms} baths</span>
+                    <span><i class="fas fa-ruler-combined"></i> ${property.sqft.toLocaleString()} sqft</span>
+                    <span><i class="fas fa-home"></i> ${property.type}</span>
+                </div>
+                <div class="amenities">
+                    ${property.amenities.map(amenity => `
+                        <span class="amenity-tag">${amenity}</span>
+                    `).join('')}
+                </div>
+                <p style="margin: 1rem 0; color: var(--dark-gray); line-height: 1.5;">${property.description}</p>
+                <div class="info-actions">
+                    <button class="btn btn-primary" onclick="viewProperty(${property.id})">View Details</button>
+                    <button class="btn btn-secondary" onclick="toggleFavorite(${property.id})">
+                        <i class="fas fa-heart"></i> Save
+                    </button>
+                </div>
+            `;
+            
+            infoPanel.classList.add('active');
+        }
+        
+        function closeInfoPanel() {
+            document.getElementById('info-panel').classList.remove('active');
+        }
+        
+        // Close info panel when clicking outside
+        document.addEventListener('click', (e) => {
+            const infoPanel = document.getElementById('info-panel');
+            if (!infoPanel.contains(e.target) && !e.target.closest('.leaflet-popup-content')) {
+                closeInfoPanel();
+            }
+        });
+    </script>
+</body>
+</html>

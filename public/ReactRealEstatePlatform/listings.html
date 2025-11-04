@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Listings - Luxury Realty</title>
+    <meta name="description" content="Browse our extensive collection of luxury properties. Filter by price, location, property type, and amenities to find your perfect home.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Core Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #2D3748;
+            --secondary-color: #D69E2E;
+            --accent-color: #68D391;
+            --neutral-color: #F7FAFC;
+            --text-color: #1A202C;
+            --light-gray: #E2E8F0;
+            --dark-gray: #4A5568;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--neutral-color);
+            padding-top: 80px;
+        }
+        
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--secondary-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Main Content */
+        .main-content {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            gap: 2rem;
+        }
+        
+        /* Sidebar Filters */
+        .sidebar {
+            width: 300px;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+        
+        .sidebar h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .filter-group {
+            margin-bottom: 2rem;
+        }
+        
+        .filter-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        
+        .filter-group input,
+        .filter-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .filter-group input:focus,
+        .filter-group select:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        
+        .price-range {
+            margin-bottom: 1rem;
+        }
+        
+        .price-display {
+            font-weight: 600;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .range-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .range-inputs input[type="range"] {
+            width: 100%;
+            margin: 0;
+        }
+        
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: var(--secondary-color);
+            color: white;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-primary:hover {
+            background: #B7791F;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: var(--light-gray);
+            color: var(--text-color);
+            width: 100%;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--dark-gray);
+            color: white;
+        }
+        
+        /* Main Content Area */
+        .content {
+            flex: 1;
+        }
+        
+        /* Results Header */
+        .results-header {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .results-count {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .sort-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .sort-controls select {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: white;
+        }
+        
+        .view-toggle {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .view-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--light-gray);
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .view-btn.active {
+            background: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+        
+        /* Property Grid */
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .property-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+        
+        .property-card.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .property-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .property-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .property-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .property-card:hover .property-image img {
+            transform: scale(1.1);
+        }
+        
+        .property-type {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .favorite-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-color);
+        }
+        
+        .favorite-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        .favorite-btn.active {
+            background: var(--secondary-color);
+            color: white;
+        }
+        
+        .property-info {
+            padding: 1.5rem;
+        }
+        
+        .property-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .address {
+            color: var(--dark-gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .property-specs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+        
+        .property-specs span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .amenity-tag {
+            background: var(--light-gray);
+            color: var(--dark-gray);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .property-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .property-actions .btn {
+            flex: 1;
+            padding: 0.6rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        /* List View */
+        .property-list {
+            display: none;
+        }
+        
+        .property-list.active {
+            display: block;
+        }
+        
+        .property-list-item {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .property-list-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .list-item-image {
+            width: 300px;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .list-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .list-item-info {
+            flex: 1;
+        }
+        
+        .list-item-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .list-item-specs {
+            display: flex;
+            gap: 2rem;
+            margin: 1rem 0;
+            font-size: 1rem;
+        }
+        
+        .list-item-description {
+            margin: 1rem 0;
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+        
+        .page-btn {
+            padding: 0.8rem 1.2rem;
+            border: 2px solid var(--light-gray);
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .page-btn:hover {
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+        }
+        
+        .page-btn.active {
+            background: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 2rem;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--light-gray);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            z-index: 10;
+        }
+        
+        .property-modal {
+            width: 900px;
+        }
+        
+        .property-detail {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+        
+        .property-gallery {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .property-gallery img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .property-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .property-info .price {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .property-info .address {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .property-info .property-specs {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .property-info .amenities {
+            margin: 1.5rem 0;
+        }
+        
+        .property-info .amenities h4 {
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .description {
+            margin: 1.5rem 0;
+            line-height: 1.6;
+            color: var(--dark-gray);
+        }
+        
+        .agent-info {
+            background: var(--neutral-color);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+        
+        .agent-info h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: static;
+                margin-bottom: 2rem;
+            }
+            
+            .property-detail {
+                grid-template-columns: 1fr;
+            }
+            
+            .property-modal {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .property-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .sort-controls {
+                justify-content: space-between;
+            }
+            
+            .property-list-item {
+                flex-direction: column;
+            }
+            
+            .list-item-image {
+                width: 100%;
+                height: 250px;
+            }
+            
+            .list-item-specs {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .sidebar,
+            .results-header {
+                padding: 1.5rem;
+            }
+            
+            .property-actions {
+                flex-direction: column;
+            }
+        }
+        
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-animate.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Luxury Realty</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="listings.html" class="active">Listings</a></li>
+                <li><a href="map.html">Map</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="blog.html">Blog</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Property Listings</h1>
+            <p>Discover your perfect property from our extensive collection of luxury homes</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Sidebar Filters -->
+        <aside class="sidebar">
+            <h3>Filter Properties</h3>
+            
+            <form id="filter-form">
+                <div class="filter-group">
+                    <label>Property Type</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="house" name="propertyType" value="House">
+                            <label for="house">House</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="condo" name="propertyType" value="Condo">
+                            <label for="condo">Condo</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="townhouse" name="propertyType" value="Townhouse">
+                            <label for="townhouse">Townhouse</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="land" name="propertyType" value="Land">
+                            <label for="land">Land</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Price Range</label>
+                    <div class="price-range">
+                        <div class="price-display" id="min-price-filter-display">$0</div>
+                        <input type="range" id="min-price-filter" name="minPrice" min="0" max="5000000" value="0" step="10000">
+                        
+                        <div class="price-display" id="max-price-filter-display">$5M</div>
+                        <input type="range" id="max-price-filter" name="maxPrice" min="0" max="5000000" value="5000000" step="10000">
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="bedrooms">Minimum Bedrooms</label>
+                    <select id="bedrooms" name="bedrooms">
+                        <option value="">Any</option>
+                        <option value="1">1+</option>
+                        <option value="2">2+</option>
+                        <option value="3">3+</option>
+                        <option value="4">4+</option>
+                        <option value="5">5+</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="bathrooms">Minimum Bathrooms</label>
+                    <select id="bathrooms" name="bathrooms">
+                        <option value="">Any</option>
+                        <option value="1">1+</option>
+                        <option value="2">2+</option>
+                        <option value="3">3+</option>
+                        <option value="4">4+</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Amenities</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="pool" name="amenities" value="Pool">
+                            <label for="pool">Pool</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="garage" name="amenities" value="Garage">
+                            <label for="garage">Garage</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="garden" name="amenities" value="Garden">
+                            <label for="garden">Garden</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="gym" name="amenities" value="Gym">
+                            <label for="gym">Gym</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="waterfront" name="amenities" value="Waterfront">
+                            <label for="waterfront">Waterfront</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="button" class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+                <button type="button" class="btn btn-secondary" onclick="clearFilters()">Clear All</button>
+            </form>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content">
+            <!-- Results Header -->
+            <div class="results-header">
+                <div class="results-count" id="results-count">8 properties found</div>
+                
+                <div class="sort-controls">
+                    <select id="sort-select">
+                        <option value="newest">Newest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="sqft">Largest First</option>
+                    </select>
+                    
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="grid">
+                            <i class="fas fa-th-large"></i>
+                        </button>
+                        <button class="view-btn" data-view="list">
+                            <i class="fas fa-list"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Grid -->
+            <div id="property-grid" class="property-grid">
+                <!-- Properties will be dynamically loaded here -->
+            </div>
+
+            <!-- Property List -->
+            <div id="property-list" class="property-list">
+                <!-- List view properties will be dynamically loaded here -->
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="page-btn">Previous</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">Next</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="main.js"></script>
+    
+    <script>
+        // Additional functionality for listings page
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeListingsPage();
+            initializeViewToggle();
+        });
+        
+        function initializeViewToggle() {
+            const viewBtns = document.querySelectorAll('.view-btn');
+            const propertyGrid = document.getElementById('property-grid');
+            const propertyList = document.getElementById('property-list');
+            
+            viewBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const view = this.dataset.view;
+                    
+                    // Update active button
+                    viewBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Toggle views
+                    if (view === 'grid') {
+                        propertyGrid.style.display = 'grid';
+                        propertyList.style.display = 'none';
+                    } else {
+                        propertyGrid.style.display = 'none';
+                        propertyList.style.display = 'block';
+                        renderPropertyList();
+                    }
+                });
+            });
+        }
+        
+        function renderPropertyList() {
+            const propertyList = document.getElementById('property-list');
+            if (!propertyList) return;
+            
+            propertyList.innerHTML = currentProperties.map(property => `
+                <div class="property-list-item">
+                    <div class="list-item-image">
+                        <img src="${property.image}" alt="${property.title}" loading="lazy">
+                    </div>
+                    <div class="list-item-info">
+                        <h3>${property.title}</h3>
+                        <p class="price">${formatPrice(property.price)}</p>
+                        <p class="address">${property.address}</p>
+                        <div class="list-item-specs">
+                            <span>${property.bedrooms} beds</span>
+                            <span>${property.bathrooms} baths</span>
+                            <span>${property.sqft.toLocaleString()} sqft</span>
+                            <span>${property.type}</span>
+                        </div>
+                        <p class="list-item-description">${property.description}</p>
+                        <div class="property-actions">
+                            <button class="btn btn-primary" onclick="viewProperty(${property.id})">View Details</button>
+                            <button class="btn btn-outline" onclick="toggleFavorite(${property.id})">
+                                <i class="fas fa-heart"></i> Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function applyFilters() {
+            handleFilterChange();
+        }
+        
+        function clearFilters() {
+            document.getElementById('filter-form').reset();
+            currentProperties = [...properties];
+            renderPropertyGrid();
+            updateResultsCount();
+        }
+    </script>
+</body>
+</html>
