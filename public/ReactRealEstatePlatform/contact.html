@@ -1002,11 +1002,12 @@
     <script src="main.js"></script>
     
     <script>
-        let currentStep = 1;
-        const totalSteps = 3;
-        
-        // Initialize contact page
-        document.addEventListener('DOMContentLoaded', function() {
+        // currentStep is already declared in main.js, so we don't redeclare it here
+        // Reset currentStep to 1 when page loads
+        window.addEventListener('DOMContentLoaded', function() {
+            if (typeof currentStep !== 'undefined') {
+                currentStep = 1;
+            }
             initializeContactPage();
             setupFormNavigation();
         });
@@ -1016,75 +1017,20 @@
             const prevBtns = document.querySelectorAll('.prev-step');
             
             nextBtns.forEach(btn => {
-                btn.addEventListener('click', nextStep);
+                btn.addEventListener('click', function() {
+                    if (typeof nextStep === 'function') {
+                        nextStep();
+                    }
+                });
             });
             
             prevBtns.forEach(btn => {
-                btn.addEventListener('click', prevStep);
+                btn.addEventListener('click', function() {
+                    if (typeof prevStep === 'function') {
+                        prevStep();
+                    }
+                });
             });
-        }
-        
-        function nextStep() {
-            if (currentStep < totalSteps) {
-                // Validate current step
-                if (!validateStep(currentStep)) {
-                    return;
-                }
-                
-                // Hide current step
-                document.getElementById(`step-${currentStep}`).classList.remove('active');
-                
-                // Update step indicator
-                const currentDot = document.querySelectorAll('.step-dot')[currentStep - 1];
-                currentDot.classList.remove('active');
-                currentDot.classList.add('completed');
-                
-                // Move to next step
-                currentStep++;
-                
-                // Show next step
-                document.getElementById(`step-${currentStep}`).classList.add('active');
-                
-                // Update step indicator
-                const nextDot = document.querySelectorAll('.step-dot')[currentStep - 1];
-                nextDot.classList.add('active');
-                
-                // Update progress bar
-                updateProgressBar();
-            }
-        }
-        
-        function prevStep() {
-            if (currentStep > 1) {
-                // Hide current step
-                document.getElementById(`step-${currentStep}`).classList.remove('active');
-                
-                // Update step indicator
-                const currentDot = document.querySelectorAll('.step-dot')[currentStep - 1];
-                currentDot.classList.remove('active');
-                
-                // Move to previous step
-                currentStep--;
-                
-                // Show previous step
-                document.getElementById(`step-${currentStep}`).classList.add('active');
-                
-                // Update step indicator
-                const prevDot = document.querySelectorAll('.step-dot')[currentStep - 1];
-                prevDot.classList.remove('completed');
-                prevDot.classList.add('active');
-                
-                // Update progress bar
-                updateProgressBar();
-            }
-        }
-        
-        function updateProgressBar() {
-            const progress = (currentStep / totalSteps) * 100;
-            const progressFill = document.getElementById('progress-fill');
-            if (progressFill) {
-                progressFill.style.width = `${progress}%`;
-            }
         }
         
         function validateStep(step) {

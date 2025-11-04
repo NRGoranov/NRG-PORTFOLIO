@@ -433,51 +433,68 @@ function initializePriceSlider() {
 
 // Featured properties carousel
 function initializeFeaturedProperties() {
-    const featuredContainer = document.getElementById('featured-properties');
-    if (!featuredContainer) return;
+    const splideList = document.querySelector('#featured-properties .splide__list');
+    if (!splideList) return;
     
     const featuredProperties = properties.slice(0, 6);
     
-    featuredContainer.innerHTML = featuredProperties.map(property => `
-        <div class="property-card" data-property-id="${property.id}">
-            <div class="property-image">
-                <img src="${property.image}" alt="${property.title}" loading="lazy">
-                <button class="favorite-btn ${favorites.includes(property.id) ? 'active' : ''}" onclick="toggleFavorite(${property.id})">
-                    <i class="fas fa-heart"></i>
-                </button>
-            </div>
-            <div class="property-info">
-                <h3>${property.title}</h3>
-                <p class="price">${formatPrice(property.price)}</p>
-                <p class="address">${property.address}</p>
-                <div class="property-specs">
-                    <span>${property.bedrooms} beds</span>
-                    <span>${property.bathrooms} baths</span>
-                    <span>${property.sqft.toLocaleString()} sqft</span>
-                </div>
-                <button class="btn btn-primary" onclick="viewProperty(${property.id})">View Details</button>
-            </div>
-        </div>
-    `).join('');
+    // Clear existing content
+    splideList.innerHTML = '';
     
-    // Initialize carousel
+    // Add properties to the list
+    featuredProperties.forEach(property => {
+        const li = document.createElement('li');
+        li.className = 'splide__slide';
+        li.innerHTML = `
+            <div class="property-card" data-property-id="${property.id}">
+                <div class="property-image">
+                    <img src="${property.image}" alt="${property.title}" loading="lazy">
+                    <button class="favorite-btn ${favorites.includes(property.id) ? 'active' : ''}" onclick="toggleFavorite(${property.id})">
+                        <i class="fas fa-heart"></i>
+                    </button>
+                </div>
+                <div class="property-info">
+                    <h3>${property.title}</h3>
+                    <p class="price">${formatPrice(property.price)}</p>
+                    <p class="address">${property.address}</p>
+                    <div class="property-specs">
+                        <span>${property.bedrooms} beds</span>
+                        <span>${property.bathrooms} baths</span>
+                        <span>${property.sqft.toLocaleString()} sqft</span>
+                    </div>
+                    <button class="btn btn-primary" onclick="viewProperty(${property.id})">View Details</button>
+                </div>
+            </div>
+        `;
+        splideList.appendChild(li);
+    });
+    
+    // Initialize carousel after content is added
     if (typeof Splide !== 'undefined') {
-        new Splide('#featured-properties', {
-            type: 'loop',
-            perPage: 3,
-            perMove: 1,
-            gap: '2rem',
-            autoplay: true,
-            interval: 4000,
-            breakpoints: {
-                768: {
-                    perPage: 1
-                },
-                1024: {
-                    perPage: 2
-                }
+        setTimeout(() => {
+            try {
+                new Splide('#featured-properties', {
+                    type: 'loop',
+                    perPage: 3,
+                    perMove: 1,
+                    gap: '2rem',
+                    autoplay: true,
+                    interval: 4000,
+                    pagination: true,
+                    arrows: true,
+                    breakpoints: {
+                        768: {
+                            perPage: 1
+                        },
+                        1024: {
+                            perPage: 2
+                        }
+                    }
+                }).mount();
+            } catch (error) {
+                console.error('Error initializing Splide:', error);
             }
-        }).mount();
+        }, 100);
     }
 }
 
@@ -777,30 +794,45 @@ function initializeContactForm() {
     });
 }
 
-let currentStep = 1;
+// Contact form step management - use window object to avoid conflicts
+if (typeof window.contactFormStep === 'undefined') {
+    window.contactFormStep = 1;
+}
 const totalSteps = 3;
 
 function nextStep() {
-    if (currentStep < totalSteps) {
-        document.getElementById(`step-${currentStep}`).classList.remove('active');
-        currentStep++;
-        document.getElementById(`step-${currentStep}`).classList.add('active');
+    if (window.contactFormStep < totalSteps) {
+        const currentStepEl = document.getElementById(`step-${window.contactFormStep}`);
+        if (currentStepEl) {
+            currentStepEl.classList.remove('active');
+        }
+        window.contactFormStep++;
+        const nextStepEl = document.getElementById(`step-${window.contactFormStep}`);
+        if (nextStepEl) {
+            nextStepEl.classList.add('active');
+        }
         updateProgressBar();
     }
 }
 
 function prevStep() {
-    if (currentStep > 1) {
-        document.getElementById(`step-${currentStep}`).classList.remove('active');
-        currentStep--;
-        document.getElementById(`step-${currentStep}`).classList.add('active');
+    if (window.contactFormStep > 1) {
+        const currentStepEl = document.getElementById(`step-${window.contactFormStep}`);
+        if (currentStepEl) {
+            currentStepEl.classList.remove('active');
+        }
+        window.contactFormStep--;
+        const prevStepEl = document.getElementById(`step-${window.contactFormStep}`);
+        if (prevStepEl) {
+            prevStepEl.classList.add('active');
+        }
         updateProgressBar();
     }
 }
 
 function updateProgressBar() {
-    const progress = (currentStep / totalSteps) * 100;
-    const progressBar = document.querySelector('.progress-fill');
+    const progress = (window.contactFormStep / totalSteps) * 100;
+    const progressBar = document.querySelector('.progress-fill') || document.getElementById('progress-fill');
     if (progressBar) {
         progressBar.style.width = `${progress}%`;
     }
