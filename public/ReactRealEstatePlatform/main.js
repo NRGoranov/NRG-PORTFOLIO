@@ -464,7 +464,7 @@ function initializeFeaturedProperties() {
         grid.innerHTML = featuredProperties.map(property => `
             <div class="property-card" data-property-id="${property.id}">
                 <div class="property-image">
-                    <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop'" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='${property.image}'" style="width: 100%; height: 100%; object-fit: cover;">
                     <button class="favorite-btn ${favorites.includes(property.id) ? 'active' : ''}" onclick="toggleFavorite(${property.id})">
                         <i class="fas fa-heart"></i>
                     </button>
@@ -504,7 +504,7 @@ function initializeFeaturedProperties() {
             li.innerHTML = `
                 <div class="property-card" data-property-id="${property.id}">
                     <div class="property-image">
-                        <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop'" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='${property.image}'" style="width: 100%; height: 100%; object-fit: cover;">
                         <button class="favorite-btn ${favorites.includes(property.id) ? 'active' : ''}" onclick="toggleFavorite(${property.id})">
                             <i class="fas fa-heart"></i>
                         </button>
@@ -681,7 +681,7 @@ function renderPropertyGrid() {
     gridContainer.innerHTML = currentProperties.map(property => `
         <div class="property-card" data-property-id="${property.id}">
             <div class="property-image">
-                <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop'">
+                <img src="${property.image}" alt="${property.title}" loading="lazy" onerror="this.src='${property.image}'">
                 <span class="property-type">${property.type}</span>
                 <button class="favorite-btn ${favorites.includes(property.id) ? 'active' : ''}" onclick="toggleFavorite(${property.id})">
                     <i class="fas fa-heart"></i>
