@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Belle Époque Restaurant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2C2C2C;
+            --secondary: #F8F6F0;
+            --accent: #8B2635;
+            --gold: #D4AF37;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .font-accent {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gallery-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 246, 240, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 38, 53, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        
+        .gallery-card:hover {
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--accent) 0%, #A73142 100%);
+            color: white;
+        }
+        
+        .filter-btn:not(.active):hover {
+            background: rgba(139, 38, 53, 0.1);
+            color: var(--accent);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: var(--accent);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .lightbox {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        
+        .lightbox-content {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 246, 240, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 38, 53, 0.1);
+        }
+        
+        .gallery-item {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .gallery-item.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+        
+        .reveal-text {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .reveal-text.revealed {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .masonry-grid {
+            column-count: 3;
+            column-gap: 1.5rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .masonry-grid {
+                column-count: 1;
+            }
+        }
+        
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-display text-2xl font-bold text-gradient">Belle Époque</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-gray-900 font-medium">Home</a>
+                    <a href="menu.html" class="nav-link text-gray-700 hover:text-gray-900 font-medium">Menu</a>
+                    <a href="reservation.html" class="nav-link text-gray-700 hover:text-gray-900 font-medium">Reservations</a>
+                    <a href="gallery.html" class="nav-link text-gray-700 hover:text-gray-900 font-medium">Gallery</a>
+                </div>
+                <button class="md:hidden">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="pt-24 pb-12 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h1 class="font-display text-5xl md:text-6xl font-bold mb-6 reveal-text">
+                    Our <span class="text-gradient">Gallery</span>
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto reveal-text">
+                    Explore the visual journey of Belle Époque through our carefully curated collection of 
+                    culinary artistry, elegant ambiance, and memorable moments.
+                </p>
+            </div>
+            
+            <!-- Category Filters -->
+            <div class="flex flex-wrap justify-center gap-4 reveal-text">
+                <button class="filter-btn active px-6 py-3 rounded-full font-semibold" data-filter="all">
+                    All Photos
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-semibold bg-gray-100 text-gray-700" data-filter="food">
+                    Food & Cuisine
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-semibold bg-gray-100 text-gray-700" data-filter="interior">
+                    Interior Design
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-semibold bg-gray-100 text-gray-700" data-filter="events">
+                    Events & Celebrations
+                </button>
+                <button class="filter-btn px-6 py-3 rounded-full font-semibold bg-gray-100 text-gray-700" data-filter="team">
+                    Behind the Scenes
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="masonry-grid">
+                <!-- Food & Cuisine -->
+                <div class="masonry-item gallery-item" data-category="food">
+                    <div class="gallery-card rounded-2xl overflow-hidden">
+                        <div class="aspect-square overflow-hidden">
+                            <img src="resources/steak-plated.jpg" alt="Wagyu Beef Tenderloin" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-display text-lg font-semibold mb-2">Wagyu Beef Tenderloin</h3>
+                            <p class="text-gray-600 text-sm">Our signature dish featuring premium wagyu beef</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="masonry-item gallery-item" data-category="food">
+                    <div class="gallery-card rounded-2xl overflow-hidden">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img src="resources/main-course.jpg" alt="Pan-Seared Salmon" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-display text-lg font-semibold mb-2">Pan-Seared Salmon</h3>
+                            <p class="text-gray-600 text-sm">Atlantic salmon with seasonal vegetables</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="masonry-item gallery-item" data-category="food">
+                    <div class="gallery-card rounded-2xl overflow-hidden">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="resources/chocolate-dessert.jpg" alt="Chocolate Soufflé" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-display text-lg font-semibold mb-2">Chocolate Soufflé</h3>
+                            <p class="text-gray-600 text-sm">Warm dark chocolate with vanilla ice cream</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="masonry-item gallery-item" data-category="food">
+                    <div class="gallery-card rounded-2xl overflow-hidden">
+                        <div class="aspect-square overflow-hidden">
+                            <img src="resources/pasta-dish.jpg" alt="Handmade Pasta" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-display text-lg font-semibold mb-2">Handmade Pasta</h3>
+                            <p class="text-gray-600 text-sm">Fresh pasta with seasonal ingredients</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Interior Design -->
+                <div class="masonry-item gallery-item" data-category="interior">
+                    <div class="gallery-card rounded-2xl overflow-hidden">
+                        <div class="aspect-[16/9] overflow-hidden">
+                            <img src="resources/hero-ambiance.jpg" alt="Main Dining Room" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-display text-lg font-semibold mb-2">Main Dining Room</h3>
+                            <p class="text-gray-600 text-sm">Elegant ambiance with warm lighting</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="masonry-item gallery-item" data-category="interior">
+                    <div class="gallery-card rounded-2xl overflow-hidden">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img src="resources/interior-1.jpg" alt="Bar Area" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-display text-lg font-semibold mb-2">Bar Area</h3>
+                            <p class="text-gray-600 text-sm">Craft cocktails and fine wines</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="masonry-item gallery-item" data-category="interior">
+                    <div class="gallery-card rounded-2xl overflow-hidden">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="resources/interior-2.jpg" alt="Private Dining" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-display text-lg font-semibold mb-2">Private Dining Room</h3>
+                            <p class="text-gray-600 text-sm">Intimate setting for special occasions</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="masonry-item gallery-item" data-category="interior">
+                    <div class="gallery-card rounded-2xl overflow-hidden">
+                        <div class="aspect-square overflow-hidden">
+                            <img src="resources/terrace.jpg" alt="Outdoor Terrace" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-display text-lg font-semibold mb-2">Outdoor Terrace</h3>
+                            <p class="text-gray-600 text-sm">Al fresco dining experience</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="masonry-item gallery-item" data-category="interior">
+                    <div class="gallery-card rounded-2xl overflow-hidden">
+                        <div class="aspect-[16/9] overflow-hidden">
+                            <img src="resources/wine-cellar.jpg" alt="Wine Cellar" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-display text-lg font-semibold mb-2">Wine Cellar</h3>
+                            <p class="text-gray-600 text-sm">Curated selection of fine wines</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Events & Celebrations -->
+                <div class="masonry-item gallery-item" data-category="events">
+                    <div class="gallery-card rounded-2xl overflow-hidden">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img src="resources/elegant-interior.jpg" alt="Anniversary Celebration" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-display text-lg font-semibold mb-2">Anniversary Celebration</h3>
+                            <p class="text-gray-600 text-sm">Creating memorable moments</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="masonry-item gallery-item" data-category="events">
+                    <div class="gallery-card rounded-2xl overflow-hidden">
+                        <div class="aspect-square overflow-hidden">
+                            <img src="resources/bar-cocktails.jpg" alt="Wine Tasting Event" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-display text-lg font-semibold mb-2">Wine Tasting Event</h3>
+                            <p class="text-gray-600 text-sm">Exclusive wine pairing experiences</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Behind the Scenes -->
+                <div class="masonry-item gallery-item" data-category="team">
+                    <div class="gallery-card rounded-2xl overflow-hidden">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="resources/chef-cooking.jpg" alt="Chef Michel Laurent" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-display text-lg font-semibold mb-2">Chef Michel Laurent</h3>
+                            <p class="text-gray-600 text-sm">Master of culinary artistry</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="masonry-item gallery-item" data-category="team">
+                    <div class="gallery-card rounded-2xl overflow-hidden">
+                        <div class="aspect-square overflow-hidden">
+                            <img src="resources/gourmet-main.jpg" alt="Kitchen Team" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-display text-lg font-semibold mb-2">Kitchen Team</h3>
+                            <p class="text-gray-600 text-sm">Passionate culinary professionals</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="masonry-item gallery-item" data-category="food">
+                    <div class="gallery-card rounded-2xl overflow-hidden">
+                        <div class="aspect-[4/3] overflow-hidden">
+                            <img src="resources/bread-basket.jpg" alt="Artisanal Breads" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-display text-lg font-semibold mb-2">Artisanal Breads</h3>
+                            <p class="text-gray-600 text-sm">Freshly baked daily in-house</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="masonry-item gallery-item" data-category="interior">
+                    <div class="gallery-card rounded-2xl overflow-hidden">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="resources/gourmet-main.jpg" alt="Table Setting" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-display text-lg font-semibold mb-2">Elegant Table Setting</h3>
+                            <p class="text-gray-600 text-sm">Attention to every detail</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox fixed inset-0 z-50 hidden items-center justify-center">
+        <div class="lightbox-content max-w-4xl mx-4 p-6 rounded-2xl">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="lightbox-title" class="font-display text-2xl font-bold text-gradient"></h3>
+                <button id="close-lightbox" class="text-gray-500 hover:text-gray-700">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="aspect-video overflow-hidden rounded-lg mb-4">
+                <img id="lightbox-image" src="" alt="" class="w-full h-full object-cover">
+            </div>
+            <p id="lightbox-description" class="text-gray-600 text-center"></p>
+            
+            <!-- Navigation Arrows -->
+            <button id="prev-image" class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+            </button>
+            <button id="next-image" class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-3 rounded-full shadow-lg">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-display text-3xl font-bold text-gradient mb-4">Belle Époque</div>
+                <p class="text-gray-400 mb-6">Fine Dining Excellence Since 2018</p>
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-400 text-sm">
+                        © 2024 Belle Époque Restaurant. All rights reserved. | 
+                        Crafted with passion for exceptional dining experiences.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

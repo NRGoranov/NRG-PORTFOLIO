@@ -238,7 +238,7 @@ A feature-rich platform with advanced search capabilities, interactive maps, pro
     year: 2024,
     role: 'Full Stack Developer',
     stack: ['React', 'JavaScript', 'Leaflet.js', 'Anime.js', 'ECharts', 'p5.js'],
-    liveUrl: '#',
+    liveUrl: '/ReactRealEstatePlatform/index.html',
     sourceUrl: '#',
     coverImage: '/covers/real-estate.jpg',
     gallery: [
@@ -364,13 +364,13 @@ A beautifully designed, responsive website that combines elegant aesthetics with
     year: 2024,
     role: 'Frontend Developer',
     stack: ['HTML5', 'CSS3', 'JavaScript', 'Anime.js', 'Splide.js', 'p5.js'],
-    liveUrl: '#',
+    liveUrl: '/ResponsiveRestaurantWebsite/index.html',
     sourceUrl: '#',
-    coverImage: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=630&fit=crop',
+    coverImage: '/covers/restaurant-elegant-interior.jpg',
     gallery: [
-      'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=630&fit=crop',
-      'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1200&h=630&fit=crop',
-      'https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=1200&h=630&fit=crop'
+      '/covers/restaurant-elegant-interior.jpg',
+      '/covers/restaurant-hero.jpg',
+      '/covers/restaurant-gourmet.jpg'
     ],
     featured: false,
     highlightColor: '#d97706',
