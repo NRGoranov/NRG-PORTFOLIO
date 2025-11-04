@@ -311,8 +311,8 @@ function handleSearch(e) {
     const formData = new FormData(e.target);
     const searchParams = {
         location: formData.get('location'),
-        minPrice: formData.get('minPrice'),
-        maxPrice: formData.get('maxPrice'),
+        minPrice: 0,
+        maxPrice: formData.get('maxPrice') || 2000000,
         propertyType: formData.get('propertyType'),
         bedrooms: formData.get('bedrooms')
     };
