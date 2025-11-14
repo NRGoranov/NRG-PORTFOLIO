@@ -16,11 +16,13 @@ export default function HomePage() {
     setFeaturedProjects(projects.filter(project => project.featured))
   }, [])
 
+  const totalProjects = projects.length
+
   const stats = [
-    { label: 'Projects Built', value: '30+' },
+    { label: 'Hackathons Completed', value: '4' },
+    { label: 'Projects Shipped', value: `${totalProjects}` },
     { label: 'Years Learning', value: '5' },
-    { label: 'Technologies', value: '20+' },
-    { label: 'Passion Level', value: '100%' },
+    { label: 'Technologies', value: '5+' },
   ]
 
   const skillCategories = [
@@ -41,7 +43,7 @@ export default function HomePage() {
     },
     {
       category: 'Languages',
-      skills: ['JavaScript', 'TypeScript', 'Python', 'HTML5', 'CSS3'],
+      skills: ['JavaScript', 'TypeScript', 'Python', 'Go', 'C#', 'SQL', 'HTML & CSS'],
       description: 'Programming languages'
     }
   ]
@@ -81,7 +83,7 @@ export default function HomePage() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.6 }}
-                    className="text-5xl lg:text-7xl font-bold tracking-tight"
+                    className="text-5xl lg:text-7xl font-bold tracking-tight relative z-50"
                   >
                     <span className="block">Nikolay</span>
                     <span className="block bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">
@@ -99,8 +101,9 @@ export default function HomePage() {
                     Full-Stack Developer
                   </h2>
                     <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
-                      Crafting exceptional digital experiences with modern technologies. 
-                      I transform complex ideas into elegant, scalable solutions through continuous learning and passion.
+                      Crafting exceptional digital experiences with modern technologies. Through 4 hackathons
+                      and {totalProjects} shipped builds (all showcased on the Projects page), I transform complex ideas
+                      into elegant, scalable solutions driven by continuous learning and passion.
                     </p>
                   </motion.div>
                 </div>

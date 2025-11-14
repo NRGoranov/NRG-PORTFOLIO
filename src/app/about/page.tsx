@@ -66,27 +66,36 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
-              className="text-center space-y-8"
+              className="text-center space-y-10 relative z-10"
             >
-              <div className="flex justify-center">
-                <div className="h-32 w-32 rounded-full bg-gradient-to-r from-primary to-primary/70 flex items-center justify-center">
+              <div className="flex justify-center relative z-0">
+                <div className="h-32 w-32 rounded-full bg-gradient-to-r from-primary to-primary/70 flex items-center justify-center relative z-0">
                   <span className="text-primary-foreground font-bold text-3xl">NRG</span>
                 </div>
               </div>
 
-              <div className="space-y-4">
-                <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-                  About
-                  <span className="block bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">
+              <div className="space-y-4 relative z-20">
+                <h1 className="text-4xl md:text-6xl font-bold tracking-tight relative z-30" style={{ lineHeight: "1.1" }}>
+                  About<br/>
+                  <span
+                    className="block bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent relative z-30"
+                    style={{ position: "relative", zIndex: 30, lineHeight: "1.1", paddingBottom: "0.1em", display: "inline-block" }}
+                  >
                     Nikolay Goranov
                   </span>
                 </h1>
-                
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-                  A passionate full-stack developer with 5 years of experience creating 
-                  exceptional digital experiences. I specialize in modern web technologies 
-                  and love turning complex problems into elegant solutions.
-                </p>
+                <div className="relative">
+                  {/* Spacer to prevent overlap */}
+                  <div
+                    className="hidden md:block"
+                    style={{ height: "0.2em" }}
+                  />
+                  <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed relative z-10 mt-[-0.2em]">
+                    A passionate full-stack developer with 5 years of experience creating 
+                    exceptional digital experiences. I specialize in modern web technologies 
+                    and love turning complex problems into elegant solutions.
+                  </p>
+                </div>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
