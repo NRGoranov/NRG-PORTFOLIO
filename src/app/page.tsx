@@ -93,10 +93,10 @@ export default function HomePage() {
                     transition={{ delay: 0.4, duration: 0.6 }}
                     className="space-y-2"
                   >
-                  <h2 className="text-2xl lg:text-3xl text-muted-foreground font-light">
+                  <h2 className="text-2xl lg:text-3xl text-foreground/90 font-light drop-shadow-[0_0_10px_rgba(59,130,246,0.18)]">
                     Full-Stack Developer
                   </h2>
-                    <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
+                    <p className="text-lg text-foreground/85 leading-relaxed max-w-lg drop-shadow-[0_0_12px_rgba(15,23,42,0.4)]">
                       Crafting exceptional digital experiences with modern technologies. Through 4 hackathons
                       and {totalProjects} shipped builds (all showcased on the Projects page), I transform complex ideas
                       into elegant, scalable solutions driven by continuous learning and passion.
