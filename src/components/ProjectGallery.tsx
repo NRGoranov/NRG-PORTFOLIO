@@ -10,7 +10,7 @@ interface ProjectGalleryProps {
   selectedTags: string[]
   selectedYear: number | null
   sortBy: string
-  onProjectsChange: (projects: Project[]) => void
+  onProjectsChange?: (projects: Project[]) => void
   className?: string
 }
 
@@ -70,7 +70,7 @@ export function ProjectGallery({
     }
 
     setFilteredProjects(filtered)
-    onProjectsChange(filtered)
+    onProjectsChange?.(filtered)
   }, [projects, searchQuery, selectedTags, selectedYear, sortBy, onProjectsChange])
 
   if (filteredProjects.length === 0) {

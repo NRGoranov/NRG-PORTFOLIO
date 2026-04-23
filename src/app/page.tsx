@@ -6,7 +6,6 @@ import { ArrowRight, Sparkles, Code, Zap, Award, Users, Github, Linkedin, Instag
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import LightPillar from '@/components/LightPillar'
 import { projects } from '@/data/projects'
 import { Project } from '@/types/project'
 
@@ -51,24 +50,6 @@ export default function HomePage() {
 
   return (
     <div className="relative flex flex-col min-h-screen">
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <LightPillar
-          topColor="#3b82f6"
-          bottomColor="#1d4ed8"
-          intensity={1}
-          rotationSpeed={0.3}
-          glowAmount={0.002}
-          pillarWidth={3}
-          pillarHeight={0.6}
-          noiseIntensity={0.5}
-          pillarRotation={25}
-          interactive={false}
-          mixBlendMode="screen"
-          quality="high"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/55 to-background/70" />
-      </div>
-
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="container relative z-10">

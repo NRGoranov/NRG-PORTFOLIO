@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
+import { GlobalPillarBackground } from '@/components/GlobalPillarBackground'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
@@ -113,11 +114,13 @@ export default function RootLayout({
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          forcedTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
-          <div className="relative flex min-h-screen flex-col bg-background/95 backdrop-blur-sm">
+          <div className="relative flex min-h-screen flex-col">
+            <GlobalPillarBackground />
             <Header />
             <main className="flex-1">
               {children}

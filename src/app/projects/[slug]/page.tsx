@@ -61,7 +61,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
   return (
     <div className="py-20">
-      <div className="container max-w-4xl">
+      <div className="container max-w-4xl glass-panel p-6 md:p-10">
         {/* Back Button */}
         <div className="mb-8">
           <Button asChild variant="ghost" size="sm">
@@ -151,7 +151,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           <div className="lg:col-span-2 space-y-8">
             {/* Description */}
             {project.longDescription && (
-              <Card>
+              <Card className="border-white/10 bg-background/30 backdrop-blur-xl">
                 <CardHeader>
                   <CardTitle>About This Project</CardTitle>
                 </CardHeader>
@@ -167,7 +167,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
             {/* Gallery */}
             {project.gallery && project.gallery.length > 0 && (
-              <Card>
+              <Card className="border-white/10 bg-background/30 backdrop-blur-xl">
                 <CardHeader>
                   <CardTitle>Project Gallery</CardTitle>
                 </CardHeader>
@@ -192,7 +192,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
           {/* Sidebar */}
           <div className="space-y-6">
             {/* Tech Stack */}
-            <Card>
+            <Card className="border-white/10 bg-background/30 backdrop-blur-xl">
               <CardHeader>
                 <CardTitle>Tech Stack</CardTitle>
               </CardHeader>
@@ -209,7 +209,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
 
             {/* Metrics */}
             {project.metrics && (
-              <Card>
+              <Card className="border-white/10 bg-background/30 backdrop-blur-xl">
                 <CardHeader>
                   <CardTitle>Project Metrics</CardTitle>
                 </CardHeader>
@@ -237,7 +237,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             )}
 
             {/* Navigation */}
-            <Card>
+            <Card className="border-white/10 bg-background/30 backdrop-blur-xl">
               <CardHeader>
                 <CardTitle>More Projects</CardTitle>
               </CardHeader>

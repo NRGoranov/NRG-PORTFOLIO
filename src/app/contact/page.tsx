@@ -87,11 +87,9 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-b from-background via-background/95 to-background">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.1)_0%,transparent_70%)]" />
-        
+      <section className="relative py-20 lg:py-32">
         <div className="container relative">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="glass-panel max-w-4xl mx-auto p-8 md:p-12 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -117,7 +115,7 @@ export default function ContactPage() {
       {/* Contact Section */}
       <section className="py-20">
         <div className="container">
-          <div className="max-w-6xl mx-auto">
+          <div className="glass-panel max-w-6xl mx-auto p-8 md:p-12">
             <div className="grid lg:grid-cols-2 gap-12">
               {/* Contact Form */}
               <motion.div
@@ -244,7 +242,7 @@ export default function ContactPage() {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: index * 0.1 }}
                       viewport={{ once: true }}
-                      className="flex items-center gap-4 p-4 rounded-lg border bg-card/50 hover:bg-card transition-colors"
+                      className="flex items-center gap-4 p-4 rounded-lg border border-white/10 bg-background/30 hover:bg-background/45 transition-colors backdrop-blur-sm"
                     >
                       <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
                         <info.icon className="h-6 w-6 text-primary" />
@@ -271,7 +269,7 @@ export default function ContactPage() {
                         href={social.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`h-12 w-12 rounded-lg border bg-card/50 flex items-center justify-center hover:bg-card transition-colors ${social.color}`}
+                        className={`h-12 w-12 rounded-lg border border-white/10 bg-background/30 flex items-center justify-center hover:bg-background/45 transition-colors backdrop-blur-sm ${social.color}`}
                       >
                         <social.icon className="h-6 w-6" />
                         <span className="sr-only">{social.label}</span>
@@ -280,7 +278,7 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="p-6 rounded-lg border bg-muted/30">
+                <div className="p-6 rounded-lg border border-white/10 bg-background/30 backdrop-blur-sm">
                   <h3 className="font-semibold mb-2">Important Note</h3>
                   <p className="text-sm text-muted-foreground">
                     The contact form above is for demonstration purposes only. To actually reach me, 
@@ -295,8 +293,9 @@ export default function ContactPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20">
         <div className="container">
+          <div className="glass-panel p-8 md:p-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -325,6 +324,7 @@ export default function ContactPage() {
               </Button>
             </div>
           </motion.div>
+          </div>
         </div>
       </section>
     </div>

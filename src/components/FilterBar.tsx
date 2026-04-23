@@ -47,7 +47,7 @@ export function FilterBar({
     <div className={`space-y-4 ${className}`}>
       {/* Filter Toggle */}
       <div className="flex items-center justify-between">
-        <Button
+        {/* <Button
           variant="outline"
           onClick={() => setIsExpanded(!isExpanded)}
           className="flex items-center gap-2"
@@ -59,7 +59,7 @@ export function FilterBar({
               {selectedTags.length + (selectedYear ? 1 : 0)}
             </Badge>
           )}
-        </Button>
+        </Button> */}
 
         {hasActiveFilters && (
           <Button variant="ghost" size="sm" onClick={onClear}>

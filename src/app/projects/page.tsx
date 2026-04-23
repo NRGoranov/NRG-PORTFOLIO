@@ -1,49 +1,28 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { ArrowRight, Search, Filter, X } from 'lucide-react'
+import { useState, useMemo } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { ArrowRight, Search, X } from 'lucide-react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { SearchInput } from '@/components/SearchInput'
-import { FilterBar } from '@/components/FilterBar'
 import { ProjectGallery } from '@/components/ProjectGallery'
 import { projects } from '@/data/projects'
-import { getAllTags, getAllYears } from '@/lib/search'
-import { Project } from '@/types/project'
 
 export default function ProjectsPage() {
+  const [searchInputValue, setSearchInputValue] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedTags, setSelectedTags] = useState<string[]>([])
-  const [selectedYear, setSelectedYear] = useState<number | null>(null)
-  const [sortBy, setSortBy] = useState('newest')
-  const [filteredProjects, setFilteredProjects] = useState<Project[]>([])
-
-  const allTags = getAllTags(projects)
-  const allYears = getAllYears(projects)
-
-  useEffect(() => {
-    setFilteredProjects(projects)
-  }, [])
-
-  const handleClearFilters = () => {
-    setSearchQuery('')
-    setSelectedTags([])
-    setSelectedYear(null)
-    setSortBy('newest')
-  }
-
-  const hasActiveFilters = searchQuery || selectedTags.length > 0 || selectedYear || sortBy !== 'newest'
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+  const emptyTags = useMemo(() => [] as string[], [])
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-b from-background via-background/95 to-background">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_110%)]"></div>
+      <section className="relative pt-28 pb-0 lg:pt-36 lg:pb-0">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
         
         <div className="container relative">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="glass-panel max-w-4xl mx-auto p-8 md:p-12 text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -74,87 +53,83 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      {/* Search and Filters */}
-      <section className="py-12 border-b">
+      {/* Expandable Search */}
+      <section className="py-0">
         <div className="container">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6"
-          >
-            <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
-              <div className="flex-1 max-w-md">
-                <SearchInput
-                  onSearch={setSearchQuery}
-                  placeholder="Search projects..."
-                  className="w-full"
-                />
-              </div>
-              
-              <div className="flex items-center gap-4">
-                <FilterBar
-                  tags={allTags}
-                  years={allYears}
-                  selectedTags={selectedTags}
-                  selectedYear={selectedYear}
-                  sortBy={sortBy}
-                  onTagsChange={setSelectedTags}
-                  onYearChange={setSelectedYear}
-                  onSortChange={setSortBy}
-                  onClear={handleClearFilters}
-                />
-                
-                {hasActiveFilters && (
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={handleClearFilters}
-                    className="flex items-center gap-2"
-                  >
-                    <X className="h-4 w-4" />
-                    Clear
-                  </Button>
-                )}
-              </div>
-            </div>
-
-            {/* Active Filters Display */}
-            {hasActiveFilters && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                className="flex flex-wrap gap-2"
+          <div className="mt-8 mb-8 flex justify-center lg:mt-12 lg:mb-12">
+            <motion.div
+              layout
+              transition={{ type: 'spring', stiffness: 240, damping: 24 }}
+              className="flex items-center gap-3 rounded-full border border-white/10 bg-background/35 px-3 py-3 shadow-2xl backdrop-blur-xl"
+            >
+              <Button
+                type="button"
+                size="icon"
+                variant="ghost"
+                onClick={() => setIsSearchOpen((prev) => !prev)}
+                className="relative h-12 w-12 rounded-full"
               >
-                {searchQuery && (
-                  <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm">
-                    Search: "{searchQuery}"
-                  </span>
+                <Search className="h-5 w-5" />
+                {!isSearchOpen && (
+                  <span className="pointer-events-none absolute inset-0 rounded-full border border-primary/40 animate-ping" />
                 )}
-                {selectedTags.map((tag) => (
-                  <span key={tag} className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm">
-                    {tag}
-                  </span>
-                ))}
-                {selectedYear && (
-                  <span className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm">
-                    {selectedYear}
-                  </span>
+                <span className="sr-only">Toggle project search</span>
+              </Button>
+
+              <AnimatePresence initial={false}>
+                {isSearchOpen && (
+                  <motion.div
+                    key="expanded-search"
+                    initial={{ width: 0, opacity: 0 }}
+                    animate={{ width: 'min(48rem, calc(100vw - 9rem))', opacity: 1 }}
+                    exit={{ width: 0, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: 'easeInOut' }}
+                    className="overflow-hidden"
+                  >
+                    <SearchInput
+                      onSearch={setSearchQuery}
+                      value={searchInputValue}
+                      onValueChange={setSearchInputValue}
+                      placeholder="Search projects, tags, tech..."
+                      className="w-full"
+                    />
+                  </motion.div>
                 )}
-                {sortBy !== 'newest' && (
-                  <span className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm">
-                    Sort: {sortBy}
-                  </span>
+              </AnimatePresence>
+
+              <AnimatePresence>
+                {isSearchOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                  >
+                    <Button
+                      type="button"
+                      size="icon"
+                      variant="ghost"
+                      onClick={() => {
+                        setIsSearchOpen(false)
+                        setSearchInputValue('')
+                        setSearchQuery('')
+                      }}
+                      className="h-12 w-12 rounded-full"
+                    >
+                      <X className="h-5 w-5" />
+                      <span className="sr-only">Close search</span>
+                    </Button>
+                  </motion.div>
                 )}
-              </motion.div>
-            )}
-          </motion.div>
+              </AnimatePresence>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Projects Grid */}
-      <section className="py-12">
+      <section className="pt-0 pb-12">
         <div className="container">
+          <div className="glass-panel p-6 md:p-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -163,19 +138,20 @@ export default function ProjectsPage() {
             <ProjectGallery
               projects={projects}
               searchQuery={searchQuery}
-              selectedTags={selectedTags}
-              selectedYear={selectedYear}
-              sortBy={sortBy}
-              onProjectsChange={setFilteredProjects}
+              selectedTags={emptyTags}
+              selectedYear={null}
+              sortBy="newest"
               className="max-w-7xl mx-auto"
             />
           </motion.div>
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20">
         <div className="container">
+          <div className="glass-panel p-8 md:p-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -203,6 +179,7 @@ export default function ProjectsPage() {
               </Button>
             </div>
           </motion.div>
+          </div>
         </div>
       </section>
     </div>

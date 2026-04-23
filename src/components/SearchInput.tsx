@@ -10,14 +10,25 @@ interface SearchInputProps {
   onSearch: (query: string) => void
   placeholder?: string
   className?: string
+  value?: string
+  onValueChange?: (value: string) => void
 }
 
 export function SearchInput({ 
   onSearch, 
   placeholder = "Search projects...", 
-  className 
+  className,
+  value,
+  onValueChange
 }: SearchInputProps) {
-  const [query, setQuery] = useState('')
+  const [internalQuery, setInternalQuery] = useState('')
+  const query = value ?? internalQuery
+  const setQuery = (nextValue: string) => {
+    if (value === undefined) {
+      setInternalQuery(nextValue)
+    }
+    onValueChange?.(nextValue)
+  }
 
   const debouncedSearch = debounce((searchQuery: string) => {
     onSearch(searchQuery)

@@ -122,6 +122,21 @@ const LightPillar = ({
       }
     `
 
+    const waveDistortionBlock =
+      settings.waveIterations === 1
+        ? `
+          q.xz = vec2(uWaveCos * q.x - uWaveSin * q.z, uWaveSin * q.x + uWaveCos * q.z);
+          q += cos(q.zxy) * amp;
+        `
+        : `
+          for(int j = 0; j < WAVE_ITER; j++) {
+            q.xz = vec2(uWaveCos * q.x - uWaveSin * q.z, uWaveSin * q.x + uWaveCos * q.z);
+            q += cos(q.zxy * freq - uTime * float(j) * 2.0) * amp;
+            freq *= 2.0;
+            amp *= 0.5;
+          }
+        `
+
     const fragmentShader = `
       precision ${settings.precision} float;
       uniform float uTime;
@@ -174,12 +189,7 @@ const LightPillar = ({
 
           float freq = 1.0;
           float amp = 1.0;
-          for(int j = 0; j < WAVE_ITER; j++) {
-            q.xz = vec2(uWaveCos * q.x - uWaveSin * q.z, uWaveSin * q.x + uWaveCos * q.z);
-            q += cos(q.zxy * freq - uTime * float(j) * 2.0) * amp;
-            freq *= 2.0;
-            amp *= 0.5;
-          }
+          ${waveDistortionBlock}
 
           float d = length(cos(q.xz)) - 0.2;
           float bound = length(p.xz) - uPillarWidth;
