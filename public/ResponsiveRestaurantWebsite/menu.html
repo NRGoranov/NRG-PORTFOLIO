@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Belle Époque Restaurant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2C2C2C;
+            --secondary: #F8F6F0;
+            --accent: #8B2635;
+            --gold: #D4AF37;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--secondary);
+            color: var(--primary);
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .font-accent {
+            font-family: 'Cormorant Garamond', serif;
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .menu-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 246, 240, 0.9) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 38, 53, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-8px) rotateX(5deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .category-tab {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .category-tab.active {
+            background: linear-gradient(135deg, var(--accent) 0%, #A73142 100%);
+            color: white;
+        }
+        
+        .category-tab:not(.active):hover {
+            background: rgba(139, 38, 53, 0.1);
+            color: var(--accent);
+        }
+        
+        .dietary-tag {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+        }
+        
+        .vegan {
+            background: rgba(34, 197, 94, 0.1);
+            color: #16a34a;
+        }
+        
+        .vegetarian {
+            background: rgba(59, 130, 246, 0.1);
+            color: #2563eb;
+        }
+        
+        .gluten-free {
+            background: rgba(245, 158, 11, 0.1);
+            color: #d97706;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: var(--accent);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .search-input {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(139, 38, 53, 0.1);
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(139, 38, 53, 0.1);
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .menu-item {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .menu-item.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="font-display text-2xl font-bold text-gradient">Belle Époque</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html" class="nav-link text-gray-700 hover:text-gray-900 font-medium">Home</a>
+                    <a href="menu.html" class="nav-link text-gray-700 hover:text-gray-900 font-medium">Menu</a>
+                    <a href="reservation.html" class="nav-link text-gray-700 hover:text-gray-900 font-medium">Reservations</a>
+                    <a href="gallery.html" class="nav-link text-gray-700 hover:text-gray-900 font-medium">Gallery</a>
+                </div>
+                <button class="md:hidden">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="pt-24 pb-12 bg-gradient-to-br from-gray-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h1 class="font-display text-5xl md:text-6xl font-bold mb-6">
+                    Our <span class="text-gradient">Menu</span>
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Discover our carefully curated selection of dishes, each prepared with the finest ingredients 
+                    and presented with artistic elegance that defines our culinary philosophy.
+                </p>
+            </div>
+            
+            <!-- Search and Filters -->
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-8">
+                    <div class="relative">
+                        <input type="text" id="menu-search" placeholder="Search dishes..." 
+                               class="search-input w-full px-6 py-4 rounded-full text-lg">
+                        <svg class="absolute right-6 top-1/2 transform -translate-y-1/2 w-6 h-6 text-gray-400" 
+                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-3 mb-8">
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-gray-400" 
+                            data-filter="all">All</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-gray-400" 
+                            data-filter="vegetarian">Vegetarian</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-gray-400" 
+                            data-filter="vegan">Vegan</button>
+                    <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 text-gray-700 hover:border-gray-400" 
+                            data-filter="gluten-free">Gluten-Free</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Categories -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Category Tabs -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="category-tab active px-8 py-4 rounded-full font-semibold text-lg" data-category="appetizers">
+                    Appetizers
+                </button>
+                <button class="category-tab px-8 py-4 rounded-full font-semibold text-lg bg-gray-100 text-gray-700" data-category="mains">
+                    Main Courses
+                </button>
+                <button class="category-tab px-8 py-4 rounded-full font-semibold text-lg bg-gray-100 text-gray-700" data-category="desserts">
+                    Desserts
+                </button>
+                <button class="category-tab px-8 py-4 rounded-full font-semibold text-lg bg-gray-100 text-gray-700" data-category="drinks">
+                    Beverages
+                </button>
+            </div>
+
+            <!-- Appetizers -->
+            <div id="appetizers" class="menu-category">
+                <h2 class="font-display text-3xl font-bold text-center mb-12 text-gradient">Appetizers</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="menu-card rounded-2xl overflow-hidden menu-item" data-tags="vegetarian">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="resources/bread-basket.jpg" alt="Artisanal Bread Selection" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display text-xl font-semibold">Artisanal Bread Selection</h3>
+                                <span class="font-accent text-xl font-semibold text-gradient">$12</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Freshly baked sourdough, olive focaccia, and rye bread with herb butter.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="dietary-tag vegetarian">Vegetarian</span>
+                                <button class="text-sm text-gray-500 hover:text-gray-700">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card rounded-2xl overflow-hidden menu-item" data-tags="vegetarian gluten-free">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="resources/gourmet-main.jpg" alt="Burrata Caprese" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display text-xl font-semibold">Burrata Caprese</h3>
+                                <span class="font-accent text-xl font-semibold text-gradient">$18</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Fresh burrata with heirloom tomatoes, basil, and aged balsamic.</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex gap-2">
+                                    <span class="dietary-tag vegetarian">Vegetarian</span>
+                                    <span class="dietary-tag gluten-free">Gluten-Free</span>
+                                </div>
+                                <button class="text-sm text-gray-500 hover:text-gray-700">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card rounded-2xl overflow-hidden menu-item" data-tags="">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="resources/pasta-dish.jpg" alt="Seared Scallops" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display text-xl font-semibold">Seared Scallops</h3>
+                                <span class="font-accent text-xl font-semibold text-gradient">$24</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Pan-seared scallops with cauliflower purée and pancetta crisps.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-400">Signature</span>
+                                <button class="text-sm text-gray-500 hover:text-gray-700">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Courses -->
+            <div id="mains" class="menu-category hidden">
+                <h2 class="font-display text-3xl font-bold text-center mb-12 text-gradient">Main Courses</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="menu-card rounded-2xl overflow-hidden menu-item" data-tags="">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="resources/steak-plated.jpg" alt="Wagyu Beef Tenderloin" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display text-xl font-semibold">Wagyu Beef Tenderloin</h3>
+                                <span class="font-accent text-xl font-semibold text-gradient">$85</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Premium wagyu beef with truffle jus, roasted vegetables, and potato gratin.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-400">Signature</span>
+                                <button class="text-sm text-gray-500 hover:text-gray-700">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card rounded-2xl overflow-hidden menu-item" data-tags="">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="resources/main-course.jpg" alt="Pan-Seared Salmon" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display text-xl font-semibold">Pan-Seared Salmon</h3>
+                                <span class="font-accent text-xl font-semibold text-gradient">$42</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Atlantic salmon with lemon butter, seasonal vegetables, and herb risotto.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-400">Chef's Choice</span>
+                                <button class="text-sm text-gray-500 hover:text-gray-700">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card rounded-2xl overflow-hidden menu-item" data-tags="vegetarian">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="resources/gourmet-main.jpg" alt="Wild Mushroom Risotto" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display text-xl font-semibold">Wild Mushroom Risotto</h3>
+                                <span class="font-accent text-xl font-semibold text-gradient">$32</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Creamy arborio rice with wild mushrooms, truffle oil, and parmesan.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="dietary-tag vegetarian">Vegetarian</span>
+                                <button class="text-sm text-gray-500 hover:text-gray-700">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desserts -->
+            <div id="desserts" class="menu-category hidden">
+                <h2 class="font-display text-3xl font-bold text-center mb-12 text-gradient">Desserts</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="menu-card rounded-2xl overflow-hidden menu-item" data-tags="vegetarian">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="resources/chocolate-dessert.jpg" alt="Chocolate Soufflé" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display text-xl font-semibold">Chocolate Soufflé</h3>
+                                <span class="font-accent text-xl font-semibold text-gradient">$18</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Warm dark chocolate soufflé with vanilla bean ice cream and berry coulis.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="dietary-tag vegetarian">Vegetarian</span>
+                                <button class="text-sm text-gray-500 hover:text-gray-700">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card rounded-2xl overflow-hidden menu-item" data-tags="vegetarian">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="resources/pasta-dish.jpg" alt="Crème Brûlée" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display text-xl font-semibold">Crème Brûlée</h3>
+                                <span class="font-accent text-xl font-semibold text-gradient">$16</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Classic vanilla custard with caramelized sugar and fresh berries.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="dietary-tag vegetarian">Vegetarian</span>
+                                <button class="text-sm text-gray-500 hover:text-gray-700">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card rounded-2xl overflow-hidden menu-item" data-tags="vegan gluten-free">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="resources/gourmet-main.jpg" alt="Fresh Fruit Tart" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display text-xl font-semibold">Fresh Fruit Tart</h3>
+                                <span class="font-accent text-xl font-semibold text-gradient">$15</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Seasonal fresh fruits on vanilla pastry cream with gluten-free crust.</p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex gap-2">
+                                    <span class="dietary-tag vegan">Vegan</span>
+                                    <span class="dietary-tag gluten-free">Gluten-Free</span>
+                                </div>
+                                <button class="text-sm text-gray-500 hover:text-gray-700">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beverages -->
+            <div id="drinks" class="menu-category hidden">
+                <h2 class="font-display text-3xl font-bold text-center mb-12 text-gradient">Beverages</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="menu-card rounded-2xl overflow-hidden menu-item" data-tags="">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="resources/bar-cocktails.jpg" alt="House Wine Selection" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display text-xl font-semibold">House Wine Selection</h3>
+                                <span class="font-accent text-xl font-semibold text-gradient">$12</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Carefully curated selection of red and white wines from renowned regions.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-400">Per Glass</span>
+                                <button class="text-sm text-gray-500 hover:text-gray-700">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card rounded-2xl overflow-hidden menu-item" data-tags="">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="resources/terrace.jpg" alt="Craft Cocktails" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display text-xl font-semibold">Craft Cocktails</h3>
+                                <span class="font-accent text-xl font-semibold text-gradient">$16</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Signature cocktails crafted by our mixologist using premium spirits.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-400">Signature</span>
+                                <button class="text-sm text-gray-500 hover:text-gray-700">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-card rounded-2xl overflow-hidden menu-item" data-tags="vegan">
+                        <div class="aspect-video overflow-hidden">
+                            <img src="resources/wine-cellar.jpg" alt="Fresh Juices" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-3">
+                                <h3 class="font-display text-xl font-semibold">Fresh Juices</h3>
+                                <span class="font-accent text-xl font-semibold text-gradient">$8</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Daily pressed organic juices including orange, apple, and green blends.</p>
+                            <div class="flex justify-between items-center">
+                                <span class="dietary-tag vegan">Vegan</span>
+                                <button class="text-sm text-gray-500 hover:text-gray-700">Add to Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="font-display text-3xl font-bold text-gradient mb-4">Belle Époque</div>
+                <p class="text-gray-400 mb-6">Fine Dining Excellence Since 2018</p>
+                <div class="border-t border-gray-800 pt-8">
+                    <p class="text-gray-400 text-sm">
+                        © 2024 Belle Époque Restaurant. All rights reserved. | 
+                        Crafted with passion for exceptional dining experiences.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
