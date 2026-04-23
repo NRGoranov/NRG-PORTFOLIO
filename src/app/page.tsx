@@ -6,6 +6,7 @@ import { ArrowRight, Sparkles, Code, Zap, Award, Users, Github, Linkedin, Instag
 import Link from 'next/link'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import LightPillar from '@/components/LightPillar'
 import { projects } from '@/data/projects'
 import { Project } from '@/types/project'
 
@@ -49,13 +50,27 @@ export default function HomePage() {
   ]
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="relative flex flex-col min-h-screen">
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <LightPillar
+          topColor="#3b82f6"
+          bottomColor="#1d4ed8"
+          intensity={1}
+          rotationSpeed={0.3}
+          glowAmount={0.002}
+          pillarWidth={3}
+          pillarHeight={0.6}
+          noiseIntensity={0.5}
+          pillarRotation={25}
+          interactive={false}
+          mixBlendMode="screen"
+          quality="high"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/55 to-background/70" />
+      </div>
+
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-muted/20" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.1)_0%,transparent_70%)]" />
-        
         <div className="container relative z-10">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -223,8 +238,9 @@ export default function HomePage() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20">
         <div className="container">
+          <div className="rounded-3xl border border-white/10 bg-background/35 p-8 shadow-2xl backdrop-blur-xl md:p-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -250,12 +266,14 @@ export default function HomePage() {
               </motion.div>
             ))}
           </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Skills Section */}
       <section className="py-20">
         <div className="container">
+          <div className="rounded-3xl border border-white/10 bg-background/30 p-8 shadow-2xl backdrop-blur-xl md:p-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -314,12 +332,14 @@ export default function HomePage() {
               </motion.div>
             ))}
           </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Featured Projects */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20">
         <div className="container">
+          <div className="rounded-3xl border border-white/10 bg-background/35 p-8 shadow-2xl backdrop-blur-xl md:p-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -407,12 +427,14 @@ export default function HomePage() {
               </Link>
             </Button>
           </motion.div>
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-20">
         <div className="container">
+          <div className="rounded-3xl border border-white/10 bg-background/30 p-8 shadow-2xl backdrop-blur-xl md:p-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -440,6 +462,7 @@ export default function HomePage() {
               </Button>
             </div>
           </motion.div>
+          </div>
         </div>
       </section>
     </div>
