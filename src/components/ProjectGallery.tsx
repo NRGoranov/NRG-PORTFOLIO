@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { Project } from '@/types/project'
 import { ProjectCard } from './ProjectCard'
 
+const pinnedTopSlugs = ['gola-handcrafted', 'matcha-shop-sofia']
+
 interface ProjectGalleryProps {
   projects: Project[]
   searchQuery: string
@@ -68,6 +70,16 @@ export function ProjectGallery({
         filtered.sort((a, b) => (b.metrics?.stars || 0) - (a.metrics?.stars || 0))
         break
     }
+
+    // Keep designated outlier projects pinned to the top.
+    filtered.sort((a, b) => {
+      const aPinned = pinnedTopSlugs.indexOf(a.slug)
+      const bPinned = pinnedTopSlugs.indexOf(b.slug)
+      if (aPinned === -1 && bPinned === -1) return 0
+      if (aPinned === -1) return 1
+      if (bPinned === -1) return -1
+      return aPinned - bPinned
+    })
 
     setFilteredProjects(filtered)
     onProjectsChange?.(filtered)

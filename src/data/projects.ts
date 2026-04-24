@@ -27,6 +27,50 @@ import type { Project } from '../types/project'
 
 export const projects: Project[] = [
   {
+    slug: 'gola-handcrafted',
+    title: 'GoLa Handcrafted',
+    shortDescription: 'Boutique handcrafted wooden and leather handbags site focused on bespoke requests and premium product presentation.',
+    longDescription: `# GoLa Handcrafted
+
+A refined brand website for handcrafted wooden and leather handbags, designed to highlight craftsmanship, bespoke customization, and direct inquiry-based sales.
+
+## Problem
+Handcrafted ateliers need a digital presence that communicates premium quality and individuality without feeling like mass-market e-commerce.
+
+## Solution
+A minimal, elegant presentation focused on craftsmanship, model storytelling, and bespoke requests, with clear direct-contact paths while the web form remains inactive.
+
+## Key Features
+- Premium product presentation for multiple handbag models
+- Artisan-focused brand storytelling and craftsmanship highlights
+- Inquiry-first conversion flow for custom orders
+- WhatsApp-first contact options for faster direct communication
+- Clear messaging around custom sizing, personalization, and bespoke requests
+
+## Results
+- Stronger premium brand perception
+- Better clarity around bespoke ordering flow
+- Improved direct inquiry intent from visitors`,
+    tags: ['Luxury', 'Handcrafted', 'Fashion', 'Brand Website', 'E-commerce'],
+    year: 2026,
+    role: 'Frontend Developer',
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    liveUrl: 'https://www.gola-handcrafted.eu',
+    coverImage: '/covers/gola-handcrafted4K4-3.jpeg',
+    gallery: [
+      '/covers/gola-handcrafted.png',
+      '/covers/gola-handcrafted.png',
+      '/covers/gola-handcrafted.png'
+    ],
+    featured: true,
+    highlightColor: '#7c3aed',
+    metrics: {
+      users: 'New',
+      stars: 1,
+      lighthousePerf: 96,
+    },
+  },
+  {
     slug: 'restaurant-website',
     title: 'La Belle Cuisine - Fine Dining',
     shortDescription: 'Elegant fine dining restaurant website with reservation system, menu showcase, and gallery.',
@@ -170,7 +214,7 @@ Traditional tea packaging creates waste and doesn't preserve freshness. Customer
 - 95+ Lighthouse performance score
 - 60% reduction in packaging waste`,
     tags: ['E-commerce', 'Next.js', 'Sustainability', 'matcha in a can', 'Sofia'],
-    year: 2024,
+    year: 2025,
     role: 'Full Stack Developer',
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Sanity', 'Vercel'],
     liveUrl: 'https://matcha-swart.vercel.app',
