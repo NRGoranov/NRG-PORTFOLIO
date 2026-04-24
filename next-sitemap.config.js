@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://nrg-portfolio.vercel.app',
+  siteUrl: process.env.SITE_URL || 'https://www.nrgtrw.com',
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   exclude: ['/api/*'],
@@ -22,7 +22,7 @@ module.exports = {
       },
     ],
     additionalSitemaps: [
-      'https://nrg-portfolio.vercel.app/sitemap.xml',
+      'https://www.nrgtrw.com/sitemap.xml',
     ],
   },
 }

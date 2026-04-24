@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/private/', '/admin/'],
     },
-    sitemap: 'https://nrg-portfolio.vercel.app/sitemap.xml',
+    sitemap: 'https://www.nrgtrw.com/sitemap.xml',
   }
 }
 
