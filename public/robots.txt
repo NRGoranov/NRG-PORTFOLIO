@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /private/
+
+# Host
+Host: https://nrg-portfolio.vercel.app
+
+# Sitemaps
+Sitemap: https://nrg-portfolio.vercel.app/sitemap.xml
