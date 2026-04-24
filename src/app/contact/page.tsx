@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Github, Linkedin, Instagram, Send, CheckCircle } from 'lucide-react'
+import { Mail, Phone, MapPin, Github, Linkedin, Instagram, Send, CheckCircle, Info } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -115,8 +115,40 @@ export default function ContactPage() {
       {/* Contact Section */}
       <section className="py-20">
         <div className="container">
+          <div className="mb-8 text-center">
+            <div
+              className="relative mx-auto inline-block max-w-3xl overflow-hidden border border-white/15 bg-background/35 p-6 shadow-2xl backdrop-blur-xl md:p-8"
+              style={{
+                borderRadius: '44% 4% 44% 4% / 50% 1% 60% 1%',
+                transform: 'rotate(180deg)',
+              }}
+            >
+            <div
+              className="pointer-events-none absolute inset-0"
+              aria-hidden="true"
+              style={{
+                background:
+                  'radial-gradient(120% 90% at 18% 10%, hsl(var(--primary) / 0.16), transparent 52%), radial-gradient(90% 90% at 85% 85%, hsl(var(--primary) / 0.08), transparent 58%)',
+              }}
+            />
+            <div className="relative" style={{ transform: 'rotate(180deg)' }}>
+              <h3 className="mb-2 inline-flex items-center gap-2 text-xl font-semibold tracking-tight">
+                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-primary/25 bg-primary/10">
+                  <Info className="h-4 w-4 text-primary" />
+                </span>
+                <span>Important Note</span>
+              </h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                The contact form below is for demonstration purposes only. To actually reach me,
+                please use the email, phone, or social media links provided. I typically respond
+                within 24 hours to direct messages.
+              </p>
+            </div>
+          </div>
+          </div>
+
           <div className="glass-panel max-w-6xl mx-auto p-8 md:p-12">
-            <div className="grid lg:grid-cols-2 gap-12">
+            <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 lg:gap-10 items-start">
               {/* Contact Form */}
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -219,6 +251,11 @@ export default function ContactPage() {
                 )}
               </motion.div>
 
+              <div
+                className="h-px w-full bg-white/10 lg:h-full lg:w-px"
+                aria-hidden="true"
+              />
+
               {/* Contact Info */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
@@ -278,14 +315,6 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div className="p-6 rounded-lg border border-white/10 bg-background/30 backdrop-blur-sm">
-                  <h3 className="font-semibold mb-2">Important Note</h3>
-                  <p className="text-sm text-muted-foreground">
-                    The contact form above is for demonstration purposes only. To actually reach me, 
-                    please use the email, phone, or social media links provided. I typically respond 
-                    within 24 hours to direct messages.
-                  </p>
-                </div>
               </motion.div>
             </div>
           </div>

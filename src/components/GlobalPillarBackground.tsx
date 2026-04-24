@@ -1,13 +1,16 @@
 'use client'
 
 import LightPillar from '@/components/LightPillar'
+import { useLightPillarSettings } from '@/components/LightPillarSettings'
 
 export function GlobalPillarBackground() {
+  const { topColor, bottomColor } = useLightPillarSettings()
+
   return (
     <div className="pointer-events-none fixed inset-0 -z-10">
       <LightPillar
-        topColor="#3b82f6"
-        bottomColor="#1d4ed8"
+        topColor={topColor}
+        bottomColor={bottomColor}
         intensity={1.0}
         rotationSpeed={0.2}
         glowAmount={0.002}

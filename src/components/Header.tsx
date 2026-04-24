@@ -2,10 +2,11 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
+import { Menu, Palette, RotateCcw, X } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
+import { useLightPillarSettings } from '@/components/LightPillarSettings'
 import { cn } from '@/lib/utils'
 
 const navigation = [
@@ -36,11 +37,35 @@ function mobileNavLinkClass(isActive: boolean) {
   )
 }
 
+function ColorControl({
+  label,
+  value,
+  onChange,
+}: {
+  label: string
+  value: string
+  onChange: (value: string) => void
+}) {
+  return (
+    <label className="flex items-center gap-2 text-xs text-muted-foreground">
+      <span>{label}</span>
+      <input
+        type="color"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="h-6 w-8 cursor-pointer rounded border border-white/20 bg-transparent p-0"
+        aria-label={label}
+      />
+    </label>
+  )
+}
+
 export function Header() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const headerRef = useRef<HTMLElement>(null)
   const [allowCursorSheen, setAllowCursorSheen] = useState(false)
+  const { topColor, bottomColor, setTopColor, setBottomColor, resetColors } = useLightPillarSettings()
 
   useEffect(() => {
     const fine = window.matchMedia('(pointer: fine)')
@@ -77,6 +102,40 @@ export function Header() {
 
   return (
     <div className="sticky top-0 z-50 w-full px-3 pt-2.5 sm:px-4 sm:pt-3">
+      <div className="pointer-events-none fixed left-4 top-3 z-[60] hidden md:block">
+        <div className="pointer-events-auto rounded-xl border border-white/10 bg-background/45 px-3 py-1.5 shadow-sm backdrop-blur-xl supports-[backdrop-filter]:bg-background/35">
+          <Link
+            href="/"
+            className="group/logo flex cursor-pointer items-center gap-1.5 rounded-md transition-[background-color,transform] duration-200 hover:bg-foreground/[0.04] active:scale-[0.99]"
+          >
+            <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary transition-transform duration-200 ease-out group-hover/logo:scale-[1.04]">
+              <span className="text-xs font-bold text-primary-foreground">NRG</span>
+            </div>
+            <span className="text-base font-bold transition-colors duration-200 group-hover/logo:text-foreground">
+              Portfolio
+            </span>
+          </Link>
+        </div>
+      </div>
+
+      <div className="pointer-events-none fixed right-4 top-3 z-[60] hidden md:block">
+        <div className="pointer-events-auto flex items-center gap-2 rounded-xl border border-white/10 bg-background/45 px-3 py-1.5 shadow-sm backdrop-blur-xl supports-[backdrop-filter]:bg-background/35">
+          <Palette className="h-3.5 w-3.5 text-muted-foreground" />
+          <ColorControl label="Top" value={topColor} onChange={setTopColor} />
+          <ColorControl label="Bottom" value={bottomColor} onChange={setBottomColor} />
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="h-7 w-7 rounded-md"
+            onClick={resetColors}
+            aria-label="Reset pillar colors"
+          >
+            <RotateCcw className="h-3.5 w-3.5" />
+          </Button>
+        </div>
+      </div>
+
       <header
         ref={headerRef}
         onPointerMove={onHeaderPointerMove}
@@ -93,20 +152,8 @@ export function Header() {
           }}
         />
       ) : null}
-      <div className="relative z-[1] hidden h-11 md:grid md:grid-cols-3 md:items-center">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="group/logo flex cursor-pointer items-center gap-1.5 justify-self-start rounded-md transition-[background-color,transform] duration-200 hover:bg-foreground/[0.04] active:scale-[0.99]"
-        >
-          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary transition-transform duration-200 ease-out group-hover/logo:scale-[1.04]">
-            <span className="text-xs font-bold text-primary-foreground">NRG</span>
-          </div>
-          <span className="text-base font-bold transition-colors duration-200 group-hover/logo:text-foreground">
-            Portfolio
-          </span>
-        </Link>
-
+      <div className="relative z-[1] container hidden h-11 md:grid md:grid-cols-3 md:items-center">
+        <div />
         {/* Desktop Navigation */}
         <nav className="flex items-center justify-self-center gap-3">
           {navigation.map((item) => (
@@ -184,6 +231,26 @@ export function Header() {
                   </motion.div>
                 ))}
               </nav>
+              <div className="mt-1 border-t border-white/10 pt-3">
+                <div className="mb-2 flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                  <Palette className="h-3.5 w-3.5" />
+                  <span>Light Pillar Colors</span>
+                </div>
+                <div className="flex items-center justify-between gap-2">
+                  <ColorControl label="Top" value={topColor} onChange={setTopColor} />
+                  <ColorControl label="Bottom" value={bottomColor} onChange={setBottomColor} />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    className="h-8 w-8 rounded-md"
+                    onClick={resetColors}
+                    aria-label="Reset pillar colors"
+                  >
+                    <RotateCcw className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}

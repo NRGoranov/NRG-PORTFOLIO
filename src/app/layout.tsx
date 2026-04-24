@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/ThemeProvider'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { GlobalPillarBackground } from '@/components/GlobalPillarBackground'
+import { LightPillarSettingsProvider } from '@/components/LightPillarSettings'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
@@ -119,14 +120,16 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <div className="relative flex min-h-screen flex-col">
-            <GlobalPillarBackground />
-            <Header />
-            <main className="flex-1">
-              {children}
-            </main>
-            <Footer />
-          </div>
+          <LightPillarSettingsProvider>
+            <div className="relative flex min-h-screen flex-col">
+              <GlobalPillarBackground />
+              <Header />
+              <main className="flex-1">
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </LightPillarSettingsProvider>
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>
