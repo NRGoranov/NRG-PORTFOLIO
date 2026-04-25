@@ -102,7 +102,7 @@ export function Header() {
 
   return (
     <div className="sticky top-0 z-50 w-full px-3 pt-2.5 sm:px-4 sm:pt-3">
-      <div className="pointer-events-none fixed left-4 top-3 z-[60] hidden md:block">
+      <div className="pointer-events-none fixed left-12 top-3 z-[60] hidden md:block xl:left-14">
         <div className="pointer-events-auto rounded-xl border border-white/10 bg-background/45 px-3 py-1.5 shadow-sm backdrop-blur-xl supports-[backdrop-filter]:bg-background/35">
           <Link
             href="/"
@@ -118,7 +118,7 @@ export function Header() {
         </div>
       </div>
 
-      <div className="pointer-events-none fixed right-4 top-3 z-[60] hidden md:block">
+      <div className="pointer-events-none fixed right-12 top-3 z-[60] hidden md:block xl:right-14">
         <div className="pointer-events-auto flex items-center gap-2 rounded-xl border border-white/10 bg-background/45 px-3 py-1.5 shadow-sm backdrop-blur-xl supports-[backdrop-filter]:bg-background/35">
           <Palette className="h-3.5 w-3.5 text-muted-foreground" />
           <ColorControl label="Top" value={topColor} onChange={setTopColor} />
@@ -140,7 +140,7 @@ export function Header() {
         ref={headerRef}
         onPointerMove={onHeaderPointerMove}
         onPointerEnter={onHeaderPointerEnter}
-        className="group/header relative mx-auto w-full max-w-7xl overflow-hidden rounded-xl border border-white/10 bg-background/45 shadow-sm backdrop-blur-xl supports-[backdrop-filter]:bg-background/35"
+        className="group/header relative mx-auto w-full max-w-[60rem] overflow-hidden rounded-xl border border-white/10 bg-background/45 shadow-sm backdrop-blur-xl supports-[backdrop-filter]:bg-background/35"
       >
       {allowCursorSheen ? (
         <div
