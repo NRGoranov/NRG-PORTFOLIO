@@ -5,6 +5,7 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { GlobalPillarBackground } from '@/components/GlobalPillarBackground'
 import { LightPillarSettingsProvider } from '@/components/LightPillarSettings'
+import { BackToTopButton } from '@/components/BackToTopButton'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
@@ -129,6 +130,7 @@ export default function RootLayout({
               </main>
               <Footer />
             </div>
+            <BackToTopButton />
           </LightPillarSettingsProvider>
           <Analytics />
           <SpeedInsights />

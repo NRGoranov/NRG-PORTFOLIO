@@ -58,9 +58,9 @@ A minimal, elegant presentation focused on craftsmanship, model storytelling, an
     liveUrl: 'https://www.gola-handcrafted.eu',
     coverImage: '/covers/gola-handcrafted4K4-3.jpeg',
     gallery: [
-      '/covers/gola-handcrafted.png',
-      '/covers/gola-handcrafted.png',
-      '/covers/gola-handcrafted.png'
+      '/covers/gola-handcrafted-gallery-1.png',
+      '/covers/gola-handcrafted-gallery-2.png',
+      '/covers/gola-handcrafted-gallery-3.png'
     ],
     featured: true,
     highlightColor: '#7c3aed',

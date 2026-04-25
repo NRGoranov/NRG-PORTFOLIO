@@ -189,15 +189,15 @@ export default function AboutPage() {
                 >
                   <div className="flex items-start gap-6">
                     <div className="flex-shrink-0">
-                      <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-                        <span className="text-primary font-bold">{job.year}</span>
+                      <div className="h-12 w-12 rounded-full bg-white/10 flex items-center justify-center shadow-[0_0_10px_rgba(226,232,240,0.14)]">
+                        <span className="text-foreground/95 font-bold tracking-tight drop-shadow-[0_0_8px_rgba(226,232,240,0.25)]">{job.year}</span>
                       </div>
                     </div>
                     
                     <div className="flex-1 space-y-2">
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                         <h3 className="text-xl font-semibold">{job.title}</h3>
-                        <span className="text-sm text-muted-foreground">{job.year}</span>
+                        <span className="text-sm text-foreground/90">{job.year}</span>
                       </div>
                       <p className="text-primary font-medium">{job.company}</p>
                       <p className="text-muted-foreground">{job.description}</p>

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { ExternalLink, Github, Star, Users, Zap } from 'lucide-react'
 import { Project } from '@/types/project'
@@ -17,6 +18,25 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, index }: ProjectCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false)
+  const router = useRouter()
+
+  const handleCardOpen = () => {
+    router.push(`/projects/${project.slug}`)
+  }
+
+  const handleCardClick = (event: React.MouseEvent<HTMLElement>) => {
+    const target = event.target as HTMLElement
+    if (target.closest('a, button')) return
+    handleCardOpen()
+  }
+
+  const handleCardKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return
+    const target = event.target as HTMLElement
+    if (target.closest('a, button')) return
+    event.preventDefault()
+    handleCardOpen()
+  }
 
   return (
     <motion.div
@@ -26,7 +46,14 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
       whileHover={{ y: -4 }}
       className="group"
     >
-      <Card className="overflow-hidden border-0 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:shadow-primary/5">
+      <Card
+        role="link"
+        tabIndex={0}
+        aria-label={`Open ${project.title} project details`}
+        onClick={handleCardClick}
+        onKeyDown={handleCardKeyDown}
+        className="cursor-pointer overflow-hidden border-0 bg-card/50 backdrop-blur-sm transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+      >
         <div className="relative aspect-[4/3] overflow-hidden">
           {!imageLoaded && (
             <div className="absolute inset-0 bg-muted animate-pulse" />
@@ -64,12 +91,12 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               <h3 className="text-xl font-semibold leading-tight group-hover:text-primary transition-colors">
                 {project.title}
               </h3>
-              <span className="text-sm text-muted-foreground font-mono">
+              <span className="text-sm text-foreground/90 font-mono">
                 {project.year}
               </span>
             </div>
 
-            <p className="text-sm text-muted-foreground line-clamp-2">
+            <p className="text-sm text-foreground/90 line-clamp-2">
               {project.shortDescription}
             </p>
 
@@ -91,15 +118,15 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
             </div>
 
             {project.metrics && (
-              <div className="flex items-center gap-4 text-xs text-muted-foreground">
+              <div className="flex items-center gap-4 text-xs text-foreground/90">
                 {project.metrics.users && (
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 drop-shadow-[0_0_8px_rgba(226,232,240,0.2)]">
                     <Users className="w-3 h-3" />
                     {project.metrics.users}
                   </div>
                 )}
                 {project.metrics.stars && (
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 drop-shadow-[0_0_8px_rgba(226,232,240,0.2)]">
                     <Star className="w-3 h-3" />
                     {project.metrics.stars}
                   </div>

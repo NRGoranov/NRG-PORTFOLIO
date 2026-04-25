@@ -102,7 +102,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
             </div>
 
             <div className="flex flex-wrap items-center gap-4">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2 text-sm text-foreground/90">
                 <Calendar className="h-4 w-4" />
                 {project.year}
               </div>
@@ -110,7 +110,7 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 <Badge variant="outline">{project.role}</Badge>
               )}
               {project.metrics?.lighthousePerf && (
-                <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                <div className="flex items-center gap-1 text-sm text-foreground/90">
                   <Zap className="h-4 w-4" />
                   Lighthouse: {project.metrics.lighthousePerf}
                 </div>
@@ -216,20 +216,20 @@ export default function ProjectPage({ params }: ProjectPageProps) {
                 <CardContent className="space-y-4">
                   {project.metrics.users && (
                     <div className="flex items-center gap-2">
-                      <Users className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-sm">{project.metrics.users} users</span>
+                      <Users className="h-4 w-4 text-foreground/90 drop-shadow-[0_0_8px_rgba(226,232,240,0.2)]" />
+                      <span className="text-sm text-foreground/90">{project.metrics.users} users</span>
                     </div>
                   )}
                   {project.metrics.stars && (
                     <div className="flex items-center gap-2">
-                      <Star className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-sm">{project.metrics.stars} GitHub stars</span>
+                      <Star className="h-4 w-4 text-foreground/90 drop-shadow-[0_0_8px_rgba(226,232,240,0.2)]" />
+                      <span className="text-sm text-foreground/90">{project.metrics.stars} GitHub stars</span>
                     </div>
                   )}
                   {project.metrics.lighthousePerf && (
                     <div className="flex items-center gap-2">
-                      <Zap className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-sm">{project.metrics.lighthousePerf} Lighthouse score</span>
+                      <Zap className="h-4 w-4 text-foreground/90 drop-shadow-[0_0_8px_rgba(226,232,240,0.2)]" />
+                      <span className="text-sm text-foreground/90">{project.metrics.lighthousePerf} Lighthouse score</span>
                     </div>
                   )}
                 </CardContent>

@@ -96,7 +96,7 @@ export default function HomePage() {
                   <h2 className="text-2xl lg:text-3xl text-foreground/90 font-light drop-shadow-[0_0_10px_rgba(59,130,246,0.18)]">
                     Full-Stack Developer
                   </h2>
-                    <p className="text-lg text-foreground/85 leading-relaxed max-w-lg drop-shadow-[0_0_12px_rgba(15,23,42,0.4)]">
+                    <p className="text-lg text-foreground/95 leading-relaxed max-w-lg drop-shadow-[0_0_12px_rgba(226,232,240,0.18)]">
                       Crafting exceptional digital experiences with modern technologies. Through 4 hackathons
                       and {totalProjects} shipped builds (all showcased on the Projects page), I transform complex ideas
                       into elegant, scalable solutions driven by continuous learning and passion.
@@ -238,10 +238,10 @@ export default function HomePage() {
                 viewport={{ once: true }}
                 className="text-center"
               >
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">
+                <div className="text-3xl md:text-4xl font-bold text-foreground drop-shadow-[0_0_16px_rgba(226,232,240,0.36)] mb-2">
                   {stat.value}
                 </div>
-                <div className="text-sm text-muted-foreground">
+                <div className="text-sm text-foreground/95 drop-shadow-[0_0_10px_rgba(226,232,240,0.24)]">
                   {stat.label}
                 </div>
               </motion.div>
