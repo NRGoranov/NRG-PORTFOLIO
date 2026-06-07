@@ -32,6 +32,9 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# local wishlist data (use Supabase in production)
+data/clothing-wishlist.json
+
 # vercel
 .vercel
 

@@ -3,7 +3,7 @@ import type { ClothingItem } from '@/types/clothing'
 export const clothingItems: ClothingItem[] = [
   {
     slug: 'zip-up',
-    name: '??? Zip-Up',
+    name: 'Zip-Up',
     teaser: 'Something is being stitched in the dark.',
     description:
       'Details are still under wraps. A zip-up is in development — cut, fabric, and drop date remain classified. Check in to the wishlist and you will be first to know when it surfaces.',
