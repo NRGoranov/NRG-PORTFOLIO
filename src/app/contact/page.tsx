@@ -13,26 +13,45 @@ export default function ContactPage() {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    website: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [feedback, setFeedback] = useState('')
+  const [error, setError] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-    
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false)
-      setFormData({ name: '', email: '', subject: '', message: '' })
-    }, 3000)
+    setFeedback('')
+    setError('')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+
+      const result = (await response.json()) as { ok: boolean; message: string }
+      if (!response.ok || !result.ok) {
+        throw new Error(result.message || 'Unable to send message.')
+      }
+
+      setIsSubmitted(true)
+      setFeedback(result.message)
+      setFormData({ name: '', email: '', subject: '', message: '', website: '' })
+
+      setTimeout(() => {
+        setIsSubmitted(false)
+        setFeedback('')
+      }, 5000)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -139,9 +158,8 @@ export default function ContactPage() {
                 <span>Important Note</span>
               </h3>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                The contact form below is for demonstration purposes only. To actually reach me,
-                please use the email, phone, or social media links provided. I typically respond
-                within 24 hours to direct messages.
+                Send a message through the form and I&apos;ll get an email notification. You can also
+                reach me directly using the email, phone, or social links on the right.
               </p>
             </div>
           </div>
@@ -158,9 +176,9 @@ export default function ContactPage() {
                 className="space-y-8"
               >
                 <div>
-                  <h2 className="text-3xl font-bold mb-4">Contact Form (Demo)</h2>
+                  <h2 className="text-3xl font-bold mb-4">Send a Message</h2>
                   <p className="text-muted-foreground">
-                    This form is for showcasing purposes only. To actually reach me, please use the contact methods on the right or send me a direct email, message, or call.
+                    Tell me about your project or idea. I typically respond within 24 hours.
                   </p>
                 </div>
 
@@ -171,13 +189,22 @@ export default function ContactPage() {
                     className="text-center py-12"
                   >
                     <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-                    <h3 className="text-2xl font-semibold mb-2">Demo Message Sent!</h3>
+                    <h3 className="text-2xl font-semibold mb-2">Message Sent</h3>
                     <p className="text-muted-foreground">
-                      This is just a demo. To actually contact me, please use the email, phone, or social links on the right.
+                      {feedback || 'Thank you — your message has been received.'}
                     </p>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+                    <input
+                      tabIndex={-1}
+                      autoComplete="off"
+                      className="hidden"
+                      name="website"
+                      value={formData.website}
+                      onChange={handleChange}
+                    />
+
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="name">Name</Label>
@@ -247,6 +274,12 @@ export default function ContactPage() {
                         </>
                       )}
                     </Button>
+
+                    {error ? (
+                      <p role="alert" className="text-sm text-red-400">
+                        {error}
+                      </p>
+                    ) : null}
                   </form>
                 )}
               </motion.div>
@@ -267,7 +300,7 @@ export default function ContactPage() {
                 <div>
                   <h2 className="text-3xl font-bold mb-4">Get In Touch</h2>
                   <p className="text-muted-foreground">
-                    Here are the actual ways to contact me. Use these methods to reach out directly.
+                    Prefer a direct line? Use email, phone, or social links below.
                   </p>
                 </div>
 
