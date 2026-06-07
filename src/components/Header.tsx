@@ -12,6 +12,7 @@ import { cn } from '@/lib/utils'
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Projects', href: '/projects' },
+  { name: 'Clothing', href: '/clothing' },
   { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ]
@@ -160,7 +161,11 @@ export function Header() {
             <Link
               key={item.name}
               href={item.href}
-              className={desktopNavLinkClass(pathname === item.href)}
+              className={desktopNavLinkClass(
+                item.href === '/'
+                  ? pathname === '/'
+                  : pathname === item.href || pathname.startsWith(`${item.href}/`),
+              )}
             >
               {item.name}
             </Link>
@@ -223,7 +228,11 @@ export function Header() {
                   >
                     <Link
                       href={item.href}
-                      className={mobileNavLinkClass(pathname === item.href)}
+                      className={mobileNavLinkClass(
+                        item.href === '/'
+                          ? pathname === '/'
+                          : pathname === item.href || pathname.startsWith(`${item.href}/`),
+                      )}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.name}

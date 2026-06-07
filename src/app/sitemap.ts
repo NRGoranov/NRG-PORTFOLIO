@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { projects } from '@/data/projects'
+import { clothingItems } from '@/data/clothing'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.nrgtrw.com'
@@ -17,6 +18,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
       priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/clothing`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/about`,
@@ -40,7 +47,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  return [...staticPages, ...projectPages]
+  const clothingPages = clothingItems.map((item) => ({
+    url: `${baseUrl}/clothing/${item.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.65,
+  }))
+
+  return [...staticPages, ...projectPages, ...clothingPages]
 }
 
 
