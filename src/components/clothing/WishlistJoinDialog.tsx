@@ -25,6 +25,16 @@ interface WishlistJoinDialogProps {
 export function WishlistJoinDialog({ slug, open, onOpenChange, onJoined }: WishlistJoinDialogProps) {
   const item = getClothingItem(slug)
   const itemName = item?.name ?? 'Zip-Up'
+  const isInterestGated = item?.status === 'interest-gated'
+  const interestGoal = item?.interestGoal ?? 100
+  const dialogTitle = isInterestGated ? 'Signal interest' : 'Wishlist check-in'
+  const dialogDescription = isInterestGated
+    ? `Add your signal for ${itemName}. At ${interestGoal} signals we review whether this vault piece gets made.`
+    : `Leave your email for the ${itemName}. We will notify you when updates and the drop are ready.`
+  const submitLabel = isInterestGated ? 'Send signal' : 'Join wishlist'
+  const successHint = isInterestGated
+    ? 'Your interest is logged. We will email you if this piece moves toward production.'
+    : 'We will email you when the drop is ready.'
 
   const [email, setEmail] = useState('')
   const [signedUpEmail, setSignedUpEmail] = useState<string | null>(null)
@@ -37,8 +47,8 @@ export function WishlistJoinDialog({ slug, open, onOpenChange, onJoined }: Wishl
     setSignedUpEmail(saved)
     setEmail(saved ?? '')
     setStatus(saved ? 'success' : 'idle')
-    setFeedback(saved ? `You are checked in as ${saved}. We will email you when the drop is ready.` : '')
-  }, [open, slug])
+    setFeedback(saved ? `You are checked in as ${saved}. ${successHint}` : '')
+  }, [open, slug, successHint])
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault()
@@ -78,10 +88,8 @@ export function WishlistJoinDialog({ slug, open, onOpenChange, onJoined }: Wishl
           <div className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-full border border-primary/30 bg-primary/15 sm:mx-0">
             <Heart className="h-4 w-4 fill-primary text-primary" />
           </div>
-          <DialogTitle>Wishlist check-in</DialogTitle>
-          <DialogDescription>
-            Leave your email for the {itemName}. We will notify you when updates and the drop are ready.
-          </DialogDescription>
+          <DialogTitle>{dialogTitle}</DialogTitle>
+          <DialogDescription>{dialogDescription}</DialogDescription>
         </DialogHeader>
 
         {status === 'success' && signedUpEmail ? (
@@ -121,7 +129,7 @@ export function WishlistJoinDialog({ slug, open, onOpenChange, onJoined }: Wishl
               className="w-full gap-2 bg-primary text-primary-foreground hover:bg-primary/90"
             >
               <Mail className="h-4 w-4" />
-              {status === 'loading' ? 'Joining…' : 'Join wishlist'}
+              {status === 'loading' ? 'Submitting…' : submitLabel}
             </Button>
 
             {feedback && status === 'error' ? <p className="text-sm text-red-400">{feedback}</p> : null}

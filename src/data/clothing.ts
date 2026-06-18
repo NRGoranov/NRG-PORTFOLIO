@@ -1,6 +1,7 @@
 import type { ClothingItem } from '@/types/clothing'
+import { clothingCandidates } from '@/data/clothing-candidates'
 
-export const clothingItems: ClothingItem[] = [
+export const developmentClothingItems: ClothingItem[] = [
   {
     slug: 'zip-up',
     name: 'Zip-Up',
@@ -17,6 +18,8 @@ export const clothingItems: ClothingItem[] = [
     priceLabel: 'Wishlist check-in',
   },
 ]
+
+export const clothingItems: ClothingItem[] = [...developmentClothingItems, ...clothingCandidates]
 
 export function getClothingItem(slug: string): ClothingItem | undefined {
   return clothingItems.find((item) => item.slug === slug)

@@ -5,7 +5,8 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ClothingProductCard } from '@/components/clothing/ClothingProductCard'
-import { clothingItems } from '@/data/clothing'
+import { VaultCollectionsSection } from '@/components/clothing/VaultCollectionsSection'
+import { developmentClothingItems } from '@/data/clothing'
 
 export default function ClothingPage() {
   return (
@@ -58,7 +59,7 @@ export default function ClothingPage() {
 
           <div className="flex justify-center">
             <div className="grid grid-cols-1 place-items-center gap-8">
-              {clothingItems.map((item, index) => (
+              {developmentClothingItems.map((item, index) => (
                 <ClothingProductCard key={item.slug} item={item} index={index} />
               ))}
             </div>
@@ -66,11 +67,14 @@ export default function ClothingPage() {
         </div>
       </section>
 
+      <VaultCollectionsSection />
+
       <section className="pb-20">
         <div className="container">
           <div className="glass-panel mx-auto max-w-2xl p-6 text-center md:p-8">
             <p className="text-sm text-muted-foreground">
-              More pieces may appear here as they leave the lab. For now, one silhouette is enough.
+              The zip-up leads the lab. Everything in the vault needs your signal — no drops without
+              demand.
             </p>
             <Button asChild variant="outline" className="mt-4 border-white/15 bg-background/30">
               <Link href="/">

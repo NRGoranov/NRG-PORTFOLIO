@@ -5,6 +5,7 @@ import {
   listWishlistEntries,
   verifyClothingAdminPassword,
 } from '@/lib/clothing/wishlist-store'
+import { getClothingItem } from '@/data/clothing'
 
 export async function GET(req: Request) {
   try {
@@ -83,9 +84,15 @@ export async function POST(req: Request) {
       name: body.name?.trim() || null,
     })
 
+    const item = getClothingItem(slug)
+    const message =
+      item?.status === 'interest-gated'
+        ? 'Interest signal received. The counter just moved — thank you.'
+        : 'You are on the wishlist. We will email you when the drop is ready.'
+
     return NextResponse.json({
       ok: true,
-      message: 'You are on the wishlist. We will email you when the zip-up drops.',
+      message,
     })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unable to join wishlist.'

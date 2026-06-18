@@ -16,6 +16,11 @@ const nextConfig = {
         hostname: 'images.unsplash.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'nrgtrw-images.s3.eu-central-1.amazonaws.com',
+        pathname: '/**',
+      },
     ],
   },
   async headers() {

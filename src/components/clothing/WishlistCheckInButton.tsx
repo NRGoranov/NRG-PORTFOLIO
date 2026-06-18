@@ -5,6 +5,7 @@ import { Heart } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { getSignedUpEmail, isSignedUp } from '@/lib/clothing-wishlist-client'
+import { getClothingItem } from '@/data/clothing'
 import { WishlistJoinDialog } from '@/components/clothing/WishlistJoinDialog'
 
 interface WishlistCheckInButtonProps {
@@ -20,6 +21,11 @@ export function WishlistCheckInButton({
   className,
   onToggle,
 }: WishlistCheckInButtonProps) {
+  const item = getClothingItem(slug)
+  const isInterestGated = item?.status === 'interest-gated'
+  const actionLabel = isInterestGated ? 'Signal interest' : 'Wishlist check-in'
+  const checkedInLabel = isInterestGated ? 'Signaled' : 'Checked in'
+
   const [checkedIn, setCheckedIn] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -74,7 +80,7 @@ export function WishlistCheckInButton({
               : 'border-white/15 bg-background/60 text-muted-foreground hover:bg-background/80 hover:text-foreground',
             className,
           )}
-          aria-label={checkedIn ? 'View wishlist — checked in' : 'Join wishlist'}
+          aria-label={checkedIn ? `${checkedInLabel} — view details` : actionLabel}
           aria-pressed={checkedIn}
         >
           <Heart className={cn('h-4 w-4', checkedIn ? 'fill-current' : '')} />
@@ -95,7 +101,7 @@ export function WishlistCheckInButton({
           aria-pressed={checkedIn}
         >
           <Heart className={cn('h-4 w-4', checkedIn && 'fill-current')} />
-          {checkedIn ? 'Checked in' : 'Wishlist check-in'}
+          {checkedIn ? checkedInLabel : actionLabel}
         </Button>
       )}
 

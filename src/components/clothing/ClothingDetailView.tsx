@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import type { ClothingItem } from '@/types/clothing'
 import { MysteriousPlaceholder } from '@/components/clothing/MysteriousPlaceholder'
+import { ClothingColorMedia, clothingItemHasImages } from '@/components/clothing/ClothingColorMedia'
+import { InterestCounter } from '@/components/clothing/InterestCounter'
 import { WishlistCheckInButton } from '@/components/clothing/WishlistCheckInButton'
 import { cn } from '@/lib/utils'
 
@@ -21,6 +23,9 @@ export function ClothingDetailView({ item }: ClothingDetailViewProps) {
   const [checkedIn, setCheckedIn] = useState(false)
 
   const currentColor = item.colors[selectedColorIndex] ?? item.colors[0]
+  const isInterestGated = item.status === 'interest-gated'
+  const interestGoal = item.interestGoal ?? 100
+  const hasImages = clothingItemHasImages(item.colors)
 
   return (
     <div className="min-h-screen py-12 lg:py-20">
@@ -46,16 +51,30 @@ export function ClothingDetailView({ item }: ClothingDetailViewProps) {
               className="relative min-h-[360px] lg:min-h-[520px]"
             >
               <div className="group relative h-full min-h-[360px] lg:min-h-[520px]">
-                <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-0">
-                  <MysteriousPlaceholder hue={currentColor?.hue ?? 220} label="PREVIEW LOCKED" />
-                </div>
-                <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                  <MysteriousPlaceholder
-                    hue={(currentColor?.hue ?? 220) + 12}
-                    variant="hover"
-                    label="STILL CLASSIFIED"
+                {hasImages ? (
+                  <ClothingColorMedia
+                    color={currentColor}
+                    alt={`${item.name} — ${currentColor.name}`}
+                    priority
+                    placeholderLabel={item.codename ?? 'PREVIEW LOCKED'}
                   />
-                </div>
+                ) : (
+                  <>
+                    <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-0">
+                      <MysteriousPlaceholder
+                        hue={currentColor?.hue ?? 220}
+                        label={item.codename ?? 'PREVIEW LOCKED'}
+                      />
+                    </div>
+                    <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                      <MysteriousPlaceholder
+                        hue={(currentColor?.hue ?? 220) + 12}
+                        variant="hover"
+                        label={isInterestGated ? 'SIGNAL?' : 'STILL CLASSIFIED'}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
             </motion.div>
 
@@ -67,12 +86,21 @@ export function ClothingDetailView({ item }: ClothingDetailViewProps) {
             >
               <div className="mb-4 flex flex-wrap items-center gap-2">
                 <Badge variant="outline" className="border-white/15 bg-background/40">
-                  {item.status === 'coming-soon' ? 'Coming soon' : 'Available'}
+                  {isInterestGated
+                    ? 'Vault piece'
+                    : item.status === 'coming-soon'
+                      ? 'Coming soon'
+                      : 'Available'}
                 </Badge>
                 <Badge variant="secondary" className="gap-1 bg-secondary/50">
                   <EyeOff className="h-3 w-3" />
-                  Photos pending
+                  {hasImages ? 'Archive preview' : 'Photos pending'}
                 </Badge>
+                {item.codename ? (
+                  <Badge variant="outline" className="font-mono text-[10px] tracking-widest">
+                    {item.codename}
+                  </Badge>
+                ) : null}
               </div>
 
               <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{item.name}</h1>
@@ -81,7 +109,7 @@ export function ClothingDetailView({ item }: ClothingDetailViewProps) {
 
               <div className="mt-8 space-y-6">
                 <div>
-                  <p className="mb-3 text-sm font-medium">Color — unrevealed</p>
+                  <p className="mb-3 text-sm font-medium">{hasImages ? 'Color' : 'Color — unrevealed'}</p>
                   <div className="flex flex-wrap gap-2">
                     {item.colors.map((color, index) => (
                       <button
@@ -131,10 +159,17 @@ export function ClothingDetailView({ item }: ClothingDetailViewProps) {
                 </div>
 
                 <div className="rounded-2xl border border-white/10 bg-background/25 p-4 backdrop-blur-sm">
+                  {isInterestGated ? (
+                    <InterestCounter slug={item.slug} goal={interestGoal} className="mb-4" />
+                  ) : null}
                   <p className="text-sm text-muted-foreground">
                     {checkedIn
-                      ? 'You are checked in. We will notify you when this piece drops.'
-                      : 'No price yet — wishlist check-in reserves your spot in line.'}
+                      ? isInterestGated
+                        ? 'Your signal is logged. We will notify you if this piece enters production.'
+                        : 'You are checked in. We will notify you when this piece drops.'
+                      : isInterestGated
+                        ? `No price yet — signal interest. At ${interestGoal} signals we decide whether to manufacture.`
+                        : 'No price yet — wishlist check-in reserves your spot in line.'}
                   </p>
                   <div className="mt-4 flex flex-wrap gap-3">
                     <WishlistCheckInButton
