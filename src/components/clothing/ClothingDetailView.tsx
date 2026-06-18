@@ -57,14 +57,14 @@ export function ClothingDetailView({ item }: ClothingDetailViewProps) {
                     color={currentColor}
                     alt={`${item.name} — ${currentColor.name}`}
                     priority
-                    placeholderLabel={item.codename ?? 'PREVIEW LOCKED'}
+                    placeholderLabel="PREVIEW LOCKED"
                   />
                 ) : (
                   <>
                     <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-0">
                       <MysteriousPlaceholder
                         hue={currentColor?.hue ?? 220}
-                        label={item.codename ?? 'PREVIEW LOCKED'}
+                        label="PREVIEW LOCKED"
                       />
                     </div>
                     <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
@@ -88,20 +88,15 @@ export function ClothingDetailView({ item }: ClothingDetailViewProps) {
               <div className="mb-4 flex flex-wrap items-center gap-2">
                 <Badge variant="outline" className="border-white/15 bg-background/40">
                   {isInterestGated
-                    ? 'Vault piece'
+                    ? 'Vote to make'
                     : item.status === 'coming-soon'
                       ? 'Coming soon'
                       : 'Available'}
                 </Badge>
                 <Badge variant="secondary" className="gap-1 bg-secondary/50">
                   <EyeOff className="h-3 w-3" />
-                  {hasImages ? 'Archive preview' : 'Photos pending'}
+                  {hasImages ? 'Preview' : 'Photos pending'}
                 </Badge>
-                {item.codename ? (
-                  <Badge variant="outline" className="font-mono text-[10px] tracking-widest">
-                    {item.codename}
-                  </Badge>
-                ) : null}
               </div>
 
               <h1 className="text-3xl font-bold tracking-tight md:text-4xl">{item.name}</h1>

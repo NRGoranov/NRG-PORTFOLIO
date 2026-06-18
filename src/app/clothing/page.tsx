@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ClothingProductCard } from '@/components/clothing/ClothingProductCard'
-import { VaultCollectionsSection } from '@/components/clothing/VaultCollectionsSection'
+import { InterestCollectionsSection } from '@/components/clothing/InterestCollectionsSection'
 import { developmentClothingItems } from '@/data/clothing'
 
 export default function ClothingPage() {
@@ -33,8 +33,8 @@ export default function ClothingPage() {
                 </span>
               </h1>
               <p className="mx-auto max-w-2xl text-muted-foreground">
-                Pieces still under construction. No photos yet — only silhouettes and signals.
-                Check in to the wishlist when something speaks to you.
+                Pieces in development and designs waiting on your vote. Check in or signal interest
+                when something speaks to you.
               </p>
             </motion.div>
           </div>
@@ -67,14 +67,13 @@ export default function ClothingPage() {
         </div>
       </section>
 
-      <VaultCollectionsSection />
+      <InterestCollectionsSection />
 
       <section className="pb-20">
         <div className="container">
           <div className="glass-panel mx-auto max-w-2xl p-6 text-center md:p-8">
             <p className="text-sm text-muted-foreground">
-              The zip-up leads the lab. Everything in the vault needs your signal — no drops without
-              demand.
+              The zip-up leads the lab. Every community vote counts — no production without demand.
             </p>
             <Button asChild variant="outline" className="mt-4 border-white/15 bg-background/30">
               <Link href="/">

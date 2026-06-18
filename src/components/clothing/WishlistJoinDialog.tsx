@@ -29,7 +29,7 @@ export function WishlistJoinDialog({ slug, open, onOpenChange, onJoined }: Wishl
   const interestGoal = item?.interestGoal ?? 100
   const dialogTitle = isInterestGated ? 'Signal interest' : 'Wishlist check-in'
   const dialogDescription = isInterestGated
-    ? `Add your signal for ${itemName}. At ${interestGoal} signals we review whether this vault piece gets made.`
+    ? `Add your signal for ${itemName}. At ${interestGoal} signals we review whether to put it into production.`
     : `Leave your email for the ${itemName}. We will notify you when updates and the drop are ready.`
   const submitLabel = isInterestGated ? 'Send signal' : 'Join wishlist'
   const successHint = isInterestGated

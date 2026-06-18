@@ -57,7 +57,7 @@ export function InterestClothingCard({ item, index = 0 }: InterestClothingCardPr
           <ClothingColorMedia
             color={currentColor}
             alt={`${item.name} — ${currentColor.name}`}
-            placeholderLabel={item.codename ?? 'ARCHIVED'}
+            placeholderLabel="CLASSIFIED"
           />
 
           <div className="absolute left-3 top-3 z-10 flex flex-col gap-1.5">
@@ -65,13 +65,8 @@ export function InterestClothingCard({ item, index = 0 }: InterestClothingCardPr
               variant="outline"
               className="border-white/20 bg-background/50 text-[10px] uppercase tracking-wider backdrop-blur-md"
             >
-              Vault piece
+              Vote to make
             </Badge>
-            {item.codename ? (
-              <span className="rounded-full border border-white/10 bg-black/40 px-2 py-0.5 font-mono text-[9px] tracking-widest text-muted-foreground backdrop-blur-md">
-                {item.codename}
-              </span>
-            ) : null}
           </div>
 
           <div className="absolute bottom-0 left-0 right-0 z-10 translate-y-full opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
@@ -127,7 +122,7 @@ export function InterestClothingCard({ item, index = 0 }: InterestClothingCardPr
               onClick={(e) => e.stopPropagation()}
               className="text-xs text-primary hover:underline"
             >
-              View dossier
+              View details
             </Link>
           </div>
         </div>

@@ -21,9 +21,9 @@ export interface ClothingItem {
   colors: ClothingColor[]
   /** Shown instead of a numeric price */
   priceLabel: string
-  /** Internal archive label shown on mystery placeholders */
+  /** Optional internal label on mystery placeholders */
   codename?: string
-  /** Group for interest-gated pieces from the Diplomna archive */
+  /** Collection grouping for community-voted pieces */
   collection?: ClothingCollectionId
   /** Interest signals required before production is considered */
   interestGoal?: number
