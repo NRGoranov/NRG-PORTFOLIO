@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
+import { clothingSwatchNeedsLightBorder, clothingSwatchStyle } from '@/lib/clothing/swatch-style'
 import type { ClothingItem } from '@/types/clothing'
 import { MysteriousPlaceholder } from '@/components/clothing/MysteriousPlaceholder'
 import { WishlistCheckInButton } from '@/components/clothing/WishlistCheckInButton'
@@ -94,10 +95,11 @@ export function ClothingProductCard({ item, index = 0 }: ClothingProductCardProp
                       colorIndex === selectedColorIndex
                         ? 'border-primary scale-110'
                         : 'border-white/20',
+                      clothingSwatchNeedsLightBorder(color.name) &&
+                        colorIndex !== selectedColorIndex &&
+                        'border-white/35',
                     )}
-                    style={{
-                      background: `linear-gradient(135deg, hsl(${color.hue} 25% 22%), hsl(${color.hue + 20} 20% 12%))`,
-                    }}
+                    style={clothingSwatchStyle(color)}
                   />
                 ))}
               </div>

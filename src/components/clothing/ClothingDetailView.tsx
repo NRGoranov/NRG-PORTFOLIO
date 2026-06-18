@@ -12,6 +12,7 @@ import { ClothingColorMedia, clothingItemHasImages } from '@/components/clothing
 import { InterestCounter } from '@/components/clothing/InterestCounter'
 import { WishlistCheckInButton } from '@/components/clothing/WishlistCheckInButton'
 import { cn } from '@/lib/utils'
+import { clothingSwatchNeedsLightBorder, clothingSwatchStyle } from '@/lib/clothing/swatch-style'
 
 interface ClothingDetailViewProps {
   item: ClothingItem
@@ -125,10 +126,13 @@ export function ClothingDetailView({ item }: ClothingDetailViewProps) {
                         )}
                       >
                         <span
-                          className="h-4 w-4 rounded-full border border-white/20"
-                          style={{
-                            background: `linear-gradient(135deg, hsl(${color.hue} 25% 22%), hsl(${color.hue + 20} 20% 12%))`,
-                          }}
+                          className={cn(
+                            'h-4 w-4 rounded-full border',
+                            clothingSwatchNeedsLightBorder(color.name)
+                              ? 'border-white/35'
+                              : 'border-white/20',
+                          )}
+                          style={clothingSwatchStyle(color)}
                         />
                         {color.name}
                       </button>

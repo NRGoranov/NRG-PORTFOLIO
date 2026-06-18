@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
+import { clothingSwatchNeedsLightBorder, clothingSwatchStyle } from '@/lib/clothing/swatch-style'
 import type { ClothingItem } from '@/types/clothing'
 import { InterestCounter } from '@/components/clothing/InterestCounter'
 import { ClothingColorMedia } from '@/components/clothing/ClothingColorMedia'
@@ -108,10 +109,11 @@ export function InterestClothingCard({ item, index = 0 }: InterestClothingCardPr
                   className={cn(
                     'h-6 w-6 rounded-full border-2 transition-transform duration-200 hover:scale-110',
                     colorIndex === selectedColorIndex ? 'border-primary scale-110' : 'border-white/20',
+                    clothingSwatchNeedsLightBorder(color.name) &&
+                      colorIndex !== selectedColorIndex &&
+                      'border-white/35',
                   )}
-                  style={{
-                    background: `linear-gradient(135deg, hsl(${color.hue} 25% 22%), hsl(${color.hue + 20} 20% 12%))`,
-                  }}
+                  style={clothingSwatchStyle(color)}
                 />
               ))}
               {item.colors.length > 4 ? (
