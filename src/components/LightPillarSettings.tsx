@@ -18,7 +18,7 @@ type LightPillarSettingsValue = {
 
 const STORAGE_KEY = 'nrg.light-pillar.settings'
 const LEGACY_COLORS_KEY = 'nrg.light-pillar.colors'
-const DEFAULT_TOP_COLOR = '#3b82f6'
+const DEFAULT_TOP_COLOR = '#f73bde'
 const DEFAULT_BOTTOM_COLOR = '#1d4ed8'
 
 function isLightPillarQuality(value: unknown): value is LightPillarQuality {

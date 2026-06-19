@@ -25,7 +25,7 @@ interface LightPillarProps {
 }
 
 const LightPillar = ({
-  topColor = '#ffffff',
+  topColor = '#f73bde',
   bottomColor = '#1d4ed8',
   intensity = 1.0,
   rotationSpeed = 0.3,
