@@ -18,7 +18,7 @@ export default function ClothingPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="space-y-4"
+              className="relative space-y-4 overflow-visible"
             >
               <div className="flex justify-center">
                 <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-background/40 px-3 py-1 text-xs uppercase tracking-wider text-muted-foreground backdrop-blur-sm">
@@ -26,13 +26,13 @@ export default function ClothingPage() {
                   NRG Apparel
                 </span>
               </div>
-              <h1 className="text-4xl font-bold tracking-tight md:text-5xl">
-                Clothing{' '}
+              <h1 className="relative z-10 overflow-visible font-display text-4xl font-bold leading-[1.2] tracking-tight md:text-5xl">
+                Clothin<span className="font-sans font-bold">g</span>{' '}
                 <span className="bg-gradient-to-r from-primary via-primary/90 to-primary/70 bg-clip-text text-transparent">
                   Lab
                 </span>
               </h1>
-              <p className="mx-auto max-w-2xl text-muted-foreground">
+              <p className="relative z-0 mx-auto max-w-2xl text-muted-foreground">
                 Pieces in development and designs waiting on your vote. Check in or signal interest
                 when something speaks to you.
               </p>

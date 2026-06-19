@@ -2,8 +2,9 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, Palette, RotateCcw, X } from 'lucide-react'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { ChevronRight, Menu, Sparkles, X } from 'lucide-react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import {
   AnimatePresence,
   motion,
@@ -14,8 +15,9 @@ import {
   useMotionValue,
 } from 'framer-motion'
 import { Button } from '@/components/ui/button'
+import { BackgroundSettingsPanel } from '@/components/BackgroundSettingsPanel'
 import { useLightPillarSettings } from '@/components/LightPillarSettings'
-import { LIGHT_PILLAR_QUALITY_OPTIONS, type LightPillarQuality } from '@/types/light-pillar'
+import type { LightPillarQuality } from '@/types/light-pillar'
 import { cn } from '@/lib/utils'
 
 const navigation = [
@@ -26,11 +28,8 @@ const navigation = [
   { name: 'Contact', href: '/contact' },
 ]
 
-/** Hold full-width bar until scroll passes this (px) — avoids top-edge jitter */
 const SCROLL_START = 40
-/** Distance (px) over which the nav morphs from full bar → pill after the dead zone */
 const SCROLL_RANGE = 140
-
 const SPRING = { stiffness: 260, damping: 36, mass: 0.7 }
 
 function desktopNavLinkClass(isActive: boolean) {
@@ -44,79 +43,30 @@ function desktopNavLinkClass(isActive: boolean) {
   )
 }
 
-function mobileNavLinkClass(isActive: boolean) {
-  return cn(
-    'block cursor-pointer rounded-md px-2 py-1.5 text-sm font-medium transition-[color,background-color,transform] duration-200 ease-out',
-    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/45 focus-visible:ring-offset-2 focus-visible:ring-offset-background',
-    isActive
-      ? 'bg-primary/[0.08] text-primary'
-      : 'text-muted-foreground hover:bg-foreground/[0.04] hover:text-foreground active:scale-[0.99]',
-  )
-}
-
 function isNavActive(pathname: string, href: string) {
   return href === '/' ? pathname === '/' : pathname === href || pathname.startsWith(`${href}/`)
 }
 
-function ColorControl({
-  label,
-  value,
-  onChange,
-}: {
-  label: string
-  value: string
-  onChange: (value: string) => void
-}) {
+function LogoLink({ onClick }: { onClick?: () => void }) {
   return (
-    <label className="flex items-center gap-2 text-xs text-muted-foreground">
-      <span>{label}</span>
-      <input
-        type="color"
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="h-6 w-6 cursor-pointer appearance-none rounded-full border border-white/20 bg-transparent p-0 [&::-moz-color-swatch]:rounded-full [&::-moz-color-swatch]:border-none [&::-webkit-color-swatch-wrapper]:p-0 [&::-webkit-color-swatch]:rounded-full [&::-webkit-color-swatch]:border-none"
-        aria-label={label}
-      />
-    </label>
+    <Link
+      href="/"
+      onClick={onClick}
+      className="group/logo flex cursor-pointer items-center gap-1.5 rounded-md transition-[background-color,transform] duration-200 hover:bg-foreground/[0.04] active:scale-[0.99]"
+    >
+      <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary transition-transform duration-200 ease-out group-hover/logo:scale-[1.04]">
+        <span className="text-xs font-bold text-primary-foreground">NRG</span>
+      </div>
+      <span className="font-display text-base font-bold tracking-tight transition-colors duration-200 group-hover/logo:text-foreground">
+        Portfolio
+      </span>
+    </Link>
   )
 }
 
-function BackgroundQualityControl({
-  value,
-  onChange,
-  showHint = false,
-}: {
-  value: LightPillarQuality
-  onChange: (value: LightPillarQuality) => void
-  showHint?: boolean
-}) {
-  return (
-    <div className="flex flex-col gap-1">
-      <label className="flex items-center gap-2 text-xs text-muted-foreground">
-        <span>Look</span>
-        <select
-          value={value}
-          onChange={(e) => onChange(e.target.value as LightPillarQuality)}
-          className="h-7 cursor-pointer rounded-md border border-white/15 bg-background/50 px-2 text-xs text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring/45"
-          aria-label="Background detail"
-        >
-          {LIGHT_PILLAR_QUALITY_OPTIONS.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-      </label>
-      {showHint ? (
-        <p className="max-w-xs text-[10px] leading-snug text-muted-foreground">
-          Lighter saves battery. Full is the sharpest look.
-        </p>
-      ) : null}
-    </div>
-  )
-}
-
-function ColorControls({
+function BackgroundSettingsTrigger({
+  open,
+  onOpenChange,
   topColor,
   bottomColor,
   backgroundQuality,
@@ -124,9 +74,9 @@ function ColorControls({
   setBottomColor,
   setBackgroundQuality,
   resetColors,
-  compact = false,
-  showQualityHint = false,
 }: {
+  open: boolean
+  onOpenChange: (open: boolean) => void
   topColor: string
   bottomColor: string
   backgroundQuality: LightPillarQuality
@@ -134,57 +84,176 @@ function ColorControls({
   setBottomColor: (value: string) => void
   setBackgroundQuality: (value: LightPillarQuality) => void
   resetColors: () => void
-  compact?: boolean
-  showQualityHint?: boolean
 }) {
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const panelRef = useRef<HTMLDivElement>(null)
+  const [mounted, setMounted] = useState(false)
+  const [panelPosition, setPanelPosition] = useState({ top: 0, right: 16 })
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const updatePanelPosition = useCallback(() => {
+    const trigger = triggerRef.current
+    if (!trigger) return
+
+    const rect = trigger.getBoundingClientRect()
+    const panelWidth = 288
+    const margin = 16
+    const right = Math.min(
+      Math.max(margin, window.innerWidth - rect.right),
+      window.innerWidth - panelWidth - margin,
+    )
+
+    setPanelPosition({
+      top: rect.bottom + 8,
+      right,
+    })
+  }, [])
+
+  useLayoutEffect(() => {
+    if (!open) return
+
+    updatePanelPosition()
+    window.addEventListener('resize', updatePanelPosition)
+    window.addEventListener('scroll', updatePanelPosition, true)
+
+    return () => {
+      window.removeEventListener('resize', updatePanelPosition)
+      window.removeEventListener('scroll', updatePanelPosition, true)
+    }
+  }, [open, updatePanelPosition])
+
+  useEffect(() => {
+    if (!open) return
+
+    const onPointerDown = (event: MouseEvent) => {
+      const target = event.target as Node
+      if (triggerRef.current?.contains(target) || panelRef.current?.contains(target)) return
+      onOpenChange(false)
+    }
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onOpenChange(false)
+    }
+
+    document.addEventListener('mousedown', onPointerDown)
+    document.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown)
+      document.removeEventListener('keydown', onKeyDown)
+    }
+  }, [open, onOpenChange])
+
+  const overlay = mounted
+    ? createPortal(
+        <AnimatePresence>
+          {open ? (
+            <>
+              <motion.button
+                type="button"
+                key="background-settings-backdrop"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.18 }}
+                className="fixed inset-0 z-[60] cursor-default bg-background/25 backdrop-blur-[2px]"
+                aria-label="Close background settings"
+                onClick={() => onOpenChange(false)}
+              />
+              <motion.div
+                key="background-settings-panel"
+                ref={panelRef}
+                initial={{ opacity: 0, y: -8, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -8, scale: 0.98 }}
+                transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                style={{ top: panelPosition.top, right: panelPosition.right }}
+                className="fixed z-[61] w-72 rounded-2xl border border-white/10 bg-background/95 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.45)] backdrop-blur-xl"
+                role="dialog"
+                aria-label="Background settings"
+              >
+                <p className="mb-3 font-display text-sm font-semibold tracking-tight">Background</p>
+                <BackgroundSettingsPanel
+                  topColor={topColor}
+                  bottomColor={bottomColor}
+                  backgroundQuality={backgroundQuality}
+                  setTopColor={setTopColor}
+                  setBottomColor={setBottomColor}
+                  setBackgroundQuality={setBackgroundQuality}
+                  resetColors={resetColors}
+                />
+              </motion.div>
+            </>
+          ) : null}
+        </AnimatePresence>,
+        document.body,
+      )
+    : null
+
   return (
-    <div className={cn('flex flex-col gap-2', compact ? 'items-start' : 'items-end')}>
-      <div
+    <>
+      <Button
+        ref={triggerRef}
+        type="button"
+        variant="ghost"
+        size="sm"
+        onClick={() => onOpenChange(!open)}
+        aria-expanded={open}
+        aria-haspopup="dialog"
         className={cn(
-          'flex items-center gap-2',
-          compact ? 'rounded-lg px-2 py-1' : 'rounded-xl px-2.5 py-1',
+          'h-8 gap-1.5 rounded-full border px-3 text-xs font-medium transition-all duration-200',
+          open
+            ? 'border-primary/35 bg-primary/10 text-primary'
+            : 'border-white/10 bg-background/30 text-muted-foreground hover:border-primary/25 hover:bg-primary/5 hover:text-foreground',
         )}
       >
-        <Palette className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-        <ColorControl label="Top" value={topColor} onChange={setTopColor} />
-        <ColorControl label="Bottom" value={bottomColor} onChange={setBottomColor} />
-        <BackgroundQualityControl
-          value={backgroundQuality}
-          onChange={setBackgroundQuality}
-          showHint={showQualityHint}
-        />
-        <Button
-          type="button"
-          variant="ghost"
-          size="icon"
-          className="h-7 w-7 rounded-md"
-          onClick={resetColors}
-          aria-label="Reset pillar colors"
-        >
-          <RotateCcw className="h-3.5 w-3.5" />
-        </Button>
-      </div>
-      {!showQualityHint ? (
-        <p className="hidden text-[10px] leading-snug text-muted-foreground xl:block">
-          Lighter saves battery. Full is the sharpest look.
-        </p>
-      ) : null}
-    </div>
+        <Sparkles className="h-3.5 w-3.5" />
+        <span className="hidden lg:inline">Background</span>
+      </Button>
+      {overlay}
+    </>
   )
 }
 
-function LogoLink() {
+function MobileNavLink({
+  item,
+  index,
+  isActive,
+  onNavigate,
+}: {
+  item: (typeof navigation)[number]
+  index: number
+  isActive: boolean
+  onNavigate: () => void
+}) {
   return (
     <Link
-      href="/"
-      className="group/logo flex cursor-pointer items-center gap-1.5 rounded-md transition-[background-color,transform] duration-200 hover:bg-foreground/[0.04] active:scale-[0.99]"
+      href={item.href}
+      onClick={onNavigate}
+      className={cn(
+        'group flex items-center justify-between rounded-2xl border px-4 py-3.5 transition-all duration-200',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/45 focus-visible:ring-offset-2 focus-visible:ring-offset-background',
+        isActive
+          ? 'border-primary/25 bg-primary/[0.07] text-primary'
+          : 'border-transparent text-foreground/90 hover:border-white/10 hover:bg-white/[0.03]',
+      )}
     >
-      <div className="flex h-7 w-7 items-center justify-center rounded-md bg-primary transition-transform duration-200 ease-out group-hover/logo:scale-[1.04]">
-        <span className="text-xs font-bold text-primary-foreground">NRG</span>
-      </div>
-      <span className="text-base font-bold transition-colors duration-200 group-hover/logo:text-foreground">
-        Portfolio
+      <span className="flex items-baseline gap-3">
+        <span className="font-mono text-[10px] tabular-nums text-muted-foreground/50">
+          {String(index + 1).padStart(2, '0')}
+        </span>
+        <span className="font-display text-xl font-medium tracking-tight">{item.name}</span>
       </span>
+      <ChevronRight
+        className={cn(
+          'h-4 w-4 shrink-0 transition-all duration-200',
+          isActive
+            ? 'text-primary/80'
+            : 'text-muted-foreground/40 group-hover:translate-x-0.5 group-hover:text-muted-foreground',
+        )}
+      />
     </Link>
   )
 }
@@ -192,6 +261,7 @@ function LogoLink() {
 export function Header() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [settingsOpen, setSettingsOpen] = useState(false)
   const headerRef = useRef<HTMLElement>(null)
   const [allowCursorSheen, setAllowCursorSheen] = useState(false)
   const [reduceMotion, setReduceMotion] = useState(false)
@@ -252,6 +322,13 @@ export function Header() {
     }
   }, [])
 
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [mobileMenuOpen])
+
   const updateHeaderGlow = useCallback((clientX: number, clientY: number) => {
     const el = headerRef.current
     if (!el) return
@@ -271,6 +348,8 @@ export function Header() {
     if (!allowCursorSheen || e.pointerType === 'touch') return
     updateHeaderGlow(e.clientX, e.clientY)
   }
+
+  const closeMobileMenu = () => setMobileMenuOpen(false)
 
   return (
     <motion.div
@@ -327,7 +406,9 @@ export function Header() {
             ))}
           </nav>
 
-          <ColorControls
+          <BackgroundSettingsTrigger
+            open={settingsOpen}
+            onOpenChange={setSettingsOpen}
             topColor={topColor}
             bottomColor={bottomColor}
             backgroundQuality={backgroundQuality}
@@ -343,54 +424,68 @@ export function Header() {
           className="relative z-[1] container flex items-center justify-between md:hidden"
           style={{ height: rowHeight }}
         >
-          <LogoLink />
+          <LogoLink onClick={closeMobileMenu} />
 
           <Button
             variant="ghost"
             size="icon"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="h-8 w-8"
+            aria-expanded={mobileMenuOpen}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
+            className={cn(
+              'h-9 w-9 rounded-full border transition-all duration-200',
+              mobileMenuOpen
+                ? 'border-primary/35 bg-primary/10 text-primary'
+                : 'border-white/10 bg-background/30 text-muted-foreground hover:border-primary/25 hover:text-foreground',
+            )}
           >
             {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
-            <span className="sr-only">Toggle menu</span>
           </Button>
         </motion.div>
 
         <AnimatePresence initial={false}>
-          {mobileMenuOpen && (
+          {mobileMenuOpen ? (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
-              className="relative z-[1] overflow-hidden border-t border-white/10 bg-background/55 backdrop-blur-xl md:hidden"
+              transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              className="relative z-[1] overflow-hidden border-t border-white/10 md:hidden"
             >
-              <div className="container py-3">
-                <nav className="flex flex-col gap-3">
+              <div className="container space-y-6 py-5">
+                <nav className="flex flex-col gap-1.5">
                   {navigation.map((item, index) => (
                     <motion.div
                       key={item.name}
-                      initial={{ opacity: 0, y: -6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -4 }}
-                      transition={{ duration: 0.18, delay: index * 0.04 }}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -6 }}
+                      transition={{ duration: 0.22, delay: index * 0.05, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      <Link
-                        href={item.href}
-                        className={mobileNavLinkClass(isNavActive(pathname, item.href))}
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {item.name}
-                      </Link>
+                      <MobileNavLink
+                        item={item}
+                        index={index}
+                        isActive={isNavActive(pathname, item.href)}
+                        onNavigate={closeMobileMenu}
+                      />
                     </motion.div>
                   ))}
                 </nav>
-                <div className="mt-1 border-t border-white/10 pt-3">
-                  <div className="mb-2 flex items-center gap-2 text-xs font-medium text-muted-foreground">
-                    <Palette className="h-3.5 w-3.5" />
-                    <span>Background</span>
+
+                <div className="h-px bg-gradient-to-r from-transparent via-white/15 to-transparent" />
+
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 4 }}
+                  transition={{ duration: 0.24, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                  className="glass-panel rounded-2xl p-4"
+                >
+                  <div className="mb-3 flex items-center gap-2">
+                    <Sparkles className="h-3.5 w-3.5 text-primary" />
+                    <p className="font-display text-sm font-semibold tracking-tight">Background</p>
                   </div>
-                  <ColorControls
+                  <BackgroundSettingsPanel
                     topColor={topColor}
                     bottomColor={bottomColor}
                     backgroundQuality={backgroundQuality}
@@ -398,13 +493,11 @@ export function Header() {
                     setBottomColor={setBottomColor}
                     setBackgroundQuality={setBackgroundQuality}
                     resetColors={resetColors}
-                    compact
-                    showQualityHint
                   />
-                </div>
+                </motion.div>
               </div>
             </motion.div>
-          )}
+          ) : null}
         </AnimatePresence>
       </motion.header>
     </motion.div>
