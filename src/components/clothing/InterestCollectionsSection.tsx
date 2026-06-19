@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Sparkles } from 'lucide-react'
 import { clothingCandidates, clothingCollections } from '@/data/clothing-candidates'
+import { CLOTHING_INTEREST_GOAL } from '@/lib/clothing/constants'
 import { InterestClothingCard } from '@/components/clothing/InterestClothingCard'
 
 export function InterestCollectionsSection() {
@@ -30,7 +31,8 @@ export function InterestCollectionsSection() {
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm text-muted-foreground md:text-base">
             These designs are not in production yet. Preview the colorways, signal interest, and if
-            a piece hits <span className="font-mono text-foreground/80">100</span> signals we decide
+            a piece hits{' '}
+            <span className="font-mono text-foreground/80">{CLOTHING_INTEREST_GOAL}</span> signals we decide
             whether to make it.
           </p>
         </motion.div>

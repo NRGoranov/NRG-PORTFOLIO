@@ -1,4 +1,5 @@
 import type { ClothingCollection, ClothingColor, ClothingItem } from '@/types/clothing'
+import { CLOTHING_INTEREST_GOAL } from '@/lib/clothing/constants'
 
 const S3_BASE = 'https://nrgtrw-images.s3.eu-central-1.amazonaws.com'
 
@@ -30,7 +31,7 @@ function interestPiece(
     ...input,
     status: 'interest-gated',
     priceLabel: 'Signal interest',
-    interestGoal: input.interestGoal ?? 100,
+    interestGoal: input.interestGoal ?? CLOTHING_INTEREST_GOAL,
   }
 }
 
@@ -164,7 +165,7 @@ export const clothingCandidates: ClothingItem[] = [
     name: 'The Statement Piece',
     teaser: 'Confidence you can wear — if the signal is strong enough.',
     description:
-      'The showpiece from the Confidence collection. Bold presence and deliberate construction — one hundred signals and we decide whether to run it.',
+      'The showpiece from the Confidence collection. Bold presence and deliberate construction — hit the signal threshold and we decide whether to run it.',
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       productColor('Black', 'images/ShowOff.webp', 'images/ShowOff.webp'),

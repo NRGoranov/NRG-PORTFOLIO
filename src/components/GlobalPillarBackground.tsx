@@ -4,7 +4,7 @@ import LightPillar from '@/components/LightPillar'
 import { useLightPillarSettings } from '@/components/LightPillarSettings'
 
 export function GlobalPillarBackground() {
-  const { topColor, bottomColor } = useLightPillarSettings()
+  const { topColor, bottomColor, backgroundQuality } = useLightPillarSettings()
 
   return (
     <div className="pointer-events-none fixed inset-0 -z-10">
@@ -20,7 +20,7 @@ export function GlobalPillarBackground() {
         pillarRotation={18}
         interactive={false}
         mixBlendMode="screen"
-        quality="high"
+        quality={backgroundQuality}
       />
     </div>
   )

@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useState } from 'react'
+import { CLOTHING_INTEREST_GOAL } from '@/lib/clothing/constants'
 import { cn } from '@/lib/utils'
 
 interface InterestCounterProps {
@@ -10,7 +11,12 @@ interface InterestCounterProps {
   compact?: boolean
 }
 
-export function InterestCounter({ slug, goal = 100, className, compact = false }: InterestCounterProps) {
+export function InterestCounter({
+  slug,
+  goal = CLOTHING_INTEREST_GOAL,
+  className,
+  compact = false,
+}: InterestCounterProps) {
   const [count, setCount] = useState(0)
   const [loading, setLoading] = useState(true)
 

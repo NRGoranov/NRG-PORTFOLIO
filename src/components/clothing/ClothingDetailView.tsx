@@ -11,8 +11,9 @@ import { MysteriousPlaceholder } from '@/components/clothing/MysteriousPlacehold
 import { ClothingColorMedia, clothingItemHasImages } from '@/components/clothing/ClothingColorMedia'
 import { InterestCounter } from '@/components/clothing/InterestCounter'
 import { WishlistCheckInButton } from '@/components/clothing/WishlistCheckInButton'
-import { cn } from '@/lib/utils'
+import { CLOTHING_INTEREST_GOAL } from '@/lib/clothing/constants'
 import { clothingSwatchNeedsLightBorder, clothingSwatchStyle } from '@/lib/clothing/swatch-style'
+import { cn } from '@/lib/utils'
 
 interface ClothingDetailViewProps {
   item: ClothingItem
@@ -25,7 +26,7 @@ export function ClothingDetailView({ item }: ClothingDetailViewProps) {
 
   const currentColor = item.colors[selectedColorIndex] ?? item.colors[0]
   const isInterestGated = item.status === 'interest-gated'
-  const interestGoal = item.interestGoal ?? 100
+  const interestGoal = item.interestGoal ?? CLOTHING_INTEREST_GOAL
   const hasImages = clothingItemHasImages(item.colors)
 
   return (

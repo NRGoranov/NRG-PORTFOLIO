@@ -15,6 +15,7 @@ import {
 } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { useLightPillarSettings } from '@/components/LightPillarSettings'
+import { LIGHT_PILLAR_QUALITY_OPTIONS, type LightPillarQuality } from '@/types/light-pillar'
 import { cn } from '@/lib/utils'
 
 const navigation = [
@@ -80,41 +81,94 @@ function ColorControl({
   )
 }
 
+function BackgroundQualityControl({
+  value,
+  onChange,
+  showHint = false,
+}: {
+  value: LightPillarQuality
+  onChange: (value: LightPillarQuality) => void
+  showHint?: boolean
+}) {
+  return (
+    <div className="flex flex-col gap-1">
+      <label className="flex items-center gap-2 text-xs text-muted-foreground">
+        <span>Look</span>
+        <select
+          value={value}
+          onChange={(e) => onChange(e.target.value as LightPillarQuality)}
+          className="h-7 cursor-pointer rounded-md border border-white/15 bg-background/50 px-2 text-xs text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring/45"
+          aria-label="Background detail"
+        >
+          {LIGHT_PILLAR_QUALITY_OPTIONS.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+      </label>
+      {showHint ? (
+        <p className="max-w-xs text-[10px] leading-snug text-muted-foreground">
+          Lighter saves battery. Full is the sharpest look.
+        </p>
+      ) : null}
+    </div>
+  )
+}
+
 function ColorControls({
   topColor,
   bottomColor,
+  backgroundQuality,
   setTopColor,
   setBottomColor,
+  setBackgroundQuality,
   resetColors,
   compact = false,
+  showQualityHint = false,
 }: {
   topColor: string
   bottomColor: string
+  backgroundQuality: LightPillarQuality
   setTopColor: (value: string) => void
   setBottomColor: (value: string) => void
+  setBackgroundQuality: (value: LightPillarQuality) => void
   resetColors: () => void
   compact?: boolean
+  showQualityHint?: boolean
 }) {
   return (
-    <div
-      className={cn(
-        'flex items-center gap-2',
-        compact ? 'rounded-lg px-2 py-1' : 'rounded-xl px-2.5 py-1',
-      )}
-    >
-      <Palette className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
-      <ColorControl label="Top" value={topColor} onChange={setTopColor} />
-      <ColorControl label="Bottom" value={bottomColor} onChange={setBottomColor} />
-      <Button
-        type="button"
-        variant="ghost"
-        size="icon"
-        className="h-7 w-7 rounded-md"
-        onClick={resetColors}
-        aria-label="Reset pillar colors"
+    <div className={cn('flex flex-col gap-2', compact ? 'items-start' : 'items-end')}>
+      <div
+        className={cn(
+          'flex items-center gap-2',
+          compact ? 'rounded-lg px-2 py-1' : 'rounded-xl px-2.5 py-1',
+        )}
       >
-        <RotateCcw className="h-3.5 w-3.5" />
-      </Button>
+        <Palette className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+        <ColorControl label="Top" value={topColor} onChange={setTopColor} />
+        <ColorControl label="Bottom" value={bottomColor} onChange={setBottomColor} />
+        <BackgroundQualityControl
+          value={backgroundQuality}
+          onChange={setBackgroundQuality}
+          showHint={showQualityHint}
+        />
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="h-7 w-7 rounded-md"
+          onClick={resetColors}
+          aria-label="Reset pillar colors"
+        >
+          <RotateCcw className="h-3.5 w-3.5" />
+        </Button>
+      </div>
+      {!showQualityHint ? (
+        <p className="hidden text-[10px] leading-snug text-muted-foreground xl:block">
+          Lighter saves battery. Full is the sharpest look.
+        </p>
+      ) : null}
     </div>
   )
 }
@@ -141,7 +195,15 @@ export function Header() {
   const headerRef = useRef<HTMLElement>(null)
   const [allowCursorSheen, setAllowCursorSheen] = useState(false)
   const [reduceMotion, setReduceMotion] = useState(false)
-  const { topColor, bottomColor, setTopColor, setBottomColor, resetColors } = useLightPillarSettings()
+  const {
+    topColor,
+    bottomColor,
+    backgroundQuality,
+    setTopColor,
+    setBottomColor,
+    setBackgroundQuality,
+    resetColors,
+  } = useLightPillarSettings()
 
   const { scrollY } = useScroll()
   const rawProgress = useTransform(
@@ -268,8 +330,10 @@ export function Header() {
           <ColorControls
             topColor={topColor}
             bottomColor={bottomColor}
+            backgroundQuality={backgroundQuality}
             setTopColor={setTopColor}
             setBottomColor={setBottomColor}
+            setBackgroundQuality={setBackgroundQuality}
             resetColors={resetColors}
           />
         </motion.div>
@@ -324,15 +388,18 @@ export function Header() {
                 <div className="mt-1 border-t border-white/10 pt-3">
                   <div className="mb-2 flex items-center gap-2 text-xs font-medium text-muted-foreground">
                     <Palette className="h-3.5 w-3.5" />
-                    <span>Light Pillar Colors</span>
+                    <span>Background</span>
                   </div>
                   <ColorControls
                     topColor={topColor}
                     bottomColor={bottomColor}
+                    backgroundQuality={backgroundQuality}
                     setTopColor={setTopColor}
                     setBottomColor={setBottomColor}
+                    setBackgroundQuality={setBackgroundQuality}
                     resetColors={resetColors}
                     compact
+                    showQualityHint
                   />
                 </div>
               </div>

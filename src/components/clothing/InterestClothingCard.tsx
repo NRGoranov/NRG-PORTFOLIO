@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { clothingSwatchNeedsLightBorder, clothingSwatchStyle } from '@/lib/clothing/swatch-style'
+import { CLOTHING_INTEREST_GOAL } from '@/lib/clothing/constants'
 import type { ClothingItem } from '@/types/clothing'
 import { InterestCounter } from '@/components/clothing/InterestCounter'
 import { ClothingColorMedia } from '@/components/clothing/ClothingColorMedia'
@@ -21,7 +22,7 @@ export function InterestClothingCard({ item, index = 0 }: InterestClothingCardPr
   const router = useRouter()
   const [selectedColorIndex, setSelectedColorIndex] = useState(0)
   const currentColor = item.colors[selectedColorIndex] ?? item.colors[0]
-  const goal = item.interestGoal ?? 100
+  const goal = item.interestGoal ?? CLOTHING_INTEREST_GOAL
 
   const handleOpen = () => {
     router.push(`/clothing/${item.slug}`)

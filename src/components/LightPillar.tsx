@@ -3,9 +3,10 @@
 import { useRef, useEffect, useState } from 'react'
 import type { CSSProperties } from 'react'
 import * as THREE from 'three'
+import type { LightPillarQuality } from '@/types/light-pillar'
 import './LightPillar.css'
 
-type Quality = 'low' | 'medium' | 'high'
+type Quality = LightPillarQuality
 
 interface LightPillarProps {
   topColor?: string
@@ -68,12 +69,6 @@ const LightPillar = ({
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1)
     cameraRef.current = camera
 
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
-    const isLowEndDevice = isMobile || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)
-
-    let effectiveQuality: Quality = quality
-    if (isLowEndDevice && quality === 'high') effectiveQuality = 'medium'
-
     const qualitySettings = {
       low: { iterations: 24, waveIterations: 1, pixelRatio: 0.5, precision: 'mediump' as const, stepMultiplier: 1.5 },
       medium: { iterations: 40, waveIterations: 2, pixelRatio: 0.65, precision: 'mediump' as const, stepMultiplier: 1.2 },
@@ -86,14 +81,14 @@ const LightPillar = ({
       }
     }
 
-    const settings = qualitySettings[effectiveQuality] || qualitySettings.medium
+    const settings = qualitySettings[quality] || qualitySettings.high
 
     let renderer: THREE.WebGLRenderer
     try {
       renderer = new THREE.WebGLRenderer({
         antialias: false,
         alpha: true,
-        powerPreference: effectiveQuality === 'high' ? 'high-performance' : 'low-power',
+        powerPreference: quality === 'high' ? 'high-performance' : 'low-power',
         precision: settings.precision,
         stencil: false,
         depth: false
@@ -265,7 +260,7 @@ const LightPillar = ({
     if (interactive) container.addEventListener('mousemove', handleMouseMove, { passive: true })
 
     let lastTime = performance.now()
-    const targetFPS = effectiveQuality === 'low' ? 30 : 60
+    const targetFPS = quality === 'low' ? 30 : 60
     const frameTime = 1000 / targetFPS
 
     const animate = (currentTime: number) => {

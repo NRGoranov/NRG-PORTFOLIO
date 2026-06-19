@@ -13,6 +13,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { getClothingItem } from '@/data/clothing'
+import { CLOTHING_INTEREST_GOAL } from '@/lib/clothing/constants'
 import { getSignedUpEmail, saveSignedUpEmail } from '@/lib/clothing-wishlist-client'
 
 interface WishlistJoinDialogProps {
@@ -26,7 +27,7 @@ export function WishlistJoinDialog({ slug, open, onOpenChange, onJoined }: Wishl
   const item = getClothingItem(slug)
   const itemName = item?.name ?? 'Zip-Up'
   const isInterestGated = item?.status === 'interest-gated'
-  const interestGoal = item?.interestGoal ?? 100
+  const interestGoal = item?.interestGoal ?? CLOTHING_INTEREST_GOAL
   const dialogTitle = isInterestGated ? 'Signal interest' : 'Wishlist check-in'
   const dialogDescription = isInterestGated
     ? `Add your signal for ${itemName}. At ${interestGoal} signals we review whether to put it into production.`

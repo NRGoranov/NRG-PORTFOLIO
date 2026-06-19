@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Plus_Jakarta_Sans, Syne, JetBrains_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -10,10 +10,17 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-sans',
   display: 'swap',
+})
+
+const syne = Syne({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 const jetbrainsMono = JetBrains_Mono({
@@ -113,7 +120,7 @@ export default function RootLayout({
         <meta name="twitter:description" content="A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies." />
         <meta name="twitter:image" content="https://www.nrgtrw.com/og-image.png" />
       </head>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body className={`${plusJakartaSans.variable} ${syne.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
