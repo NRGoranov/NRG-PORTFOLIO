@@ -193,7 +193,7 @@ const LightPillar = ({
           d = abs(d) * 0.15 + 0.01;
 
           float grad = clamp((15.0 - p.y) / 30.0, 0.0, 1.0);
-          col += mix(uBottomColor, uTopColor, grad) / d;
+          col += mix(uTopColor, uBottomColor, grad) / d;
 
           t += d * STEP_MULT;
           if(t > 50.0) break;
