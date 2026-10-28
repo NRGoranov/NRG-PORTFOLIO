@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { Project } from '@/types/project'
 import { ProjectCard } from './ProjectCard'
 
-const pinnedTopSlugs = ['gola-handcrafted', 'matcha-shop-sofia']
+const pinnedTopSlugs = ['clever-solution', 'gola-handcrafted', 'matcha-shop-sofia']
 
 interface ProjectGalleryProps {
   projects: Project[]

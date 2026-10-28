@@ -27,6 +27,50 @@ import type { Project } from '../types/project'
 
 export const projects: Project[] = [
   {
+    slug: 'clever-solution',
+    title: 'Clever Solution',
+    shortDescription: 'Bulgarian product catalogue for professional kitchens, access control, event wristbands, and cleaning supplies.',
+    longDescription: `# Clever Solution
+
+A Bulgarian product catalogue for Clever Solution Ltd (КЛЕВЪР СОЛЮШЪН ЕООД), built so hospitality and event clients can browse equipment and request a quote.
+
+## Problem
+The company supplies professional kitchen equipment, access control, event wristbands, and cleaning products. Pricing depends on configuration and quantity, so a standard shop cart would hide the real buying path: a direct inquiry.
+
+## Solution
+An inquiry-first catalogue in Bulgarian, with category browsing, product detail pages, and contact by phone, email, and form. The public address configured for the site is cleversolutions.bg.
+
+## Key Features
+- Four catalogues: kitchen equipment, access control, event wristbands, and cleaning supplies
+- Product pages with image galleries, colour options, and specifications
+- Zod-validated product data, with drafts kept off category pages until published
+- Bulgarian interface, SEO metadata, and an FAQ for quotes and delivery
+- Contact form that sends inquiries by email, plus direct phone and email options
+
+## Tech Stack
+- Next.js 16 with the App Router and React 19
+- TypeScript and Zod for product records
+- Tailwind CSS and Framer Motion
+- Nodemailer for inquiry email
+
+## Results
+- Clear path from category to product to quote request
+- Catalogue content that can be published without a code redesign
+- A brand presentation aimed at professional kitchens and events in Bulgaria`,
+    tags: ['Product Catalogue', 'B2B', 'Next.js', 'Hospitality', 'Bulgaria'],
+    year: 2026,
+    role: 'Full Stack Developer',
+    stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Zod', 'Framer Motion', 'Nodemailer'],
+    coverImage: '/covers/clever-solution-cover.png',
+    gallery: [
+      '/covers/clever-solution-kitchen.png',
+      '/covers/clever-solution-pan.png',
+      '/covers/clever-solution-sousvide.jpeg',
+    ],
+    featured: true,
+    highlightColor: '#ff6000',
+  },
+  {
     slug: 'gola-handcrafted',
     title: 'GoLa Handcrafted',
     shortDescription: 'Boutique handcrafted wooden and leather handbags site focused on bespoke requests and premium product presentation.',
