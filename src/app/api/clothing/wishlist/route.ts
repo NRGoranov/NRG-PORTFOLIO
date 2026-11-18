@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server'
 import {
   addWishlistEntry,
+  countWishlistEntries,
   isEmailOnWishlist,
   listWishlistEntries,
+  removeWishlistEntry,
   verifyClothingAdminPassword,
 } from '@/lib/clothing/wishlist-store'
 import { getClothingItem } from '@/data/clothing'
@@ -11,7 +13,6 @@ export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url)
     const slug = searchParams.get('slug')?.trim()
-    const email = searchParams.get('email')?.trim().toLowerCase()
     const adminPassword = req.headers.get('x-clothing-admin')?.trim()
 
     if (!slug) {
@@ -32,13 +33,10 @@ export async function GET(req: Request) {
       })
     }
 
-    const entries = await listWishlistEntries(slug)
-    const onList = email ? await isEmailOnWishlist(slug, email) : false
-
+    const count = await countWishlistEntries(slug)
     return NextResponse.json({
       ok: true,
-      count: entries.length,
-      onList,
+      count,
     })
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unable to load wishlist.'
@@ -49,10 +47,12 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const body = (await req.json()) as {
+      intent?: string
       slug?: string
       email?: string
       name?: string
       website?: string
+      consent?: boolean
       adminPassword?: string
     }
 
@@ -78,10 +78,31 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: false, message: 'Invalid email format.' }, { status: 400 })
     }
 
+    if (body.intent === 'status') {
+      const onList = await isEmailOnWishlist(slug, email)
+      return NextResponse.json({ ok: true, onList })
+    }
+
+    if (body.intent === 'withdraw') {
+      await removeWishlistEntry(slug, email)
+      return NextResponse.json({
+        ok: true,
+        message: 'If that email was on the list, it has been removed.',
+      })
+    }
+
+    if (body.consent !== true) {
+      return NextResponse.json(
+        { ok: false, message: 'Consent to this email is required.' },
+        { status: 400 },
+      )
+    }
+
     await addWishlistEntry({
       slug,
       email,
       name: body.name?.trim() || null,
+      consentAt: new Date().toISOString(),
     })
 
     const item = getClothingItem(slug)

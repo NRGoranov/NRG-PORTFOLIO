@@ -7,8 +7,12 @@ create table if not exists public.clothing_wishlist_entries (
   email text not null,
   name text,
   created_at timestamptz not null default now(),
+  consent_at timestamptz,
   constraint clothing_wishlist_entries_slug_email_key unique (slug, email)
 );
+
+alter table public.clothing_wishlist_entries
+  add column if not exists consent_at timestamptz;
 
 create index if not exists clothing_wishlist_entries_slug_created_at_idx
   on public.clothing_wishlist_entries (slug, created_at desc);

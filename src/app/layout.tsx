@@ -6,8 +6,7 @@ import { Footer } from '@/components/Footer'
 import { GlobalPillarBackground } from '@/components/GlobalPillarBackground'
 import { LightPillarSettingsProvider } from '@/components/LightPillarSettings'
 import { BackToTopButton } from '@/components/BackToTopButton'
-import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/next'
+import { AudienceMeasurement } from '@/components/AudienceMeasurement'
 import './globals.css'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
@@ -121,6 +120,12 @@ export default function RootLayout({
         <meta name="twitter:image" content="https://www.nrgtrw.com/og-image.png" />
       </head>
       <body className={`${plusJakartaSans.variable} ${syne.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+        <a
+          href="#content"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[80] focus:rounded-md focus:bg-background focus:px-4 focus:py-2 focus:text-foreground"
+        >
+          Skip to content
+        </a>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -132,15 +137,14 @@ export default function RootLayout({
             <div className="relative flex min-h-screen flex-col">
               <GlobalPillarBackground />
               <Header />
-              <main className="flex-1">
+              <main id="content" tabIndex={-1} className="flex-1 outline-none">
                 {children}
               </main>
               <Footer />
             </div>
             <BackToTopButton />
           </LightPillarSettingsProvider>
-          <Analytics />
-          <SpeedInsights />
+          <AudienceMeasurement />
         </ThemeProvider>
       </body>
     </html>

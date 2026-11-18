@@ -12,6 +12,7 @@ type WishlistRow = {
   email: string
   name: string | null
   created_at: string
+  consent_at?: string | null
 }
 
 function mapRow(row: WishlistRow): WishlistEntry {
@@ -21,6 +22,7 @@ function mapRow(row: WishlistRow): WishlistEntry {
     email: row.email,
     name: row.name,
     createdAt: row.created_at,
+    consentAt: row.consent_at ?? null,
   }
 }
 
@@ -64,20 +66,31 @@ export async function addWishlistEntry(input: WishlistJoinInput): Promise<Wishli
 
     const id = randomUUID()
     const createdAt = new Date().toISOString()
-    const { data, error } = await supabase
-      .from('clothing_wishlist_entries')
-      .insert({
-        id,
-        slug,
-        email,
-        name,
-        created_at: createdAt,
-      })
-      .select('*')
-      .single()
-
-    if (error) throw new Error(error.message)
-    return mapRow(data as WishlistRow)
+    const consentAt = input.consentAt ?? createdAt
+    const row = {
+      id,
+      slug,
+      email,
+      name,
+      created_at: createdAt,
+      consent_at: consentAt,
+    }
+    let inserted = await supabase.from('clothing_wishlist_entries').insert(row).select('*').single()
+    if (inserted.error && /consent_at/i.test(inserted.error.message)) {
+      inserted = await supabase
+        .from('clothing_wishlist_entries')
+        .insert({
+          id: row.id,
+          slug: row.slug,
+          email: row.email,
+          name: row.name,
+          created_at: row.created_at,
+        })
+        .select('*')
+        .single()
+    }
+    if (inserted.error) throw new Error(inserted.error.message)
+    return mapRow(inserted.data as WishlistRow)
   }
 
   if (process.env.NODE_ENV !== 'development') {
@@ -88,12 +101,14 @@ export async function addWishlistEntry(input: WishlistJoinInput): Promise<Wishli
   const existing = entries.find((entry) => entry.slug === slug && entry.email === email)
   if (existing) return existing
 
+  const createdAt = new Date().toISOString()
   const entry: WishlistEntry = {
     id: randomUUID(),
     slug,
     email,
     name,
-    createdAt: new Date().toISOString(),
+    createdAt,
+    consentAt: input.consentAt ?? createdAt,
   }
 
   entries.unshift(entry)
@@ -129,10 +144,63 @@ export async function listWishlistEntries(slug?: string): Promise<WishlistEntry[
   )
 }
 
+export async function countWishlistEntries(slug: string): Promise<number> {
+  const supabase = getSupabaseAdmin()
+  if (supabase) {
+    const { count, error } = await supabase
+      .from('clothing_wishlist_entries')
+      .select('id', { count: 'exact', head: true })
+      .eq('slug', slug)
+    if (error) throw new Error(error.message)
+    return count ?? 0
+  }
+
+  if (process.env.NODE_ENV !== 'development') {
+    requireStorageInProduction('Counting wishlist sign-ups')
+  }
+
+  const entries = await readJsonEntries()
+  return entries.filter((entry) => entry.slug === slug).length
+}
+
 export async function isEmailOnWishlist(slug: string, email: string): Promise<boolean> {
   const normalized = email.trim().toLowerCase()
+  const supabase = getSupabaseAdmin()
+  if (supabase) {
+    const { count, error } = await supabase
+      .from('clothing_wishlist_entries')
+      .select('id', { count: 'exact', head: true })
+      .eq('slug', slug)
+      .eq('email', normalized)
+    if (error) throw new Error(error.message)
+    return (count ?? 0) > 0
+  }
+
   const entries = await listWishlistEntries(slug)
   return entries.some((entry) => entry.email === normalized)
+}
+
+export async function removeWishlistEntry(slug: string, email: string): Promise<void> {
+  const normalized = email.trim().toLowerCase()
+  const supabase = getSupabaseAdmin()
+  if (supabase) {
+    const { error } = await supabase
+      .from('clothing_wishlist_entries')
+      .delete()
+      .eq('slug', slug)
+      .eq('email', normalized)
+    if (error) throw new Error(error.message)
+    return
+  }
+
+  if (process.env.NODE_ENV !== 'development') {
+    requireStorageInProduction('Removing a wishlist sign-up')
+  }
+
+  const entries = await readJsonEntries()
+  await writeJsonEntries(
+    entries.filter((entry) => !(entry.slug === slug && entry.email === normalized)),
+  )
 }
 
 export function verifyClothingAdminPassword(password: string): boolean {

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin, Github, Linkedin, Instagram, Send, CheckCircle, Info } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -255,6 +256,15 @@ export default function ContactPage() {
                         required
                       />
                     </div>
+
+                    <p className="text-xs leading-relaxed text-muted-foreground">
+                      Your name, email, subject, and message are emailed to Nikolay Goranov so he can reply.
+                      They are not added to a mailing list.{" "}
+                      <Link href="/privacy" className="underline">
+                        Privacy notice
+                      </Link>
+                      .
+                    </p>
 
                     <Button
                       type="submit"

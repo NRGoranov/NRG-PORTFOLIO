@@ -50,7 +50,11 @@ export function WishlistCheckInButton({
     const signedEmail = getSignedUpEmail(slug)
     if (!signedEmail) return
 
-    fetch(`/api/clothing/wishlist?slug=${encodeURIComponent(slug)}&email=${encodeURIComponent(signedEmail)}`)
+    fetch('/api/clothing/wishlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ intent: 'status', slug, email: signedEmail }),
+    })
       .then((res) => res.json())
       .then((result: { ok?: boolean; onList?: boolean }) => {
         if (result.ok && result.onList) {
