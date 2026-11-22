@@ -173,7 +173,23 @@ npx prettier --write .
 
 ---
 
-Happy coding! 🚀
+## Consultation form
+
+`/contact` posts to `POST /api/contact`.
+
+Email is sent only when `EMAIL_USER` and `EMAIL_PASSWORD` are set, or when `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, and `TO_EMAIL` are set. The success state says the request was sent only after the mail transport accepts it.
+
+If email is not configured, the API writes `data/consultations.json` when the server can write that file. The file is gitignored and is not a public page. The visitor is told the request was saved and was not emailed.
+
+If the host cannot send mail and cannot write the file, the API returns an error and names the direct email address. Do not describe that outcome as delivery.
+
+## Clothing pages
+
+`/clothing`, its detail routes, and `/api/clothing/wishlist` stay in the repository. They respond with 404 unless `CLOTHING_PUBLIC=true`. They are omitted from navigation and from both sitemap generators. Set the variable and redeploy to publish them again. Do not delete the clothing source to hide it.
+
+---
+
+Happy coding!
 
 
 

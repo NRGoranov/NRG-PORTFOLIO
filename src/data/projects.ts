@@ -38,7 +38,7 @@ A Bulgarian product catalogue for Clever Solution Ltd (КЛЕВЪР СОЛЮШЪ
 The company supplies professional kitchen equipment, access control, event wristbands, and cleaning products. Pricing depends on configuration and quantity, so a standard shop cart would hide the real buying path: a direct inquiry.
 
 ## Solution
-An inquiry-first catalogue in Bulgarian, with category browsing, product detail pages, and contact by phone, email, and form. The public address configured for the site is cleversolutions.bg.
+An inquiry-first catalogue in Bulgarian, with category browsing, product detail pages, and contact by phone, email, and form. The live site is https://clever-solution.vercel.app.
 
 ## Key Features
 - Four catalogues: kitchen equipment, access control, event wristbands, and cleaning supplies
@@ -61,11 +61,13 @@ An inquiry-first catalogue in Bulgarian, with category browsing, product detail 
     year: 2026,
     role: 'Full Stack Developer',
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Zod', 'Framer Motion', 'Nodemailer'],
+    liveUrl: 'https://clever-solution.vercel.app',
     coverImage: '/covers/clever-solution-cover.png',
     gallery: [
       '/covers/clever-solution-kitchen.png',
-      '/covers/clever-solution-pan.png',
-      '/covers/clever-solution-sousvide.jpeg',
+      '/covers/clever-solution-wristbands.jpg',
+      '/covers/clever-solution-tyvek.jpg',
+      '/covers/clever-solution-rfid.png',
     ],
     featured: true,
     highlightColor: '#ff6000',

@@ -1,101 +1,108 @@
-import nodemailer from "nodemailer";
+import nodemailer from 'nodemailer'
+import type { ConsultationInput } from '@/lib/consultation'
 
-export type ContactPayload = {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-};
+export type ContactPayload = ConsultationInput
 
-const SMTP_VARS = ["SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASS", "TO_EMAIL"] as const;
+const SMTP_VARS = ['SMTP_HOST', 'SMTP_PORT', 'SMTP_USER', 'SMTP_PASS', 'TO_EMAIL'] as const
 
 function usesLegacyGmailEnv(): boolean {
-  return Boolean(process.env.EMAIL_USER?.trim() && process.env.EMAIL_PASSWORD?.trim());
+  return Boolean(process.env.EMAIL_USER?.trim() && process.env.EMAIL_PASSWORD?.trim())
 }
 
 export function isSmtpConfigured(): boolean {
-  if (usesLegacyGmailEnv()) return true;
-  return SMTP_VARS.every((name) => Boolean(process.env[name]?.trim()));
+  if (usesLegacyGmailEnv()) return true
+  return SMTP_VARS.every((name) => Boolean(process.env[name]?.trim()))
 }
 
 function getRecipientEmail(senderEmail: string): string {
-  return process.env.TO_EMAIL?.trim() || senderEmail;
+  return process.env.TO_EMAIL?.trim() || senderEmail
 }
 
 function createTransporter() {
   if (usesLegacyGmailEnv()) {
     return nodemailer.createTransport({
-      service: "Gmail",
+      service: 'Gmail',
       auth: {
         user: process.env.EMAIL_USER!.trim(),
-        pass: process.env.EMAIL_PASSWORD!.trim()
-      }
-    });
+        pass: process.env.EMAIL_PASSWORD!.trim(),
+      },
+    })
   }
 
-  const port = Number(process.env.SMTP_PORT);
+  const port = Number(process.env.SMTP_PORT)
   return nodemailer.createTransport({
     host: process.env.SMTP_HOST!.trim(),
     port,
     secure: port === 465,
     auth: {
       user: process.env.SMTP_USER!.trim(),
-      pass: process.env.SMTP_PASS!.trim()
-    }
-  });
+      pass: process.env.SMTP_PASS!.trim(),
+    },
+  })
 }
 
 function getSenderEmail(): string {
   if (usesLegacyGmailEnv()) {
-    return process.env.EMAIL_USER!.trim();
+    return process.env.EMAIL_USER!.trim()
   }
-  return process.env.SMTP_USER!.trim();
+  return process.env.SMTP_USER!.trim()
+}
+
+function oneLine(value: string): string {
+  return value.replace(/[\r\n]+/g, ' ').slice(0, 180)
 }
 
 export async function sendContactMail(data: ContactPayload): Promise<void> {
   if (!isSmtpConfigured()) {
-    throw new Error("Email is not configured on the server.");
+    throw new Error('Email is not configured on the server.')
   }
 
-  const senderEmail = getSenderEmail();
-  const toEmail = getRecipientEmail(senderEmail);
-  const transporter = createTransporter();
+  const senderEmail = getSenderEmail()
+  const toEmail = getRecipientEmail(senderEmail)
+  const transporter = createTransporter()
+  const phone = data.phone.trim() || 'Not provided'
 
   const text = [
-    "New contact message from NRG Portfolio",
-    "",
+    'New consultation request from nrgtrw.com',
+    '',
     `Name: ${data.name}`,
+    `Business: ${data.businessName}`,
     `Email: ${data.email}`,
-    `Subject: ${data.subject}`,
-    "",
-    "Message:",
-    data.message
-  ].join("\n");
+    `Phone: ${phone}`,
+    `Business type: ${data.businessType}`,
+    `Service: ${data.service}`,
+    '',
+    'Message:',
+    data.message,
+  ].join('\n')
 
   const html = `
-    <h2>New Contact — NRG Portfolio</h2>
+    <h2>New consultation request</h2>
     <p><strong>Name:</strong> ${escapeHtml(data.name)}</p>
+    <p><strong>Business:</strong> ${escapeHtml(data.businessName)}</p>
     <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
-    <p><strong>Subject:</strong> ${escapeHtml(data.subject)}</p>
+    <p><strong>Phone:</strong> ${escapeHtml(phone)}</p>
+    <p><strong>Business type:</strong> ${escapeHtml(data.businessType)}</p>
+    <p><strong>Service:</strong> ${escapeHtml(data.service)}</p>
     <p><strong>Message:</strong></p>
-    <p>${escapeHtml(data.message).replace(/\n/g, "<br/>")}</p>
-  `;
+    <p>${escapeHtml(data.message).replace(/\n/g, '<br/>')}</p>
+  `
 
   await transporter.sendMail({
-    from: `"NRG Portfolio Contact" <${senderEmail}>`,
+    from: `"NRG Consultation" <${senderEmail}>`,
     to: toEmail,
-    subject: `[Portfolio] ${data.subject}`,
+    subject: oneLine(`[NRG] ${data.businessName} — ${data.service}`),
     text,
     html,
-    replyTo: data.email
-  });
+    replyTo: oneLine(data.email),
+  })
 }
 
 function escapeHtml(value: string): string {
   return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
 }

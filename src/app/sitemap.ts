@@ -1,73 +1,32 @@
 import { MetadataRoute } from 'next'
 import { projects } from '@/data/projects'
-import { clothingItems } from '@/data/clothing'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.nrgtrw.com'
-  
-  // Static pages
+
   const staticPages = [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/projects`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/clothing`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    },
+    { path: '', priority: 1, changeFrequency: 'monthly' as const },
+    { path: '/solutions', priority: 0.9, changeFrequency: 'monthly' as const },
+    { path: '/about', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/contact', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/projects', priority: 0.5, changeFrequency: 'monthly' as const },
+    { path: '/privacy', priority: 0.3, changeFrequency: 'yearly' as const },
+    { path: '/legal', priority: 0.3, changeFrequency: 'yearly' as const },
   ]
 
-  // Dynamic project pages
+  const pages = staticPages.map((page) => ({
+    url: `${baseUrl}${page.path}`,
+    lastModified: new Date(),
+    changeFrequency: page.changeFrequency,
+    priority: page.priority,
+  }))
+
   const projectPages = projects.map((project) => ({
     url: `${baseUrl}/projects/${project.slug}`,
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
-    priority: 0.7,
+    priority: 0.4,
   }))
 
-  const clothingPages = clothingItems.map((item) => ({
-    url: `${baseUrl}/clothing/${item.slug}`,
-    lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.65,
-  }))
-
-  return [...staticPages, ...projectPages, ...clothingPages]
+  return [...pages, ...projectPages]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

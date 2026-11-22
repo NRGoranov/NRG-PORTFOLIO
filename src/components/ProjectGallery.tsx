@@ -93,7 +93,7 @@ export function ProjectGallery({
             No projects found
           </h3>
           <p className="text-sm text-muted-foreground">
-            Try adjusting your search or filters to find what you're looking for.
+            Try adjusting your search or filters to find what you&apos;re looking for.
           </p>
         </div>
       </div>

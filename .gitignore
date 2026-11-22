@@ -16,6 +16,7 @@
 # next.js
 /.next/
 /out/
+/.sitemap/
 
 # production
 /build
@@ -34,6 +35,9 @@ yarn-error.log*
 
 # local wishlist data (use Supabase in production)
 data/clothing-wishlist.json
+
+# consultation requests saved when email is not configured
+data/consultations.json
 
 # vercel
 .vercel

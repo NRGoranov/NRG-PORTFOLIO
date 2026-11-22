@@ -5,23 +5,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/private/', '/admin/'],
+      disallow: ['/clothing', '/clothing/', '/api/', '/private/', '/admin/'],
     },
     sitemap: 'https://www.nrgtrw.com/sitemap.xml',
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

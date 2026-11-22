@@ -163,7 +163,7 @@ export default function ProjectsPage() {
               Interested in Working Together?
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              I'm always excited to take on new challenges and create exceptional digital experiences.
+              I&apos;m always excited to take on new challenges and create exceptional digital experiences.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" className="text-base">

@@ -3,8 +3,6 @@ import { Plus_Jakarta_Sans, Syne, JetBrains_Mono } from 'next/font/google'
 import { ThemeProvider } from '@/components/ThemeProvider'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
-import { GlobalPillarBackground } from '@/components/GlobalPillarBackground'
-import { LightPillarSettingsProvider } from '@/components/LightPillarSettings'
 import { BackToTopButton } from '@/components/BackToTopButton'
 import { AudienceMeasurement } from '@/components/AudienceMeasurement'
 import './globals.css'
@@ -29,14 +27,23 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.nrgtrw.com'),
   title: {
-    default: 'NRG Portfolio - Modern Web Development',
-    template: '%s | NRG Portfolio'
+    default: 'NRG — Business automation for restaurants and growing businesses',
+    template: '%s | NRG',
   },
-  description: 'A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies.',
-  keywords: ['portfolio', 'web development', 'Next.js', 'TypeScript', 'React', 'Tailwind CSS'],
-  authors: [{ name: 'NRG' }],
-  creator: 'NRG',
+  description:
+    'AI-powered customer communication, CRM, and automation for restaurants and growing businesses. Book a consultation with Nikolay Goranov.',
+  keywords: [
+    'NRG',
+    'business automation',
+    'restaurant CRM',
+    'customer communication',
+    'hospitality software',
+    'Nikolay Goranov',
+  ],
+  authors: [{ name: 'Nikolay Goranov', url: 'https://www.nrgtrw.com/about' }],
+  creator: 'Nikolay Goranov',
   icons: {
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -54,24 +61,25 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://www.nrgtrw.com',
-    title: 'NRG Portfolio - Modern Web Development',
-    description: 'A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies.',
-    siteName: 'NRG Portfolio',
+    title: 'NRG — Business automation for restaurants and growing businesses',
+    description:
+      'AI-powered customer communication, CRM, and automation for restaurants and growing businesses.',
+    siteName: 'NRG',
     images: [
       {
-        url: 'https://www.nrgtrw.com/og-image.png',
+        url: '/og-image',
         width: 1200,
         height: 630,
-        alt: 'NRG Portfolio - Full-Stack Developer showcasing modern web development projects',
+        alt: 'NRG — business automation for restaurants and growing businesses',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NRG Portfolio - Modern Web Development',
-    description: 'A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies.',
-    creator: '@nrg',
-    images: ['https://www.nrgtrw.com/og-image.png'],
+    title: 'NRG — Business automation for restaurants and growing businesses',
+    description:
+      'AI-powered customer communication, CRM, and automation for restaurants and growing businesses.',
+    images: ['/og-image'],
   },
   robots: {
     index: true,
@@ -83,9 +91,6 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
-  },
-  verification: {
-    google: 'your-google-verification-code',
   },
 }
 
@@ -102,22 +107,6 @@ export default function RootLayout({
         <link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        
-        {/* Open Graph Meta Tags */}
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.nrgtrw.com" />
-        <meta property="og:title" content="NRG Portfolio - Modern Web Development" />
-        <meta property="og:description" content="A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies." />
-        <meta property="og:image" content="https://www.nrgtrw.com/og-image.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="NRG Portfolio - Full-Stack Developer showcasing modern web development projects" />
-        
-        {/* Twitter Card Meta Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="NRG Portfolio - Modern Web Development" />
-        <meta name="twitter:description" content="A showcase of modern web development projects built with Next.js, TypeScript, and cutting-edge technologies." />
-        <meta name="twitter:image" content="https://www.nrgtrw.com/og-image.png" />
       </head>
       <body className={`${plusJakartaSans.variable} ${syne.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <a
@@ -133,17 +122,14 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
-          <LightPillarSettingsProvider>
-            <div className="relative flex min-h-screen flex-col">
-              <GlobalPillarBackground />
-              <Header />
-              <main id="content" tabIndex={-1} className="flex-1 outline-none">
-                {children}
-              </main>
-              <Footer />
-            </div>
-            <BackToTopButton />
-          </LightPillarSettingsProvider>
+          <div className="relative flex min-h-screen flex-col">
+            <Header />
+            <main id="content" tabIndex={-1} className="flex-1 outline-none">
+              {children}
+            </main>
+            <Footer />
+          </div>
+          <BackToTopButton />
           <AudienceMeasurement />
         </ThemeProvider>
       </body>

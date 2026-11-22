@@ -1,5 +1,5 @@
 {
-  "name": "NRG Portfolio",
+  "name": "NRG",
   "short_name": "NRG",
   "icons": [
     {
@@ -13,7 +13,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#000000",
-  "background_color": "#ffffff",
+  "theme_color": "#020617",
+  "background_color": "#020617",
   "display": "standalone"
 }

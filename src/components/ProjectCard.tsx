@@ -66,6 +66,7 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
               imageLoaded ? 'opacity-100' : 'opacity-0'
             }`}
             onLoad={() => setImageLoaded(true)}
+            onError={() => setImageLoaded(true)}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           {project.featured && (

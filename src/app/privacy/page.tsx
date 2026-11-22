@@ -27,21 +27,26 @@ export default function PrivacyPage() {
         contract that waives your rights.
       </p>
 
-      <Section title="Contact form">
+      <Section title="Consultation form">
         <p>
-          If you write through the form, the server emails me your name, email address, subject, and message.
-          That copy lives in the mailbox. I use it to answer you, on the basis of steps you asked for before
-          a contract, or legitimate interest in replying (GDPR Art. 6(1)(b) or 6(1)(f)). I do not add you to
-          a mailing list because you wrote once.
+          If you book a consultation, the server receives your name, business name, email address, phone
+          number if you add one, business type, service of interest, and message. When email is configured,
+          that copy is sent to my mailbox. When it is not, the same fields may be written to a private file
+          on the server so I can still reply. If neither email nor that file can be used, the form says so
+          and nothing is kept. I use the request to answer you, on the basis of steps you asked for before a
+          contract, or legitimate interest in replying (GDPR Art. 6(1)(b) or 6(1)(f)). I do not add you to a
+          mailing list because you wrote once.
         </p>
       </Section>
 
       <Section title="Clothing interest list">
         <p>
-          The clothing pages do not take payment. If you leave an email, it is stored with the piece you
+          The clothing pages are not published. The source is still in the project, and this section still
+          describes the list if you joined it earlier. The clothing pages do not take payment. If you leave
+          an email, it is stored with the piece you
           named, the time, and the fact that you agreed to this sentence: “{WISHLIST_CONSENT_TEXT}” The
-          basis is consent (GDPR Art. 6(1)(a), and the ePrivacy rules on email). The public page shows a
-          count, not the addresses. I can see the addresses because I operate the list.
+          basis is consent (GDPR Art. 6(1)(a), and the ePrivacy rules on email). If those pages are published
+          again, the page shows a count, not the addresses. I can see the addresses because I operate the list.
         </p>
         <p className="mt-3">
           Storage is Supabase when the site is deployed. Your browser also keeps the address locally so the
@@ -73,7 +78,9 @@ export default function PrivacyPage() {
 
       <Section title="How long">
         <p>
-          Contact mail stays in the mailbox until the thread is finished and I delete it. Interest-list
+          A consultation that is emailed stays in the mailbox until the thread is finished and I delete it.
+          A consultation saved only as a private server file stays until I have replied and deleted the file.
+          Interest-list
           addresses stay until you withdraw or I delete the list after the notice for that piece is done.
           There is no separate marketing archive.
         </p>

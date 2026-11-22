@@ -59,31 +59,31 @@ export async function GET() {
                 color: 'white',
               }}
             >
-              Portfolio
+              NRG
             </div>
           </div>
 
           {/* Name */}
           <div
             style={{
-              fontSize: '64px',
+              fontSize: '56px',
               fontWeight: 'bold',
               color: 'white',
               marginBottom: '10px',
             }}
           >
-            Nikolay Goranov
+            Automate the busywork.
           </div>
 
           {/* Title */}
           <div
             style={{
-              fontSize: '32px',
+              fontSize: '28px',
               color: '#3b82f6',
               marginBottom: '30px',
             }}
           >
-            Full-Stack Developer
+            Restaurants and growing businesses
           </div>
 
           {/* Description */}
@@ -96,7 +96,7 @@ export async function GET() {
               marginBottom: '40px',
             }}
           >
-            Crafting exceptional digital experiences with modern technologies
+            Customer communication, CRM, and websites. Book a consultation.
           </div>
 
           {/* Tech Stack */}

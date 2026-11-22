@@ -1,67 +1,93 @@
-import { NextResponse } from "next/server";
-import { isSmtpConfigured, sendContactMail } from "@/lib/mail";
+import { NextResponse } from 'next/server'
+import { consultationSchema } from '@/lib/consultation'
+import { saveConsultation } from '@/lib/consultation-store'
+import { isSmtpConfigured, sendContactMail } from '@/lib/mail'
+import { isRateLimited } from '@/lib/rate-limit'
+import { person } from '@/lib/site'
+
+export const runtime = 'nodejs'
+
+const STORED_MESSAGE =
+  'Your request was saved on this server. Email delivery is not configured, so it has not been sent to an inbox.'
+
+const SENT_MESSAGE = 'Your consultation request was sent by email.'
+
+const UNAVAILABLE_MESSAGE = `This form cannot deliver or store requests right now. Email ${person.email} directly.`
 
 export async function POST(req: Request) {
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'local'
+  if (isRateLimited(`contact:${ip}`)) {
+    return NextResponse.json(
+      { ok: false, message: 'Too many requests. Please wait a few minutes and try again.' },
+      { status: 429 },
+    )
+  }
+
+  const contentLength = Number(req.headers.get('content-length') || 0)
+  if (Number.isFinite(contentLength) && contentLength > 20_000) {
+    return NextResponse.json({ ok: false, message: 'Request is too large.' }, { status: 413 })
+  }
+
+  let body: unknown
   try {
-    const body = (await req.json()) as Partial<{
-      name: string;
-      email: string;
-      subject: string;
-      message: string;
-      website?: string;
-    }>;
-
-    if (body.website) {
-      return NextResponse.json({ ok: false, message: "Invalid submission." }, { status: 400 });
+    const raw = await req.text()
+    if (raw.length > 20_000) {
+      return NextResponse.json({ ok: false, message: 'Request is too large.' }, { status: 413 })
     }
-
-    if (!isSmtpConfigured()) {
-      return NextResponse.json(
-        { ok: false, message: "Contact email is not configured yet. Please use the direct email link." },
-        { status: 503 }
-      );
-    }
-
-    const validated = validatePayload(body);
-
-    await sendContactMail(validated);
-
-    return NextResponse.json({ ok: true, message: "Message sent successfully." });
-  } catch (error) {
-    const message = error instanceof Error ? error.message : "Unexpected error";
-    const status =
-      message.toLowerCase().includes("missing") ||
-      message.toLowerCase().includes("invalid") ||
-      message.toLowerCase().includes("not configured")
-        ? 400
-        : 500;
-    return NextResponse.json({ ok: false, message }, { status });
+    body = JSON.parse(raw)
+  } catch {
+    return NextResponse.json({ ok: false, message: 'Invalid request.' }, { status: 400 })
   }
-}
 
-function validatePayload(payload: Partial<{
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}>) {
-  const fields = ["name", "email", "subject", "message"] as const;
+  if (!body || typeof body !== 'object') {
+    return NextResponse.json({ ok: false, message: 'Invalid request.' }, { status: 400 })
+  }
 
-  for (const field of fields) {
-    const value = payload[field];
-    if (typeof value !== "string" || !value.trim()) {
-      throw new Error(`Invalid or missing field: ${field}`);
+  const record = body as Record<string, unknown>
+  if (typeof record.website === 'string' && record.website.trim()) {
+    return NextResponse.json({ ok: false, message: 'Invalid submission.' }, { status: 400 })
+  }
+
+  const parsed = consultationSchema.safeParse(record)
+  if (!parsed.success) {
+    return NextResponse.json(
+      { ok: false, message: parsed.error.issues[0]?.message || 'Check the form and try again.' },
+      { status: 400 },
+    )
+  }
+
+  let delivered = false
+  if (isSmtpConfigured()) {
+    try {
+      await sendContactMail(parsed.data)
+      delivered = true
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : 'unknown error'
+      console.error(`Consultation email failed: ${detail}`)
     }
   }
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email!.trim())) {
-    throw new Error("Invalid email format");
+  if (delivered) {
+    return NextResponse.json({
+      ok: true,
+      delivered: true,
+      stored: false,
+      message: SENT_MESSAGE,
+    })
   }
 
-  return {
-    name: payload.name!.trim(),
-    email: payload.email!.trim(),
-    subject: payload.subject!.trim(),
-    message: payload.message!.trim()
-  };
+  const stored = await saveConsultation(parsed.data)
+  if (stored) {
+    return NextResponse.json({
+      ok: true,
+      delivered: false,
+      stored: true,
+      message: STORED_MESSAGE,
+    })
+  }
+
+  return NextResponse.json(
+    { ok: false, delivered: false, stored: false, message: UNAVAILABLE_MESSAGE },
+    { status: 503 },
+  )
 }

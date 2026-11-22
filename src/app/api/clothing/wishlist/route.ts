@@ -8,8 +8,15 @@ import {
   verifyClothingAdminPassword,
 } from '@/lib/clothing/wishlist-store'
 import { getClothingItem } from '@/data/clothing'
+import { isClothingPublic } from '@/lib/clothing/visibility'
+
+function hidden() {
+  return NextResponse.json({ ok: false, message: 'Not found.' }, { status: 404 })
+}
 
 export async function GET(req: Request) {
+  if (!isClothingPublic()) return hidden()
+
   try {
     const { searchParams } = new URL(req.url)
     const slug = searchParams.get('slug')?.trim()
@@ -45,6 +52,8 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
+  if (!isClothingPublic()) return hidden()
+
   try {
     const body = (await req.json()) as {
       intent?: string

@@ -4,7 +4,7 @@
  */
 export const controller = {
   name: "Nikolay Goranov",
-  brand: "NRG Portfolio",
+  brand: "NRG",
   site: "https://www.nrgtrw.com",
   email: "nrgoranov@gmail.com",
   phone: "+359 89 733 8635",
@@ -16,7 +16,7 @@ export const controller = {
   postalAddress: "",
 } as const;
 
-export const privacyUpdated = "18 November 2026";
+export const privacyUpdated = "22 November 2026";
 
 /** Shown next to the checkbox and required by the API. Not a mailing list. */
 export const WISHLIST_CONSENT_TEXT =
